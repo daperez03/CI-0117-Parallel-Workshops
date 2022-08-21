@@ -1,10 +1,21 @@
+APPNAME=hello
 
-all : hello lint
-hello : hello.c
-	cc -g -Wall -Wextra hello.c -o hello -pthread
+all : $(APPNAME) lint memcheck helgrind
+$(APPNAME) : $(APPNAME).c
+	cc -g -Wall -Wextra $(APPNAME).c -o $(APPNAME) -pthread
+
 .PHONY: lint
 lint :
-	cpplint --filter=-readability/casting hello.c 
+	cpplint --filter=-readability/casting $(APPNAME).c 
+
+.PHONY: memcheck
+memcheck :
+	valgrind --quiet --tool=memcheck ./$(APPNAME)
+
+.PHONY: helgrind 
+helgrind :
+	valgrind --quiet --tool=helgrind ./$(APPNAME)
+
 .PHONY: clean
 clean :
-	rm -f hello
+	rm -f $(APPNAME)

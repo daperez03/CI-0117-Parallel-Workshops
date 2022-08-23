@@ -33,7 +33,7 @@ int main(void) {
 
 //  procedure great():
 
-voidgit * greet(void* data) {
+void * greet(void* data) {
   const size_t greet_number = (size_t) data;
   int error = 0;
   pthread_t thread;
@@ -52,24 +52,3 @@ voidgit * greet(void* data) {
   }
   return NULL;
 }  //  end procedure
-
-
-/*
-Salida esperada:
-Hello from main thread
-Hello from secundary thread
-Number: 2
-Hello from secundary thread
-Number: 1
-Bye
-NUmber: 0
-
-Salida generada:
-Hello from main thread
-Hello from secundary thread
-Number: 2
-Hello from secundary thread
-Number: 1
-Bye
-Number: 0
-*/

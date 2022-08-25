@@ -7,12 +7,20 @@
 
 //Main el cual imprime "Hello from main thread"
 procedure main():
-    create_thread(great()) //Crea hilos secundarios
+    number = 2;
+    create_thread(great(number)) //Crea hilos secundarios
     print "Hello from main thread"
 end procedure
 
 //Proceso great el cual imprime "Hello from secundary thread"
-procedure great():
-    print "Hello from secundary thread"
+procedure great(number):
+    if(number == 0){
+        print "Bye" 
+        print "Number:" number
+    }else if(number > 0){
+        print "Hello from secundary thread" 
+        print "Number:" number
+        create_thread(great(number - 1))
+    }
 end procedure
 

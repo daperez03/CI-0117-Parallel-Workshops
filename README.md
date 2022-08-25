@@ -4,60 +4,60 @@ Repositorio individual para ejercicios, tareas y ejemplos de Programacion parale
 
 # Glosario:
 
-    Programación serial:
+   **Programación serial:**
 
 	Ejecuta tareas una tras otra
 	
-    Programación concurrente:
+    **Programación concurrente:**
 
 	Lo opuesto a serial, puede ejecutar multiples tareas y es una macroparadigma 
 
-    Programación paralela:
+    **Programación paralela:**
 
 	Ejecuta varias cosas al mismo tiempo, es una forma de concurrencia
 
-    Concurrencia de tareas:
+    **Concurrencia de tareas:**
 
 	Ejecuta multiples tareas a la vez y no de forma secuencial
 
-    Paralelismo de datos:
+    **Paralelismo de datos:**
 
-    Hilo de ejecución:
+    **Hilo de ejecución:**
 
 	Es la ejecucion de un segundo algoritmo de forma paralela respecto a los otros 
 
-    Indeterminismo:
+    **Indeterminismo:**
 
-    Memoria privada y compartida:
+    **Memoria privada y compartida:**
 
-    Espera activa:
+    **Espera activa:**
 
-    Condición de carrera:
+    **Condición de carrera:**
 
-    Control de concurrencia:
+    **Control de concurrencia:**
 
-    Seguridad condicional:
+    **Seguridad condicional:**
 
-    Exclusión mutua:
+    **Exclusión mutua:**
 
-    Semáforo:
+    **Semáforo:**
 
-    Barrera:
+   **Barrera:**
 
-    Variable de condición:
+   **Variable de condición:**
 
-    Candado de lectura y escritura:
+    **Candado de lectura y escritura:**
 
-    Descomposición:
+    **Descomposición:**
 
-    Mapeo:
+    **Mapeo:**
 
-    Incremento de velocidad:
+    **Incremento de velocidad:**
 
-    Comunicación punto a punto entre procesos:
+    **Comunicación punto a punto entre procesos:**
 
-    Comunicación colectiva entre procesos:
+    **Comunicación colectiva entre procesos:**
 
-    Reducción:
+    **Reducción:**
 
 

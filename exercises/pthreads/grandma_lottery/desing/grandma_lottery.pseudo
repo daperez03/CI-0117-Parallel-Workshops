@@ -1,0 +1,10 @@
+procedure main() {
+    boleto1 = create_thread1(lottery())
+    boleto2 = create_thread2(lottery())
+    join_thread1
+    join_thread2
+}
+
+procedure lottery(){
+    return random_number[0-100]
+}

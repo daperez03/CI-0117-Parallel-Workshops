@@ -1,36 +1,54 @@
+/*
+*Copyright 2022 Daniel Perez Morera <daniel.perezmorera@ucr.ac.cr> CC-BY 4.0
+*Simula compra de voletos de loteria
+*/
+
 #include <pthread.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
 
+/**
+ * @brief Genera un numero random de loteria del 1 al 100
+ * 
+ * @param data Semilla del time
+ * @return void* Numero random obtenido
+ */
 void* loterry(void* data);
 
-int main(void) {
-  time_t seed = time(NULL);
+int main(void) {  //  hilo principal
+  time_t seed = time(NULL);  //  Alamacena la llemilla
   void* number1 = NULL;
   void* number2 = NULL;
-  pthread_t thread1;  //  Designa primer hilo
-  pthread_t thread2;  //  Designa segundo hilo
+  pthread_t thread1;  //  Designa segundo hilo
+  pthread_t thread2;  //  Designa tercer hilo
+  //  utiliza los hilos:
   int error1 = pthread_create(&thread1 , NULL, loterry, &seed);
   int error2 = pthread_create(&thread2 , NULL, loterry, &seed);
-  if(error1 == EXIT_SUCCESS) {
+  //  Validacion de hilos:
+  if (error1 == EXIT_SUCCESS) {
+    //  Espera hilo y obtiene su valor de retorno
     pthread_join(thread1, &number1);
     printf("Boleto 1: %i\n", *(int*)number1);
-  }else{
+  } else {  //  En caso de error
     fprintf(stderr , "Error: could not create secundary thread\n");
   }
-  if(error2 == EXIT_SUCCESS) {
+  if (error2 == EXIT_SUCCESS) {
+    //  Espera hilo y obtiene su valor de retorno
     pthread_join(thread2, &number2);
     printf("Boleto 2: %i\n", *(int*)number2);
-  }else{
+  } else {  //  En caso de error
     fprintf(stderr , "Error: could not create third thread\n");
   }
+  free(number1);
+  free(number2);
 }
 
 void* loterry(void* data) {
-  unsigned int* seed = (unsigned int*) data;
-  int number = rand_r(seed) % 100 + 1;
+  unsigned int* seed = (unsigned int*) data;  //  Obtiene la semilla
+  int number = rand_r(seed) % 100 + 1;  //  Genera el numero random
+  //  Genera un puntero para el numero
   int* numberP = (int*)calloc(1, sizeof(int));
-  *numberP = number;
-  return (void*)numberP;
+  *numberP = number;  //  Almacena direccion del numero
+  return (void*)numberP;  //  Devuelve el numero generado
 }

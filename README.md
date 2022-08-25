@@ -6,15 +6,25 @@ Repositorio individual para ejercicios, tareas y ejemplos de Programacion parale
 
     Programación serial:
 
+	Ejecuta tareas una tras otra
+	
     Programación concurrente:
+
+	Lo opuesto a serial, puede ejecutar multiples tareas y es una macroparadigma 
 
     Programación paralela:
 
+	Ejecuta varias cosas al mismo tiempo, es una forma de concurrencia
+
     Concurrencia de tareas:
+
+	Ejecuta multiples tareas a la vez y no de forma secuencial
 
     Paralelismo de datos:
 
     Hilo de ejecución:
+
+	Es la ejecucion de un segundo algoritmo de forma paralela respecto a los otros 
 
     Indeterminismo:
 

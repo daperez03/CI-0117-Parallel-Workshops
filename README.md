@@ -6,7 +6,7 @@ Repositorio individual para ejercicios, tareas y ejemplos de Programacion parale
 
 **Programación serial:**
 
-	Ejecuta tareas una tras otra
+	Paradigma de programacio el cual ejecuta tareas una tras otra
 	
 **Programación concurrente:**
 
@@ -14,11 +14,11 @@ Repositorio individual para ejercicios, tareas y ejemplos de Programacion parale
 
 **Programación paralela:**
 
-	Ejecuta varias cosas al mismo tiempo, es una forma de concurrencia
+	Paradigma de programacion que ejecuta varias tareas al mismo tiempo, es una forma de concurrencia
 
 **Concurrencia de tareas:**
 
-	Ejecuta multiples tareas a la vez y no de forma secuencial
+	Utiliza el paradigma de cocurrencia para resolver varias tareas de manera paralela o intercalada
 
 **Paralelismo de datos:**
 

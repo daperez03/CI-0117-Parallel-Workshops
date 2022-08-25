@@ -10,7 +10,7 @@ Repositorio individual para ejercicios, tareas y ejemplos de Programacion parale
 	
 **Programación concurrente:**
 
-	Lo opuesto a serial, puede ejecutar multiples tareas y es una macroparadigma 
+	Lo opuesto a serial, puede ejecutar multiples tareas y es un macroparadigma 
 
 **Programación paralela:**
 

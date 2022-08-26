@@ -24,15 +24,25 @@ Boleto 2: 68
 
 ## Salida incorrecta:
 
-c15906@ECCI104L408200:~/Documents/concurrente22b-daniel_perez/exercises/pthreads/grandma_lottery$ make
-mkdir -p build/
-gcc -c -Wall -Wextra -pthread -g -std=gnu11 -Isrc -MMD src/grandma_lottery.c -o build/grandma_lottery.o
-src/grandma_lottery.c: In function ‘loterry_Case1’:
-src/grandma_lottery.c:53:10: warning: function returns address of local variable [-Wreturn-local-addr]
-   53 |   return (void*)(&number);  //  Devuelve el numero generado
-      |          ^~~~~~~~~~~~~~~~
-mkdir -p bin/
-gcc -Wall -Wextra -pthread -g -Isrc build/grandma_lottery.o -o bin/grandma_lottery 
-c15906@ECCI104L408200:~/Documents/concurrente22b-daniel_perez/exercises/pthreads/grandma_lottery$ make run
 bin/grandma_lottery
-make: *** [../../../common/Makefile:115: run] Segmentation fault (core dumped)
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==31075==ERROR: AddressSanitizer: SEGV on unknown address 0x000000000001 (pc 0x7f00f74b3d64 bp 0x7f00f3cfee00 sp 0x7f00f3cfe588 T1)
+==31075==The signal is caused by a READ memory access.
+==31075==Hint: address points to the zero page.
+    #0 0x7f00f74b3d63 in rand_r (/lib/x86_64-linux-gnu/libc.so.6+0x47d63)
+    #1 0x7f00f76bea01 in __interceptor_rand_r ../../../../src/libsanitizer/sanitizer_common/sanitizer_common_interceptors.inc:4946
+    #2 0x55e4aa6ba71a in lottery_Case1 src/grandma_lottery.c:56
+    #3 0x7f00f7666608 in start_thread /build/glibc-sMfBJT/glibc-2.31/nptl/pthread_create.c:477
+    #4 0x7f00f758b162 in __clone (/lib/x86_64-linux-gnu/libc.so.6+0x11f162)
+
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV (/lib/x86_64-linux-gnu/libc.so.6+0x47d63) in rand_r
+Thread T1 created by T0 here:
+    #0 0x7f00f76bb815 in __interceptor_pthread_create ../../../../src/libsanitizer/asan/asan_interceptors.cc:208
+    #1 0x55e4aa6ba430 in main src/grandma_lottery.c:34
+    #2 0x7f00f74900b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x240b2)
+
+==31075==ABORTING
+AddressSanitizer:DEADLYSIGNAL
+make: *** [../../../common/Makefile:115: run] Error 1

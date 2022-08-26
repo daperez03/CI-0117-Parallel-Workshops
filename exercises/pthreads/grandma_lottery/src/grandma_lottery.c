@@ -15,7 +15,7 @@
  * @param data Semilla del time
  * @return void* Numero random obtenido
  */
-//void* lottery_Case1(void* data);
+void* lottery_Case1(void* data);
 
 /**
  * @brief Genera un numero random de loteria del 1 al 100, devuelve un puntero falzo
@@ -31,8 +31,8 @@ int main(void) {  //  hilo principal
   pthread_t thread1;  //  Designa segundo hilo
   pthread_t thread2;  //  Designa tercer hilo
   //  utiliza los hilos:
-  int error1 = pthread_create(&thread1 , NULL, lottery_Case2, (void*) 1u );
-  int error2 = pthread_create(&thread2 , NULL, lottery_Case2, (void*) 2u );
+  int error1 = pthread_create(&thread1 , NULL, lottery_Case1, (void*) 1u );
+  int error2 = pthread_create(&thread2 , NULL, lottery_Case1, (void*) 2u );
   //  Validacion de hilos:
   if (error1 == EXIT_SUCCESS) {
     //  Espera hilo y obtiene su valor de retorno
@@ -50,12 +50,12 @@ int main(void) {  //  hilo principal
   }
 }
 
-/*void* loterry_Case1(void* data) {  // Retornan la dirección de memoria de la variable que tiene el número comprado.
+void* lottery_Case1(void* data) {  // Retornan la dirección de memoria de la variable que tiene el número comprado.
 
   unsigned int* seed = (unsigned int*) data;  //  Obtiene la semilla
   size_t number = rand_r(seed) % 100 + 1;  //  Genera el numero random
   return (void*)(&number);  //  Devuelve el numero generado
-}*/
+}
 
 void* lottery_Case2(void* data) {  // Retornan la dirección de memoria de la variable que tiene el número comprado.
   unsigned int seed = ((size_t)data);

@@ -22,19 +22,27 @@ Repositorio individual para ejercicios, tareas y ejemplos de Programacion parale
 
 **Paralelismo de datos:**
 
+
+
 **Hilo de ejecución:**
 
-	Es la ejecucion de un segundo algoritmo de forma paralela respecto a los otros 
+	Es un arreglo de valores que el OS carga en los registros de una CPU y permiten ejecutar codigo en ella
 
 **Indeterminismo:**
+
+	No se puede predecir el orden en que se van a ejecutar las instrucciones concurrentes
 
 **Memoria privada y compartida:**
 
 **Espera activa:**
 
+	Sucede cuando se ejcuta hilo y este inicia una espera dentro de la cpu en lugar a pasar a un modo de espera
+
 **Condición de carrera:**
 
 **Control de concurrencia:**
+
+	Se relaciona con la manipulacion de variables en paralelismo
 
 **Seguridad condicional:**
 

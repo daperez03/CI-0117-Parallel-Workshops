@@ -5,6 +5,7 @@
 #include <pthread.h>
 #include <stdlib.h>
 #include <stdio.h>
+  //  #include <unistd.h>
 
 /**
  * Aca se documenta las clase
@@ -23,6 +24,7 @@ int main(void) {
   int error = pthread_create(&thread , /*attr*/ NULL , greet , /*arg*/ NULL);
   if (error == EXIT_SUCCESS) {
     //  print "Hello from main thread"
+    // usleep(2);  //  indeterminismo
     printf("Hello from main thread\n");
     pthread_join(thread, /*value_ptr*/ NULL);  //  ENVIA A DORMIR HILO PRINCIPAL
   } else {

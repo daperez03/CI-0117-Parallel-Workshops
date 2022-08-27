@@ -47,4 +47,5 @@ Number: 0
 # Rastreo de Memoria
 
 
-![Imagen1](https://git.ucr.ac.cr/DANIEL.PEREZMORERA/concurrente22b-daniel_perez/-/blob/main/exercises/pthreads/recursive_hello/trace/trace.svg "Rastreo de Memoria")
+![Imagen1](./trace/trace.svg "Rastreo de Memoria")
+<img src="./trace/trace.svg">

@@ -12,7 +12,7 @@ Recuerde copiar este enunciado en una sección de su documeneto de análisis eje
 
 # Prediccion:
 
-## Salida esperada:
+### Salida esperada:
 
 Hello from main thread
 
@@ -28,7 +28,7 @@ Bye
 
 NUmber: 0
 
-## Salida generada:
+### Salida generada:
 
 Hello from main thread
 

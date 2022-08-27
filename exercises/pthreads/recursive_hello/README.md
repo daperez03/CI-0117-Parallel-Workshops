@@ -1,4 +1,4 @@
-## Enunciado:
+# Enunciado:
 
 Copie su ejemplos/pthreads/hello a ejercicios/pthreads/recursive_hello. Puede renombrar ejercicios/pthreads/recursive_hello/src/hello.c a recursive_hello.c o si lo prefiere, main.c.
 
@@ -10,9 +10,9 @@ Modifique el procedimiento main() para crear una variable local de tipo size_t i
 
 Recuerde copiar este enunciado en una sección de su documeneto de análisis ejercicios/pthreads/recursive_hello/readme.md y darle el formato apropiado. En otra sección haga una predicción de la salida de su programa antes de corerlo. Compílelo y córralo con el Makefile. Copie la salida de su programa y péguela en un bloque de código debajo de su predicción. ¿Acertó la predicción?
 
-## Prediccion:
+# Prediccion:
 
-# Salida esperada:
+## Salida esperada:
 Hello from main thread
 Hello from secundary thread
 Number: 2
@@ -21,7 +21,7 @@ Number: 1
 Bye
 NUmber: 0
 
-# Salida generada:
+## Salida generada:
 Hello from main thread
 Hello from secundary thread
 Number: 2
@@ -30,6 +30,6 @@ Number: 1
 Bye
 Number: 0
 
-## Rastreo de Memoria
+# Rastreo de Memoria
 
 ![Imagen1](./trace/trace.svg "Rastreo de Memoria")

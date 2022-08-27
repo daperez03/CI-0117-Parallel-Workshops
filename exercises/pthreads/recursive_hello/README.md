@@ -48,9 +48,5 @@ Number: 0
 
 ### Rastreo de Memoria:
 
-![Alt text](https://git.ucr.ac.cr/DANIEL.PEREZMORERA/concurrente22b-daniel_perez/-/blob/main/exercises/pthreads/recursive_hello/trace/trace.svg)
-<img src="https://git.ucr.ac.cr/DANIEL.PEREZMORERA/concurrente22b-daniel_perez/-/blob/main/exercises/pthreads/recursive_hello/trace/trace.svg">
-
-![Alt text](https://rawgithub.com/potherca-blog/StackOverflow/master/question.13808020.include-an-svg-hosted-on-github-in-markdown/controllers_brief.svg)
-<img src="https://rawgithub.com/potherca-blog/StackOverflow/master/question.13808020.include-an-svg-hosted-on-github-in-markdown/controllers_brief.svg">
+![imagen1](./trace/trace.svg)
 

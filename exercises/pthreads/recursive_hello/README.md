@@ -45,4 +45,6 @@ Bye
 Number: 0
 
 # Rastreo de Memoria
+
+
 ![Imagen1](./trace/trace.svg "Rastreo de Memoria")

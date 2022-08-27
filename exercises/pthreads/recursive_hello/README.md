@@ -48,5 +48,5 @@ Number: 0
 
 ### Rastreo de Memoria:
 
-<img src="./trace/trace.svg">
+![Imagen de rastreo de memoria](./trace/trace.svg "Rastreo de Memoria")
 

@@ -29,3 +29,7 @@ Hello from secundary thread
 Number: 1
 Bye
 Number: 0
+
+## Rastreo de Memoria
+
+![Rastreo de Memoria](./trace/trace.svg)

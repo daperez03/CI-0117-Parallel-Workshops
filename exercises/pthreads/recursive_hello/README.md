@@ -50,3 +50,5 @@ Number: 0
 ### Rastreo de Memoria:
 
 ![Imagen de rastreo de memoria](exercises/pthreads/recursive_hello/trace/trace.svg) 
+
+Imagen

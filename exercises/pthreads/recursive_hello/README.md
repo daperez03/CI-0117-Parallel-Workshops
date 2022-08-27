@@ -50,3 +50,4 @@ Number: 0
 
 ![Imagen de rastreo de memoria](./trace/trace.svg)
 
+.

@@ -32,4 +32,4 @@ Number: 0
 
 ## Rastreo de Memoria
 
-![Rastreo de Memoria](./trace/trace.svg)
+![Imagen1](./trace/trace.svg "Rastreo de Memoria")

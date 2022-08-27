@@ -46,5 +46,6 @@ Number: 0
 
 # Rastreo de Memoria
 
-	![Imagen1](./trace/trace.svg "Rastreo de Memoria")
-	<img src="./trace/trace.svg">
+![Alt text](./trace/trace.svg)
+<img src="./trace/trace.svg">
+

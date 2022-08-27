@@ -13,21 +13,35 @@ Recuerde copiar este enunciado en una sección de su documeneto de análisis eje
 # Prediccion:
 
 ## Salida esperada:
-"Hello from main thread
+
+Hello from main thread
+
 Hello from secundary thread
+
 Number: 2
+
 Hello from secundary thread
+
 Number: 1
+
 Bye
-NUmber: 0"
+
+NUmber: 0
 
 ## Salida generada:
+
 Hello from main thread
+
 Hello from secundary thread
+
 Number: 2
+
 Hello from secundary thread
+
 Number: 1
+
 Bye
+
 Number: 0
 
 # Rastreo de Memoria

@@ -44,7 +44,9 @@ Bye
 
 Number: 0
 
-# Rastreo de Memoria
+# Memoria
+
+### Rastreo de Memoria:
 
 ![Alt text](./trace/trace.svg)
 <img src="./trace/trace.svg">

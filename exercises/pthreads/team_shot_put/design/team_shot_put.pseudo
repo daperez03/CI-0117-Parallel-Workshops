@@ -1,0 +1,42 @@
+/*
+Instrucciones:
+
+Cada atleta lanza la bala tres veces, lo cual se puede simular generando tres números pseudoaleatorios, tomar el mayor de ellos, imprimirlo en la salida estándar, y reportarlo al árbitro como su valor de retorno. Un lanzamiento se mide como una distancia real entre 0.0 y 25.0 metros. Para comunicar este resultado al árbitro, podría implementar una estrategia como las siguientes.
+
+    Dado que un flotante de doble precisión tiene el mismo tamaño que un puntero en una arquitectura de 64 bits, puede retornar su valor como una dirección de memoria.
+
+    Usar memoria dinámica para alojar el resultado del mejor lanzamiento y retornar la dirección al árbitro.
+
+    El árbitro crea una pizarra donde los atletas anotan su mejor resultado.
+
+*/
+
+procedure main(argc, argv[]) {
+    number_Atletas = argv[1]
+    error = false
+    if (number_Atletas is impar) {
+        createThread team1(teams(number_Atletas))
+        createThread team2(teams(number_Atletas))
+    } else {
+        print "Error: the number is not odd"
+    }
+}
+
+procedure teams(number_Atletas) {
+    for (i = 0 to number_Atletas) {
+        createThread athletes[i](athletes(i))
+    }
+}
+
+procedure athletes(i) {
+    large_number = 0
+    ranadom_number = 0
+    for (i = 0 to 3) {
+        ranadom_number = rand(0.0 to 25.0)
+        if(ranadom_number > large_number) {
+            large_number = ranadom_number
+        }
+    }
+    print "Athleta number " i ": " large_number "m"
+    return large_number
+}

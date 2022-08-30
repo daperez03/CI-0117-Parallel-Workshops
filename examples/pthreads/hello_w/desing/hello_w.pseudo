@@ -6,13 +6,17 @@
 */
 
 //Main el cual imprime "Hello from main thread"
-procedure main():
-    create_thread(great()) //Crea hilos secundarios
+procedure main(argc, argv[])
+    // create thread_count as result of converting argv[1] to integer
+    thread_count := integer(argv[1])
+    for thread_number := 0 to thread_count do
+        create_thread(great(), thread_number) //Crea hilos secundarios
+    end for
     print "Hello from main thread"
 end procedure
 
 //Proceso great el cual imprime "Hello from secundary thread"
 procedure great():
-    print "Hello from secundary thread"
+    print "Hello from secundary thread" , thread_number
 end procedure
 

@@ -1,30 +1,31 @@
-/*
-Instrucciones:
+struct privateStruct{
+    publicStruct* general
+    result[]
+}
 
-Cada atleta lanza la bala tres veces, lo cual se puede simular generando tres números pseudoaleatorios, tomar el mayor de ellos, imprimirlo en la salida estándar, y reportarlo al árbitro como su valor de retorno. Un lanzamiento se mide como una distancia real entre 0.0 y 25.0 metros. Para comunicar este resultado al árbitro, podría implementar una estrategia como las siguientes.
-
-    Dado que un flotante de doble precisión tiene el mismo tamaño que un puntero en una arquitectura de 64 bits, puede retornar su valor como una dirección de memoria.
-
-    Usar memoria dinámica para alojar el resultado del mejor lanzamiento y retornar la dirección al árbitro.
-
-    El árbitro crea una pizarra donde los atletas anotan su mejor resultado.
-
-*/
+struct publicStruct{
+    number_Atletas
+}
 
 procedure main(argc, argv[]) {
-    number_Atletas = argv[1]
+    privateStruct structTeam1
+    privateStruct structTeam2
+    publicStruct structGeneral
+    team1->structGeneral = &structGeneral
+    team2->structGeneral = &structGeneral
+    structGeneral.number_Atletas = argv[1]
     error = false
-    if (number_Atletas is impar) {
-        createThread team1(teams(number_Atletas))
-        createThread team2(teams(number_Atletas))
+    if (structGeneral.number_Atletas is impar) {
+        createThread team1(teams(structTeam1))
+        createThread team2(teams(structTeam2))
     } else {
         print "Error: the number is not odd"
     }
 }
 
-procedure teams(number_Atletas) {
-    for (i = 0 to number_Atletas) {
-        createThread athletes[i](athletes(i))
+procedure teams(structTeam) {
+    for (i = 0 to *(structTeam.structGeneral.number_Atletas)) {
+        structTeam.result[i] = createThread(athletes(i))
     }
 }
 

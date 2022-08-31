@@ -112,7 +112,20 @@ int main(int argc, char* argv[]){
         for (int i = 0; i < 2; ++i) {
           pthread_join(threadTeam[i], /*value_ptr*/ NULL);
         }
-
+        int pointsTeam1 = 0;
+        int pointsTeam2 = 0;
+        for(int i = 0; i < number_Atletas; ++i) {
+          if(structTeam[0].result[i] > structTeam[1].result[i]){
+            ++pointsTeam1;
+          }else{
+            ++pointsTeam2;
+          }
+        }
+        if(pointsTeam1 > pointsTeam2){
+          printf("result %i:%i, team 1 wins\n", pointsTeam1, pointsTeam2);
+        }else{
+          printf("result %i:%i, team 2 wins\n", pointsTeam1, pointsTeam2);
+        }
         free(structTeam[0].result);
         free(structTeam[1].result);
       }else{
@@ -136,7 +149,7 @@ void* athletes(void* data);
   //  procedure teams(structTeam) {
 void* teams(void* data) {
   int error;
-  struct privateStruct* structTeam = data;
+  struct privateStruct* structTeam = (struct privateStruct*)data;
   //  for (i = 0 to *(structTeam.structGeneral.number_Atletas))
   pthread_t athlete[structTeam->general->number_Atletas];
   for(int i = 0; i < structTeam->general->number_Atletas; ++i) {
@@ -152,14 +165,11 @@ void* teams(void* data) {
     break;
     }
   }
-  for (int i = 0; i < structTeam->general->number_Atletas; ++i) {
-    double data = 0; 
-    void** cast = 0; 
-    pthread_join(athlete[i], /*value_ptr*/cast);
+  for (int i = 0; i < structTeam->general->number_Atletas; ++i) { 
+    void* cast = 0; 
+    pthread_join(athlete[i], /*value_ptr*/&cast);
     //  structTeam.result[i] = createThread(athletes(i))
-    data = *(double*)cast;
-    structTeam->result[i] = data;//(double)data;
-    printf("%f\n", data);
+    structTeam->result[i] = *(double*)&cast;//(double)data;
   }
   return 0;
 }
@@ -175,8 +185,10 @@ void* athletes(void* data) {
   //  for (i = 0 to 3) {
   for (int i = 0; i < 3; ++i) {
     //  ranadom_number = rand(0.0 to 25.0)
-    unsigned int* seed = (unsigned int*) &data;
-    random_number = rand_r(seed)%25;
+    //unsigned int* seed = (unsigned int*) &raiz;
+    unsigned int* seed = (unsigned int*) &participante; 
+    random_number = rand_r(seed)%2500;
+    random_number = random_number/100;
     //  if(ranadom_number > large_number) {
       if(random_number > large_number) {
         //  large_number = ranadom_number

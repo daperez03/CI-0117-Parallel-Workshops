@@ -22,7 +22,7 @@ Repositorio individual para ejercicios, tareas y ejemplos de Programacion parale
 
 **Paralelismo de datos:**
 
-	Une datos de varios hilos de manera paralela, asignando un espacio para cada hilo distinto
+	Son estructuras de datos que se crean para que cada hilo de ejecucion contenga un espacio no compartido de memoria y no genere ningun conflicto con los demas datos y hilos
 
 **Hilo de ejecución:**
 

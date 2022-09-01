@@ -22,7 +22,7 @@ Repositorio individual para ejercicios, tareas y ejemplos de Programacion parale
 
 **Paralelismo de datos:**
 
-
+	Une datos de varios hilos de manera paralela, asignando un espacio para cada hilo distinto
 
 **Hilo de ejecución:**
 
@@ -30,7 +30,7 @@ Repositorio individual para ejercicios, tareas y ejemplos de Programacion parale
 
 **Indeterminismo:**
 
-	No se puede predecir el orden en que se van a ejecutar las instrucciones concurrentes
+	Es cuando no se puede predecir el orden en que se va a ejercer de un hilo de ejecucion respecto a otro
 
 **Memoria privada y compartida:**
 

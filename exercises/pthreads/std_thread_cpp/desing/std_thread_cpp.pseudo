@@ -1,0 +1,14 @@
+procedure main(argc, argv[])
+    // create thread_count as result of converting argv[1] to integer
+    shared thread_count := integer(argv[1])
+    for thread_number := 0 to thread_count do
+        create_thread(great, thread_number, thread_count) //thread team
+    end for
+    print "Hello from main thread"
+end procedure
+
+//Proceso great el cual imprime "Hello from secundary thread"
+procedure great(thread_number):
+    print "Hello from secundary thread" , thread_number, " of ", thread_count
+end procedure
+

@@ -1,22 +1,14 @@
-/*
-* Ejemplo de pseudocodigo
-* procedure indica donde inicia un proceso
-* end procedure indica donde finaliza un metodo
-* print indica cuando se imprime algo
-*/
-
-//Main el cual imprime "Hello from main thread"
 procedure main(argc, argv[])
     // create thread_count as result of converting argv[1] to integer
     thread_count := integer(argv[1])
     for thread_number := 0 to thread_count do
-        create_thread(great(), thread_number) //Crea hilos secundarios
+        create_thread(great, thread_number, thread_count) //thread team
     end for
     print "Hello from main thread"
 end procedure
 
 //Proceso great el cual imprime "Hello from secundary thread"
-procedure great():
-    print "Hello from secundary thread" , thread_number
+procedure great(thread_number, thread_count):
+    print "Hello from secundary thread" , thread_number, " of ", thread_count
 end procedure
 

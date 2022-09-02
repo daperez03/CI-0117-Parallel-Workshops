@@ -12,6 +12,11 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+  //  thread_private_data_t
+typedef struct private_data {
+  uint64_t thread_number;
+  uint64_t thread_count;
+}private_data_t;
 
 /**
  * Aca se documenta las clase
@@ -32,14 +37,6 @@ int create_threads(uint64_t thread_count);
 
 //  procedure main(argc, argv[])
 int main(int argc, char* argv[]) {
-  #if 0
-    Mecanismo espacial para omitir interpretacion de codigo
-    //  Ejemplo sobre los argumentos en c
-    for (int index = 0; index < argc; ++index) {
-      // imprime argumentos ingresados por el usuario
-      printf("argv[%d] = '%s'\n", index, argv[index]);
-    }
-  #endif
   int error = EXIT_SUCCESS;
   //  thread_count := integer(argv[1])
   uint64_t thread_count =  sysconf(_SC_NPROCESSORS_ONLN);
@@ -61,14 +58,17 @@ int create_threads(uint64_t thread_count) {
   int error = EXIT_SUCCESS;
   pthread_t* threads = (pthread_t*)
   malloc(thread_count * sizeof(pthread_t));
-
-  if (threads) {
+  private_data_t* private_data = (private_data_t*)
+    calloc(thread_count, sizeof(private_data_t));
+  if (threads && private_data) {
     for (uint64_t thread_number = 0; thread_number < thread_count
       ; ++thread_number) {
+        private_data[thread_number].thread_number = thread_number;
+        private_data[thread_number].thread_count = thread_count;
       //  create_thread(great(), thread_number)
       //  CREA HILO SECUNDARIO
       error = pthread_create(&threads[thread_number] ,
-      /*attr*/ NULL , greet , (void*)thread_number);
+      /*attr*/ NULL , greet , &private_data[thread_number]);
       if (error != EXIT_SUCCESS) {
         fprintf(stderr , "Error: could not create secundary thread\n");
         error = 21;
@@ -84,6 +84,7 @@ int create_threads(uint64_t thread_count) {
     }
 
       //  print "Hello from main thread"
+    free(private_data);
     free(threads);
   } else {
     fprintf(stderr, "Error: could not allocate %" PRIu64
@@ -96,8 +97,9 @@ int create_threads(uint64_t thread_count) {
 
   //  procedure great():
 void* greet(void* data) {
-  const uint64_t rank = (uint64_t)data;
+  private_data_t* private_data = (private_data_t*)data;
   //  print "Hello from secundary thread"
-  printf("Hello from secundary thread %" PRIu64 "\n", rank);
+  printf("Hello from secundary thread %" PRIu64 " of %" PRIu64 "\n"
+  , private_data->thread_number , private_data->thread_count);
   return NULL;
 }  //  end procedure

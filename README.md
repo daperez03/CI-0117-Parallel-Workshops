@@ -34,11 +34,15 @@ Repositorio individual para ejercicios, tareas y ejemplos de Programacion parale
 
 **Memoria privada y compartida:**
 
+
+
 **Espera activa:**
 
 	Sucede cuando se ejcuta hilo y este inicia una espera dentro de la cpu en lugar a pasar a un modo de espera
 
 **Condición de carrera:**
+
+	Se produce cuando dos subprocesos(hilos) acceden a una variable compartida al mismo tiempo
 
 **Control de concurrencia:**
 

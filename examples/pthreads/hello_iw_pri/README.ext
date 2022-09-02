@@ -1,0 +1,19 @@
+# Ejercicio 9 [hello_count]
+
+## Enunciado
+
+	Utilizando los argumentos en línea de comandos, ubique la cantidad máxima de threads que su sistema operativo le permite crear.
+	 Escriba el número obtenido en un archivo readme.ext en su carpeta ejemplos/pthreads/hello_iw_pri, junto con el nombre de su sistema
+	 operativo (por ejemplo, Debian 10 64bits o Fedora 30 64bits).
+
+## Comando Utilizado
+
+	cat /proc/sys/kernel/threads-max
+
+## Sistema Operativo
+
+	Ubuntu 22 64bits
+
+## Maximos Threads
+
+	54444

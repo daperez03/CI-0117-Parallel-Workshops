@@ -8,12 +8,23 @@
 
 ## Comando Utilizado
 
-	cat /proc/sys/kernel/threads-max
+	bin/hello_iw_pri 32752
 
 ## Sistema Operativo
 
-	Ubuntu 22 64bits
+	Ubuntu 20 64bits
+
+##Result
+
+.......
+.......
+Hello from secundary thread 32748 of 32752
+Hello from secundary thread 32749 of 32752
+Error: could not create secundary thread
+Error: could not create secundary thread
+Hello from main thread
+
 
 ## Maximos Threads
 
-	54444
+	32749

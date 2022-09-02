@@ -34,7 +34,7 @@ Repositorio individual para ejercicios, tareas y ejemplos de Programacion parale
 
 **Memoria privada y compartida:**
 
-
+	La memoria privadad es cuando se crea un espacio en la memoria a la cual unicamente dejaremos que acceda la subrutina o hilo, lo cual seria opuesto a la memoria compartida la cual esta establecida para que todos tengan acceso
 
 **Espera activa:**
 

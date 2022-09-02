@@ -30,7 +30,7 @@ typedef struct private_data {
  * @param data NULL
  * @return void* NULL
  */
-void* greet(void* data);
+int greet(void* data);
 
 /**
  * @brief Metodo el cual crea hilos de ejecucion del programa greet
@@ -111,11 +111,11 @@ int create_threads(share_data_t* share_data) {
 
 
   //  procedure great():
-void* greet(void* data) {
+int greet(void* data) {
   private_data_t* private_data = (private_data_t*)data;
   share_data_t* shared_data = private_data->shared_data;
   //  print "Hello from secundary thread"
   printf("Hello from secundary thread %" PRIu64 " of %" PRIu64 "\n"
   , private_data->thread_number , shared_data->thread_count);
-  return NULL;
+  return 0;
 }  //  end procedure

@@ -10,6 +10,7 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include <unistd.h>
 
   //  thread_shared_data_t
@@ -59,7 +60,15 @@ int main(int argc, char* argv[]) {
     calloc(1, sizeof(share_data_t));
   if (share_data) {
     share_data->thread_count = thread_count;
+
+    struct timespec start_time, finish_time;
+    clock_gettime(CLOCK_MONOTONIC, &start_time);
+
     error = create_threads(share_data);
+    clock_gettime(CLOCK_MONOTONIC, &finish_time);
+    double elapsed_time = finish_time.tv_sec - start_time.tv_sec +
+      (finish_time.tv_nsec - start_time.tv_nsec) * 1e-9;  //  1e-9 = 1 ^-9
+    printf("Execution time: %9lfs\n", elapsed_time);
     free(share_data);
   } else {
     fprintf(stderr , "Error: could not allocate shared data\n");
@@ -86,7 +95,7 @@ int create_threads(share_data_t* share_data) {
       /*attr*/ NULL , greet , &private_data[thread_number]);
       if (error != EXIT_SUCCESS) {
         fprintf(stderr , "Error: could not create secundary thread\n");
-        error = 21;
+        return 21;
       }
     }
 

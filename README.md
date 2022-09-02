@@ -38,7 +38,7 @@ Repositorio individual para ejercicios, tareas y ejemplos de Programacion parale
 
 **Espera activa:**
 
-	Sucede cuando se ejcuta hilo y este inicia una espera dentro de la cpu en lugar a pasar a un modo de espera
+	Sucede cuando se ejcuta hilo, el cual esta dormido o enciclado, por lo que este inicia una espera dentro de la cpu en lugar a pasar a un modo de espera
 
 **Condición de carrera:**
 
@@ -53,6 +53,8 @@ Repositorio individual para ejercicios, tareas y ejemplos de Programacion parale
 **Exclusión mutua:**
 
 **Semáforo:**
+
+	Es la implementacion de una implicacion la cual detiene o encicla la ejecucion de un hilo hasta que suceda un evento deseado, haciendo ilucion a luz roja y verde de un semaforo
 
 **Barrera:**
 

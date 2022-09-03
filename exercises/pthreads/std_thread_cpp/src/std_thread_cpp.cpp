@@ -36,19 +36,16 @@ int main(int argc, char* argv[]) {
   if (argc == 2) {
     try {
       std::istringstream get(argv[1]);
-      //try {
       get >> thread_count;
-      if(get.fail()) {
+      if (get.fail()) {
         std::cerr <<  "Error: invalid thread count\n";
         error = 11;
       }
-
     } catch(...) {
       std::cerr <<  "Error: invalid parameter removals\n";
-
     }
   }
-  try{
+  try {
     std::shared_ptr<shared_data_t> share_data_ptr(new shared_data_t);
     if (share_data_ptr) {
       share_data_ptr->thread_count = thread_count;
@@ -103,7 +100,7 @@ int create_threads(std::shared_ptr<shared_data_t> shared_data_ptr) {
 
   //  procedure great():
 int greet(void* data) {
-  private_data_t* private_data = (private_data_t*) data;
+  private_data_t* private_data = reinterpret_cast<private_data_t*> (data);
   std::shared_ptr<shared_data_t> shared_data = private_data->shared_data;
   //  print "Hello from secundary thread"
   std::cout << "Hello from secundary thread " << private_data->thread_number

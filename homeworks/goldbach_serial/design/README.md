@@ -20,7 +20,7 @@ Se genero un diseño para la estructura de datos implementada en una clase Globa
 * **init:** Se encarga de inicializar toda la estructura de datos.
 * **add:** Se encarga de agregar un nuevo struct al vector en su última posición.
 * **get_structur:** Se encarga de devolver un puntero de un struct en específico.
-* **resume:** imprime un resumen sobre los resultados obtenidos.
+* **resume:** Imprime un resumen sobre los resultados obtenidos.
 * **free_global_data_structure:** Libera todo lo que contiene la estructura de datos.
  
 ## Ilustración

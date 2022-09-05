@@ -1,15 +1,33 @@
-# Diseño General De Estructura De La Datos
+# Diseño general de estructura de datos
  
 ## Descripción
  
-El diseño de la estructura de datos implementada se basa en el concepto de **array**, el cual almacena un **struct**, el cual contiene las variables: **entered_number** y **result**.
+Se genero un diseño para la estructura de datos implementada en una clase GlobalDataStructure, con algunos métodos, la cual se encarga de manipular un contenedor de tipo **array** y su respectivo tamaño, el array implementado será responsable de almacenar varios punteros a un **struct**, esta estructura a su vez será la responsable de almacenar un número entero, un booleano indicando si el número es par, un booleano indicando si el número contiene un signo negativo y finalmente el string el cual devolverá al usuario.
+
+### Datos
+* size
+* Array
+    * Struct
+        * number
+        * even_number
+        * unsigned
+        * string_result
+
+### Métodos
+
+* **init:** Se encarga de inicializar toda la estructura de datos.
+* **add:** Se encarga de agregar un nuevo struct al vector en su última posición.
+* **get_structur:** Se encarga de devolver un puntero de un struct en específico.
+* **get_size:** Retorna la dimensión del array.
+* **free_global_data_structure:** Libera todo lo que contiene la estructura de datos.
  
-* **entered_number:** Almacena el número ingresado por el usuario.
+## Ilustración
  
-* **result:** Almacena el resultado del cálculo de las sumas de Goldbach.
- 
-## Ilustración:
- 
-En la ilustración inferior se muestra un pequeño caso de 3 dígitos(1 primo, 1 par y 1 invitado), en el cual se puede mostrar la implementación de la estructura creada y como se propuso el ingreso de datos a esta, representada por la caja de **Input**.
- 
-![Diseño General De Estructura De La Datos](Goldbach_Diagram.svg)
+### Estructura de datos
+
+![Diseño general de estructura de datos](EstructuraDeDatos.drawio.svg)
+
+### Ejemplo
+
+![Ejemplo del diseño general de estructura de datos](Ejemplo.drawio.svg)
+

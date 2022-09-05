@@ -1,0 +1,8 @@
+function readData(ptr_Global_Data_Structure) {
+    while(read(standar_input)) {
+        new_data_structure;
+        new_data_structure->number := read(standar_input)
+        ptr_Global_Data_Structure->add(new_data_structure)
+        read->next
+    }
+}

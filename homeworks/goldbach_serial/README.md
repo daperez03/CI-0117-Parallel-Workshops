@@ -1,4 +1,4 @@
-# Tarea01: primefact_serial
+# Tarea01: goldbach_serial
 
 ## Descripción Del Problema
 

@@ -39,7 +39,7 @@ En caso de algún error se le recomienda la ejecución del comando **"make clean
 
 ### Referencias
 
-Jorge. (2022, May 3). Cómo verificar si un número es primo en python. cryptoshitcompra.com. Retrieved September 5, 2022, from (https://cryptoshitcompra.com/como-verificar-si-un-numero-es-primo-en-python) 
+Jorge. (2022, May 3). Cómo verificar si un número es primo en python. cryptoshitcompra.com. Retrieved September 5, 2022, from https://cryptoshitcompra.com/como-verificar-si-un-numero-es-primo-en-python 
 
 ### Autor
 

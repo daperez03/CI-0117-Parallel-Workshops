@@ -5,7 +5,9 @@
 Se genero un diseño para la estructura de datos implementada en una clase GlobalDataStructure, con algunos métodos, la cual se encarga de manipular un contenedor de tipo **array** y su respectivo tamaño, el array implementado será responsable de almacenar varios punteros a un **struct**, esta estructura a su vez será la responsable de almacenar un número entero, un booleano indicando si el número es par, un booleano indicando si el número contiene un signo negativo y finalmente el string el cual devolverá al usuario.
 
 ### Datos
+
 * size
+* iterator
 * array
     * struct
         * number
@@ -25,9 +27,8 @@ Se genero un diseño para la estructura de datos implementada en una clase Globa
  
 ### Estructura de datos
 
-![Diseño general de estructura de datos](EstructuraDeDatos.drawio.svg)
+![Diseño general de estructura de datos](./SVG/EstructuraDeDatos.drawio.svg)
 
 ### Ejemplo
 
-![Ejemplo del diseño general de estructura de datos](Ejemplo.drawio.svg)
-
+![Ejemplo del diseño general de estructura de datos](./SVG/Ejemplo.drawio.svg)

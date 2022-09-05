@@ -20,7 +20,7 @@ Se genero un diseño para la estructura de datos implementada en una clase Globa
 * **init:** Se encarga de inicializar toda la estructura de datos.
 * **add:** Se encarga de agregar un nuevo struct al vector en su última posición.
 * **get_structur:** Se encarga de devolver un puntero de un struct en específico.
-* **get_size:** Retorna la dimensión del array.
+* **resume:** Retorna la dimensión del array.
 * **free_global_data_structure:** Libera todo lo que contiene la estructura de datos.
  
 ## Ilustración
@@ -32,3 +32,21 @@ Se genero un diseño para la estructura de datos implementada en una clase Globa
 ### Ejemplo
 
 ![Ejemplo del diseño general de estructura de datos](./SVG/Ejemplo.drawio.svg)
+
+## Pseudocódigo
+
+### Clase principal
+
+![goldbach_serial](./pseudocode/goldbach_serial.pseudo)
+
+### Clase encargada de la extracción de datos
+
+![Buffer](./pseudocode/Buffer.pseudo)
+
+### Clase encargada de manipular la estructura de datos
+
+![Global_Data_Structure](./pseudocode/Global_Data_Structure.pseudo)
+
+### Clase encargada de los procesos matemáticos
+
+![Math](./pseudocode/Math.pseudo)

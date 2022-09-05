@@ -1,7 +1,9 @@
 function readData(ptr_Global_Data_Structure) {
     while(read(standar_input)) {
         new_data_structure;
-        new_data_structure->number := read(standar_input)
+        new_data_structure->number := positive_number(read(standar_input))
+        new_data_structure->even := new_data_structure->number is even?
+        new_data_structure->unsigned := read(standar_input) <= 0
         ptr_Global_Data_Structure->add(new_data_structure)
         read->next
     }

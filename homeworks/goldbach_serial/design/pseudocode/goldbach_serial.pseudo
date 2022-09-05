@@ -4,6 +4,6 @@ function main() {
     new Math
     Global_Data_Structure.init()
     Buffer.readData(Global_Data_Structure)
-    Math.solve(Global_Data_Structure);
+    Math.solve(Global_Data_Structure)
     Global_Data_Structure.resume()
 }

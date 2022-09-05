@@ -1,8 +1,44 @@
-struct structName {
+struct tools {
     ptr_data_structure_array
     size
+    iterator
+}
+
+struct data_structure {
+    number
+    even_number
+    unsigned
+    string_result
 }
 
 function init() {
-    ptr_data_structure_array := new array[]
+    ptr_data_structure_array := new array[20]
+    size := 20
+    iterator := 0
+}
+
+function add(ptr_data_structure) {
+    if( iterator < size){
+        ptr_data_structure_array[iterator] := ptr_data_structure
+        iterator := iterator + 1;
+    }else{
+        resize ptr_data_structure_array, add (size/4) 
+    }
+}
+
+function get_structure(position) {
+    return ptr_data_structure_array[position]
+}
+
+function resume() {
+    for (i := 0 to iterator) {
+        print ptr_data_structure_array[i]->string_result and newline
+    }
+}
+
+function free_Global_Data_Structure() {
+    for (i := 0 to size) {
+        free ptr_data_structure_array[i]
+    }
+    free ptr_data_structure_array
 }

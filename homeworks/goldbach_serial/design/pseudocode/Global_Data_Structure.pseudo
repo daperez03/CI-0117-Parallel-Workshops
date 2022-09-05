@@ -1,0 +1,8 @@
+struct structName {
+    ptr_data_structure_array
+    size
+}
+
+function init() {
+    ptr_data_structure_array := new array[]
+}

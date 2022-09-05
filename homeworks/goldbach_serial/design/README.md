@@ -6,8 +6,8 @@ Se genero un diseño para la estructura de datos implementada en una clase Globa
 
 ### Datos
 * size
-* Array
-    * Struct
+* array
+    * struct
         * number
         * even_number
         * unsigned

@@ -56,8 +56,3 @@ function combinaciones(ptr_data_structure) {
     ptr_data_structure->string_result add_front (ptr_data_structure->number": " total_combinations "sums: " )
   }
 }
-
-
-
-//Referencias:
-//https://cryptoshitcompra.com/como-verificar-si-un-numero-es-primo-en-python

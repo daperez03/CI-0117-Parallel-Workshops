@@ -42,7 +42,7 @@ Repositorio individual para ejercicios, tareas y ejemplos de Programacion parale
 
 **Condición de carrera:**
 
-	Se produce cuando dos subprocesos(hilos) acceden a una variable compartida al mismo tiempo
+	Modificacion concurrente de memoria compartidad
 
 **Control de concurrencia:**
 
@@ -52,9 +52,11 @@ Repositorio individual para ejercicios, tareas y ejemplos de Programacion parale
 
 **Exclusión mutua:**
 
+	Es la separacion de varias regiones de ejecucion concurrente para la ejecucion de un unico hilo el cual implica al resto
+
 **Semáforo:**
 
-	Es la implementacion de una implicacion la cual detiene o encicla la ejecucion de un hilo hasta que suceda un evento deseado, haciendo ilucion a luz roja y verde de un semaforo
+	Es un indicador de paso para los hilos el cual cuenta con tres estados y cada hilo puede generar un decremento o incremento al mismo
 
 **Barrera:**
 

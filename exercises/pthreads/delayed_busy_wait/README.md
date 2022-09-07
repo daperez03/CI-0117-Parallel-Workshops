@@ -33,7 +33,7 @@ Agregue la gráfica al readme.md del ejercicio y una discusión de a lo sumo dos
 
 #### Sin Random
 
-**Microsegundos     - Tiempo que tardó (s)**
+**Microsegundos - Tiempo que tardó (s)**
 ```
 20                      15.554306s
 40                      16.539538s
@@ -43,20 +43,20 @@ Agregue la gráfica al readme.md del ejercicio y una discusión de a lo sumo dos
 
 #### Con random
 
-**Microsegundos     - Tiempo que tardó (s)**
+**Microsegundos - Tiempo que tardó (s)**
 
 ```
-100                        74,71
+100                       74,71
 10                        18,33
 85                        19,47
 70                        13,63
 75                        23,50
 25                        19,75
 15                        17,10
-1                          20,51
+1                         20,51
 90                        26,99
 80                        21,13
-5                          35,26
+5                         35,26
 85                        22,54
 39                        16,61
 89                        15,39

@@ -69,7 +69,7 @@ Agregue la gráfica al readme.md del ejercicio y una discusión de a lo sumo dos
 
 ![Grafico](./IMG/graficoTiempo.svg)
 
-Elaboracion en conjunto:
+**Elaboracion en conjunto:**
 * Daniel Pérez
 * Emilia Viquez
 * Alberto Gonzáles

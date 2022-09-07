@@ -60,7 +60,7 @@ int main(int argc, char* argv[]) {
     if (sscanf(argv[2], "%" SCNu64, &delay) != 1) {
       fprintf(stderr , "Error: invalid delay\n");
       error = 11;
-    } 
+    }
   }
 
   shared_data_t* shared_data = (shared_data_t*)
@@ -133,11 +133,12 @@ void* greet(void* data) {
   private_data_t* private_data = (private_data_t*)data;
   shared_data_t* shared_data = private_data->shared_data;
 
-  while (shared_data->next_thread < private_data->thread_number) {  //  espera activa, prohibida
+  while (shared_data->next_thread
+    < private_data->thread_number) {  //  espera activa, prohibida
     // busy-wait
     unsigned int seed = shared_data->delay * private_data->thread_number;
     usleep(rand_r((unsigned int *)&seed)%shared_data->delay);
-  } //  end while
+  }  //  end while
 
   //  print "Hello from secundary thread"
   printf("Hello from secundary thread %" PRIu64 " of %" PRIu64 "\n"

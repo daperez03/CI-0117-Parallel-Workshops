@@ -20,20 +20,20 @@ Agregue la gráfica al readme.md del ejercicio y una discusión de a lo sumo dos
 
 ## Ejercicios
 
-### Mayor duracion de corridas
+### Mayor duración de corridas
 
   22.125539s
 
 ### ¿Hubo una mejora de la espera pseudoaleatoria respecto a la espera constante?
 
-  Si, ya que la espera constante no termino cuando el delay ya lo habia hecho
+  Si, ya que la espera constante no terminó cuando el delay ya lo había hecho
 
 ### ¿Mejora el tiempo de ejecución si disminuye o incrementa la espera máxima de los hilos?
 
 
 #### Sin Random
 
-**Microsegundos	 - Tiempo que tardó (s)**
+**Microsegundos     - Tiempo que tardó (s)**
 ```
 20                      15.554306s
 40                      16.539538s
@@ -43,34 +43,34 @@ Agregue la gráfica al readme.md del ejercicio y una discusión de a lo sumo dos
 
 #### Con random
 
-**Microsegundos	 - Tiempo que tardó (s)**
+**Microsegundos     - Tiempo que tardó (s)**
 
 ```
-100                   74,71
-10                    18,33
-85                    19,47
-70                    13,63
-75                    23,50
-25                    19,75
-15                    17,10
-1                     20,51
-90                    26,99
-80                    21,13
-5                     35,26
-85                    22,54
-39                    16,61
-89                    15,39
-30                    16,40
-45                    15,35
-28                    15,26
+100                        74,71
+10                        18,33
+85                        19,47
+70                        13,63
+75                        23,50
+25                        19,75
+15                        17,10
+1                          20,51
+90                        26,99
+80                        21,13
+5                          35,26
+85                        22,54
+39                        16,61
+89                        15,39
+30                        16,40
+45                        15,35
+28                        15,26
 ```
 
-##### Grafico
+##### Gráfico
 
-![Grafico](./IMG/graficoTiempo.svg)
+![Gráfico](./IMG/graficoTiempo.svg)
 
-**Elaboracion en conjunto:**
-* Daniel Pérez
+Elaboración en conjunto:
+* Daniel Perez
 * Emilia Viquez
 * Alberto Gonzáles
 * Sebastian Solano

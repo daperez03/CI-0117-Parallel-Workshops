@@ -33,36 +33,36 @@ Agregue la gráfica al readme.md del ejercicio y una discusión de a lo sumo dos
 
 #### Sin Random
 
-**Microsegundos	  Tiempo que tardó (s)**
+**Microsegundos	 - Tiempo que tardó (s)**
 ```
-20                  15.554306s
-40                  16.539538s
-60                  21.972145s
-80                  22.641810s
+20                      15.554306s
+40                      16.539538s
+60                      21.972145s
+80                      22.641810s
 ```
 
 #### Con random
 
-**Microsegundos	  Tiempo que tardó (s)**
+**Microsegundos	 - Tiempo que tardó (s)**
 
 ```
-100	                74,71
-10              	  18,33
-85              	  19,47
-70              	  13,63
-75              	  23,50
-25	                19,75
-15	                17,10
-1	                  20,51
-90	                26,99
-80	                21,13
-5	                  35,26
-85	                22,54
-39	                16,61
-89	                15,39
-30	                16,40
-45	                15,35
-28	                15,26
+100	                    74,71
+10              	      18,33
+85              	      19,47
+70              	      13,63
+75              	      23,50
+25	                    19,75
+15	                    17,10
+1	                      20,51
+90	                    26,99
+80	                    21,13
+5	                      35,26
+85	                    22,54
+39	                    16,61
+89	                    15,39
+30	                    16,40
+45	                    15,35
+28	                    15,26
 ```
 
 ##### Grafico
@@ -70,9 +70,9 @@ Agregue la gráfica al readme.md del ejercicio y una discusión de a lo sumo dos
 ![Grafico](./IMG/graficoTiempo.svg)
 
 Elaboracion en conjunto:
-* Daniel Perez
+* Daniel Pérez
 * Emilia Viquez
-* Albverto Gonzales
+* Alberto Gonzáles
 * Sebastian Solano
-* Angie Solis
+* Angie Solís
 * Luis Solano

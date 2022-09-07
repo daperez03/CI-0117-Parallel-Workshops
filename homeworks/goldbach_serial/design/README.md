@@ -2,18 +2,19 @@
  
 ## Descripción
  
-Se genero un diseño para la estructura de datos implementada en una clase GlobalDataStructure, con algunos métodos, la cual se encarga de manipular un contenedor de tipo **array** y su respectivo tamaño, el array implementado será responsable de almacenar varios punteros a un **struct**, esta estructura a su vez será la responsable de almacenar un número entero, un booleano indicando si el número es par, un booleano indicando si el número contiene un signo negativo y finalmente el string el cual devolverá al usuario.
+Se genero un diseño para la estructura de datos implementada en una clase GlobalDataStructure, con algunos métodos, la cual se encarga de manipular un contenedor de tipo **array** y su respectivo tamaño, el array implementado será responsable de almacenar varios **struct**. La estructura contendra datos respecto al numero ingresado como el numero en si, si contiene signo, un vector de las sumas, el tamaño del vector y la posicion iterada
 
 ### Datos
 
-* size
-* iterator
-* array
-    * struct
-        * number
-        * even_number
-        * unsigned
-        * string_result
+* size: uint64_t
+* iterator: uint64_t
+* array: data_struct*
+    * data_struct: struct
+        * number: uint64_t
+        * is_unsigned: uint64_t
+        * size_of_result: uint64_t
+        * iterator: uint64_t
+        * result: uint64_t*
 
 ### Métodos
 
@@ -21,7 +22,7 @@ Se genero un diseño para la estructura de datos implementada en una clase Globa
 * **add:** Se encarga de agregar un nuevo struct al vector en su última posición.
 * **get_structur:** Se encarga de devolver un puntero de un struct en específico.
 * **resume:** Imprime un resumen sobre los resultados obtenidos.
-* **free_global_data_structure:** Libera todo lo que contiene la estructura de datos.
+* **destroy:** Libera todo lo que contiene la estructura de datos.
  
 ## Ilustración
  

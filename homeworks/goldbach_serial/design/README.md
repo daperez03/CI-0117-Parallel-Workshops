@@ -8,7 +8,7 @@ Se genero un diseño para la estructura de datos implementada en una clase Globa
 
 * size: uint64_t
 * iterator: uint64_t
-* array: data_struct*
+* data_structure_array: data_struct*
     * data_struct: struct
         * number: uint64_t
         * is_unsigned: uint64_t

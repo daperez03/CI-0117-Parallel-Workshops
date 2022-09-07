@@ -1,0 +1,29 @@
+procedure main(argc, argv[])
+    shared thread_number := 0
+    shared hits := 0
+    shared can_access_position := create_mutex()
+    shared pinata_life := 100000
+    shared thread_count := integer(argv[1])
+    for thread_number := 0 to thread_count do
+        create_thread(great, thread_number, thread_count) //thread team
+    end for
+    print "Hello from main thread"
+end procedure
+
+procedure great(thread_number):
+    while(pinata_life > 0){
+        lock(can_access_position)
+        if(pinata_life = 0){
+            print "Thread " thread_number "/" thread_count ": " hits " hits"
+            unlock(can_access_position)
+        } else {
+            pinata_life =: pinata_life - 1
+            hits := hits + 1
+            unlock(can_access_position)
+            if(pinata_life = 0){
+                print "Thread " thread_number "/" thread_number ": " hits " hits, I broke the pinata"
+            }
+        }
+    }
+end procedure
+

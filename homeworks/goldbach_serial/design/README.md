@@ -2,7 +2,7 @@
  
 ## Descripción
  
-Se genero un diseño para la estructura de datos implementada en un objeto goldbach_sums, con subrutinas las cuales permiten de manipular el contenido de sus datos. La estructura contendra datos respecto al numero ingresado como el numero en si, si contiene signo, un vector de las sumas, el tamaño del vector y la posicion iterada
+Para para el problema propuesto se implemento un diseño para la estructura de datos de tipo array, implementado en un objeto goldbach_sums, con subrutinas las cuales permiten de manipular el contenido de sus datos. La estructura almacenara datos necesarios para la correcta funcion del array y almacenamiento de caracteristicas de los numeros ingresados
 
 ### Datos
 #### goldbach_sums_t

@@ -1,0 +1,9 @@
+function readData(my_goldbach_sums) {
+  while not end document {
+    i := 0;
+    my_goldbach_sums->numbers[i]->number := positive_number(read(doc))
+    my_goldbach_sums->numbers[i]->result_t := if doc is negative return 0 else return 1
+    doc->nextLine
+    i := i + 1;
+  }
+}

@@ -7,6 +7,7 @@
 #include <assert.h>
 #include <inttypes.h>
 #include <pthread.h>
+#include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -34,10 +35,10 @@ typedef struct private_data {
  * @param data NULL
  * @return void* NULL
  */
-void* greet(void* data);
+void* hit_pinata(void* data);
 
 /**
- * @brief Metodo el cual crea hilos de ejecucion del programa greet
+ * @brief Metodo el cual crea hilos de ejecucion del programa hit_pinata
  * 
  * @param thread_count Indica numero de hilos que se quiere ejecutar
  * @return Numero entero indicando si la ejecucion fue exitosa o surgio un error
@@ -93,7 +94,7 @@ int create_threads(shared_data_t* share_data) {
         private_data[thread_number].thread_number = thread_number;
         private_data[thread_number].shared_data = share_data;
         error = pthread_create(&threads[thread_number] ,
-          NULL , greet , &private_data[thread_number]);
+          NULL , hit_pinata , &private_data[thread_number]);
       if (error != EXIT_SUCCESS) {
         fprintf(stderr , "Error: could not create secundary thread\n");
         return 21;
@@ -117,30 +118,34 @@ int create_threads(shared_data_t* share_data) {
 
 
   //  procedure great():
-void* greet(void* data) {
+void* hit_pinata(void* data) {
   assert(data);
   private_data_t* private_data = (private_data_t*)data;
   shared_data_t* shared_data = private_data->shared_data;
-  int brook_that = 0;
-  while (shared_data->pinata_life != 0) {
+  bool i_broke_pinata = false;
+  bool is_pinata_alive = true;
+  while (is_pinata_alive) {
     pthread_mutex_lock(&shared_data->can_access_position);
+      
       if (shared_data->pinata_life != 0) {
         --shared_data->pinata_life;
         ++private_data->hits;
+        
         //  pthread_mutex_unlock(&shared_data->can_access_position);
         if (shared_data->pinata_life == 0) {
           printf("Thread %" PRIu64 "/%" PRIu64 ": %" PRIu64
             " hits, I broke the pinata\n", private_data->thread_number
               , shared_data->thread_count, private_data->hits);
-          ++brook_that;
+          i_broke_pinata = true;
+          is_pinata_alive = false;
         }
-      }  //  else{
-        //  pthread_mutex_unlock(&shared_data->can_access_position);
-        //  }
+      } else {
+        is_pinata_alive = false;
+      }
     pthread_mutex_unlock(&shared_data->can_access_position);
   }
 
-  if (!brook_that) {
+  if (!i_broke_pinata) {
     printf("Thread %" PRIu64 "/%" PRIu64 ": %" PRIu64 " hits\n",
       private_data->thread_number, shared_data->thread_count
         , private_data->hits);

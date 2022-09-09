@@ -2,37 +2,33 @@
  
 ## Descripción
  
-Se genero un diseño para la estructura de datos implementada en una clase GlobalDataStructure, con algunos métodos, la cual se encarga de manipular un contenedor de tipo **array** y su respectivo tamaño, el array implementado será responsable de almacenar varios **struct**. La estructura contendra datos respecto al numero ingresado como el numero en si, si contiene signo, un vector de las sumas, el tamaño del vector y la posicion iterada
+Se genero un diseño para la estructura de datos implementada en un objeto goldbach_sums, con subrutinas las cuales permiten de manipular el contenido de sus datos. La estructura contendra datos respecto al numero ingresado como el numero en si, si contiene signo, un vector de las sumas, el tamaño del vector y la posicion iterada
 
 ### Datos
+#### goldbach_sums_t
 
-* size: uint64_t
-* iterator: uint64_t
-* data_structure_array: data_struct*
-    * data_struct: struct
-        * number: uint64_t
-        * is_unsigned: uint64_t
-        * size_of_result: uint64_t
-        * iterator: uint64_t
-        * result: uint64_t*
+* capacity: uint64_t
+* count: uint64_t
+* numbers: number_t*
 
-### Métodos
+#### number_t
 
-* **init:** Se encarga de inicializar toda la estructura de datos.
-* **add:** Se encarga de agregar un nuevo struct al vector en su última posición.
-* **get_structur:** Se encarga de devolver un puntero de un struct en específico.
+* number: uint64_t
+* result_t: uint64_t
+* capacity: uint64_t
+* sum_count: uint64_t
+* sums: uint64_t*
+
+### Subrutinas
+
+* **init:** Toma la responsabilidad de inicializar el contenido de goldbach_sums_t.
+* **resize:** Reestructura el tamaño de numbers si es necesario
 * **resume:** Imprime un resumen sobre los resultados obtenidos.
 * **destroy:** Libera todo lo que contiene la estructura de datos.
  
-## Ilustración
- 
-### Estructura de datos
+## Diagrama UML
 
 ![Diseño general de estructura de datos](./SVG/EstructuraDeDatos.drawio.svg)
-
-### Ejemplo
-
-![Ejemplo del diseño general de estructura de datos](./SVG/Ejemplo.drawio.svg)
 
 ## Pseudocódigo
 

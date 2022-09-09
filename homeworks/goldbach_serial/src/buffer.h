@@ -5,11 +5,12 @@
 #define BUFFER_H
 
   //  #include <assert.h>
+#include <errno.h>
+#include "goldbach_sums.h"
 #include <inttypes.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "goldbach_sums.h"
 
 uint64_t readData(goldbach_sums_t*);
 

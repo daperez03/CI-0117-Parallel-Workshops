@@ -30,7 +30,7 @@ typedef struct goldbach_sums {
 
 uint64_t init(goldbach_sums_t* my_goldbach_sums);
 uint64_t resize(goldbach_sums_t* my_goldbach_sums);
-void resume(goldbach_sums_t* my_goldbach_sums);
+void result(goldbach_sums_t* my_goldbach_sums);
 void destroy(goldbach_sums_t* my_goldbach_sums);
 
 #endif

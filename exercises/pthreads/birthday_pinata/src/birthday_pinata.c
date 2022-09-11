@@ -29,10 +29,9 @@ typedef struct private_data {
 } private_data_t;
 
 /**
- * Aca se documenta las clase
- * @brief  Genera un mensaje en la salida standar
- * 
- * @param data NULL
+ * @brief  funcion el cual permite que los hilos puedan golpear a la piñata uno a la vez
+ * Utiliza un mutex para que esto sea posible
+ * @param data Contiene los datos de la piñata
  * @return void* NULL
  */
 void* hit_pinata(void* data);
@@ -81,7 +80,7 @@ int main(int argc, char* argv[]) {
   return error;
 }  //  end procedure
 
-
+  //  Crea hilos de ejecucion
 int create_threads(shared_data_t* share_data) {
   int error = EXIT_SUCCESS;
   pthread_t* threads = (pthread_t*)
@@ -105,7 +104,7 @@ int create_threads(shared_data_t* share_data) {
       ; ++thread_number) {
       pthread_join(threads[thread_number], /*value_ptr*/ NULL);
     }
-
+    pthread_mutex_destroy(&share_data->can_access_position);
     free(private_data);
     free(threads);
   } else {
@@ -116,8 +115,8 @@ int create_threads(shared_data_t* share_data) {
   return error;
 }
 
-
-  //  procedure great():
+  //  Proceso el cuar es respondable de que los hilos golpeen a la piñata
+  //  , ademas usa un mutex para evitar condicion de carrera y espera activa
 void* hit_pinata(void* data) {
   assert(data);
   private_data_t* private_data = (private_data_t*)data;
@@ -125,13 +124,11 @@ void* hit_pinata(void* data) {
   bool i_broke_pinata = false;
   bool is_pinata_alive = true;
   while (is_pinata_alive) {
+    //  Genera una espera por los hilos, solo permite el ingreso de uno
     pthread_mutex_lock(&shared_data->can_access_position);
-      
       if (shared_data->pinata_life != 0) {
         --shared_data->pinata_life;
         ++private_data->hits;
-        
-        //  pthread_mutex_unlock(&shared_data->can_access_position);
         if (shared_data->pinata_life == 0) {
           printf("Thread %" PRIu64 "/%" PRIu64 ": %" PRIu64
             " hits, I broke the pinata\n", private_data->thread_number
@@ -143,6 +140,7 @@ void* hit_pinata(void* data) {
         is_pinata_alive = false;
       }
     pthread_mutex_unlock(&shared_data->can_access_position);
+    //  Permite a un siguiente hilo ingresar y libera el hilo actual de mutex
   }
 
   if (!i_broke_pinata) {

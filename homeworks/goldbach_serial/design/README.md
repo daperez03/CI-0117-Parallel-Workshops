@@ -2,7 +2,7 @@
  
 ## Descripción
  
-Para para el problema propuesto se implemento un diseño para la estructura de datos de tipo array, implementado en un objeto goldbach_sums, con subrutinas las cuales permiten de manipular el contenido de sus datos. La estructura almacenara datos necesarios para la correcta funcion del array y almacenamiento de caracteristicas de los numeros ingresados
+Para para el problema propuesto se implemento un diseño para la estructura de datos de tipo array, implementado en un objeto goldbach_sums, con funciones las cuales permiten manipular el contenido de sus datos. La estructura almacenara datos necesarios para la correcta funcion del array y almacenamiento de caracteristicas de los numeros ingresados, como lo seria un contador y la capacidad.
 
 ### Datos
 #### goldbach_sums_t
@@ -14,16 +14,16 @@ Para para el problema propuesto se implemento un diseño para la estructura de d
 #### number_t
 
 * number: uint64_t
-* result_t: uint64_t
 * capacity: uint64_t
 * sum_count: uint64_t
 * sums: uint64_t*
 
-### Subrutinas
+### FUnciones
 
 * **init:** Toma la responsabilidad de inicializar el contenido de goldbach_sums_t.
-* **resize:** Reestructura el tamaño de numbers si es necesario
-* **resume:** Imprime un resumen sobre los resultados obtenidos.
+* **resize_numbers:** Reestructura el tamaño del array de numeros, del struct goldbach_sums_t
+* **resize_sums:** Reestructura el tamaño del array de sums del struct number_t
+* **result:** Envia a la salida estandar un resumen sobre los resultados obtenidos.
 * **destroy:** Libera todo lo que contiene la estructura de datos.
  
 ## Diagrama UML

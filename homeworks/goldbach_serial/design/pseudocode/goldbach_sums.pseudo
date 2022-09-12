@@ -1,5 +1,3 @@
-shared enum{negative_t := 0, positive_t := 1, error_t := 2}
-
 shared struct goldbach_sums_t{
   capacity
   count
@@ -8,55 +6,14 @@ shared struct goldbach_sums_t{
 
 shared struct number_t {
   number
-  result_t
   capacity
   sum_count
   sums[]
 }
 
-function init() {
-  goldbach_sums_t->capacity := 24
-  goldbach_sums_t->count := 0
-}
-
-function resize(){
-  expand goldbach_sums_t->capacity
-}
-
-function resume() {
+function result() {
   for (i := 0 to count) {
-    if(result_t is negative_t){
-      if (number is even){
-        print "-"number ": " sum_count/2 "sums"
-      }else{
-        print "-"number ": " sum_count/3 "sums"
-      }
-    }else{
-      print number ": " sums[0] "sums"
-    }
-    if(result_t is negative_t){
-      print ": "
-      j := 0
-      if(number is even){
-        while(j != sum_count){
-          if(j != sum_count - 2){
-            print result[j] "+" result[j + 1] ", "
-          }else{
-            print result[j] "+" result[j + 1]
-          }
-          j := j + 2;
-        }
-      }else{
-        while(j != sum_count){
-          if(j != sum_count - 3){
-            print result[j] "+" result[j + 1] "+" result[j + 2] ", "
-          }else{
-            print result[j] "+" result[j + 1] "+" result[j + 2]
-          }
-          j := j + 3;
-        }
-      }
-    }
+    print numbers[i]": " numbers[i].sums
   }
 }
 

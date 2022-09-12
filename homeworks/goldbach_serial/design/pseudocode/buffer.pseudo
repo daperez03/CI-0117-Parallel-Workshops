@@ -1,9 +1,7 @@
 function readData(my_goldbach_sums) {
   while not end document {
-    i := 0;
-    my_goldbach_sums->numbers[i]->number := positive_number(read(doc))
-    my_goldbach_sums->numbers[i]->result_t := if doc is negative return 0 else return 1
+    my_goldbach_sums->numbers[my_goldbach_sums->count]->number := read(stdin)
     doc->nextLine
-    i := i + 1;
+    my_goldbach_sums->count := my_goldbach_sums->count + 1
   }
 }

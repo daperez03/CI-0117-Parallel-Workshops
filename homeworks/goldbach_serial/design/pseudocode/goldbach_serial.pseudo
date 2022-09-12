@@ -1,8 +1,7 @@
 function main() {
-  goldbach_sums_t my_goldbach_sums;
-  goldbach_sums->init(my_goldbach_sums)
+  create goldbach_sums_t my_goldbach_sums;
   Buffer->read_data(my_goldbach_sums)
   my_math->solve(my_goldbach_sums)
-  goldbach_sums.resume(my_goldbach_sums)
+  goldbach_sums->result(my_goldbach_sums)
   goldbach_sums->destroy(my_goldbach_sums)
 }

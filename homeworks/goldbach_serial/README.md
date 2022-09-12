@@ -38,7 +38,7 @@ gcc -Wall -Wextra -pthread -g -Isrc build/buffer.o build/goldbach_serial.o build
 
 ### Ejecución
 
-Para la ejecución se encuentra disponible dos formatos:
+Para la ejecución se encuentra disponible cuatro formatos:
 
 1. Entrada estándar: El primer método consiste en simplemente utilizar 'make run' e ingresar los
 números deseados en la terminal, una vez ya haya ingresado todos los números se debe presionar

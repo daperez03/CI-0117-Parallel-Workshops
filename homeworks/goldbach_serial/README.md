@@ -13,23 +13,66 @@ Se desarrolló un programa procedimental, en el lenguaje de programación C, el 
 
 ## Manual De Uso
 
-Este apartado contiene información breve para una adecuada manipulación y ejecución del programa respectivo. Para esto debemos seguir una serie de pasos mostradas a continuación:
+Este apartado contiene información breve para una adecuada manipulación y ejecución del programa respectivo. Para esto es necesario seguir una serie de pasos mostradas a continuación:
 
-1. Abrir la terminal respectiva de su dispositivo. **Ctrl+alt+t**
-2. Desplazarse por los archivos hasta llegar a la carpeta nombrada primefact_serial. **cd _______**
-3. Una vez ubicado en la carpeta se debe compilar y correr el programa respectivo de la siguiente forma:
-  * **Compilación:**
-      - make
-  * **Ejecución:**
-      - make run
+1. Tener el compilador GCC adecuado para C y preferiblemente un documento Makefile
+configurado para la ejecución.
+2. Abrir la terminal respectiva de su dispositivo. **Ctrl+alt+t**
+3. Desplazarse por los archivos hasta llegar a la carpeta nombrada goldbach_sums. **cd _______**
+4. Una vez ubicado en la carpeta se debe compilar y correr el programa respectivo de la siguiente forma:
+
+  **Compilación:**
+
+    Makefile: Si se cuenta con un documento Makefile configurado, solamente
+    debe ejecutar el comando 'make'.
+    
+    Compilador normal: debe ingresar los comandos:
+
+    ```
+    gcc -c -Wall -Wextra -pthread -g -std=gnu11 -Isrc -MMD src/buffer.c -o build/buffer.o
+    gcc -c -Wall -Wextra -pthread -g -std=gnu11 -Isrc -MMD src/goldbach_serial.c -o build/goldbach_serial.o
+    gcc -c -Wall -Wextra -pthread -g -std=gnu11 -Isrc -MMD src/goldbach_sums.c -o build/goldbach_sums.o
+    gcc -c -Wall -Wextra -pthread -g -std=gnu11 -Isrc -MMD src/my_math.c -o build/my_math.o
+    mkdir -p bin/
+    gcc -Wall -Wextra -pthread -g -Isrc build/buffer.o build/goldbach_serial.o build/goldbach_sums.o build/my_math.o -o bin/goldbach_serial 
+    ```
+
+  **Ejecución:**
+
+    Para la ejecución se encuentra disponible dos formatos:
+
+    1. Entrada estándar: El primer método consiste en simplemente utilizar 'make run' e ingresar los números deseados en la terminal, una vez ya haya ingresado todos los números se debe presionar 'ctrl d'
+    2. Redireccionamiento de entrada estándar: El segundo método debe redireccionar la entrada estándar, para ello se debe crear un archivo de texto con un número deseado por línea, para ejecutar debe escribir el comando 'bin/goldbach_serial < **txt**' donde **txt** es la dirección de su archivo con los números
+    3. Redireccionamiento de salida standar: Para redireccionar la salida estándar debemos seguir con la misma lógica que la de la entrada estándar, nada más debemos colocar 'bin/goldbach_serial > **txt**' donde **txt** es el nombre del archivo donde queremos que vayan los resultados digitados, los números 
+    se deben ingresar desde la termina con un cambio de línea entre cada uno y una vez todos hayan sido
+    ingresados se debe presionar 'ctrl d'
+    4. Redireccionamiento de entrada y salida standar: Para este cuarto y último punto debemos tener en cuenta que el programa trabaja mediante archivos de texto, leyendo e imprimiendo así los archivos indicados, para esto se debe ejecutar el comando 'bin/goldbach_serial < **input** > **output**', dónde input sera la direccion del archivo de texto que desea ingresar y output el nombre de cómo desea que el archivo de salida sea llamado
 
 **IMPORTANTE:**
 
-En caso de algún error se le recomienda la ejecución del comando **"make clean"** y volver a ejecutar los procesos superiores nuevamente.
+En caso de algún error se le recomienda la ejecución del comando **"make clean"**, o lo que es correspondiente a **rm -rf bin build doc**, y volver a ejecutar los procesos anteriores nuevamente. Además verificar que este error no se haya producido por un dígito válido o falta de memoria.
 
-## Resultados
+## Ejemplos de ejecución
 
-### Fase de análisis
+```
+bin/goldbach_serial
+1
+6
+4
+10
+9
+Total 5 numbers 6 sums
+
+1: NA
+6: 1 sums
+4: 1 sums
+10: 2 sums
+9: 2 sums
+```
+
+```
+bin/goldbach_serial < tests/input004.txt > output004.txt
+```
 
 ## Más información
  

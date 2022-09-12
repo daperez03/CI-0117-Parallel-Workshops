@@ -18,7 +18,7 @@ Para para el problema propuesto se implemento un diseño para la estructura de d
 * sum_count: uint64_t
 * sums: uint64_t*
 
-### FUnciones
+### Funciones
 
 * **init:** Toma la responsabilidad de inicializar el contenido de goldbach_sums_t.
 * **resize_numbers:** Reestructura el tamaño del array de numeros, del struct goldbach_sums_t
@@ -32,18 +32,18 @@ Para para el problema propuesto se implemento un diseño para la estructura de d
 
 ## Pseudocódigo
 
-### Clase principal
+### Funcion principal
 
 ![goldbach_serial](./pseudocode/goldbach_serial.pseudo)
 
-### Clase encargada de la extracción de datos
+### Funciones encargadas de la extracción de datos
 
-![Buffer](./pseudocode/Buffer.pseudo)
+![buffer](./pseudocode/buffer.pseudo)
 
-### Clase encargada de manipular la estructura de datos
+### Funciones encargadas de manipular la estructura de datos
 
-![Global_Data_Structure](./pseudocode/Global_Data_Structure.pseudo)
+![goldbach_sums](./pseudocode/goldbach_sums.pseudo)
 
-### Clase encargada de los procesos matemáticos
+### Funciones encargadas de los procesos matemáticos
 
-![Math](./pseudocode/Math.pseudo)
+![my_math](./pseudocode/my_math.pseudo)

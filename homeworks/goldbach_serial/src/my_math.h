@@ -5,19 +5,29 @@
 #ifndef MY_MATH_H
 #define MY_MATH_H
 
-//#include <assert.h>
-#include <stdbool.h>
+  //  system header
 #include <inttypes.h>
+#include <math.h>
+#include <stdbool.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
+
+  //  other header
 #include "goldbach_sums.h"
-#include <math.h>
 
 struct tools;
 
-uint64_t solve(goldbach_sums_t*);
-bool is_even(uint64_t);
+/**
+ * @brief Calculate and save the goldbach sums
+ * 
+ * @param my_goldbach_sums Structure that contains the goldbach sums
+ * @return An error code:
+ * 0 for success
+ * 31 There is no space to store funtion tools
+ * Errors of the functions resize_sums and resize_numbers
+ */
+uint64_t solve(goldbach_sums_t* my_goldbach_sums);
 
 
 #endif

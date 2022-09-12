@@ -1,74 +1,153 @@
-#include "my_math.h"
-//#include "Global_Data_Structure.h"
+/*
+ *Copyright 2022 Daniel Perez Morera <daniel.perezmorera@ucr.ac.cr> CC-BY 4.0
+ */
 
-struct tools{
-  uint64_t* array_prime_number;
-  uint64_t size;
-  uint64_t iterator;
+#include "my_math.h"
+
+/**
+ * @brief Struct containing prime number array, count and capacity of array
+ *
+ */
+struct tools {
+  uint64_t *array_prime_number;
+  uint64_t count;
+  uint64_t capacity;
 };
 
-void numPrimos(struct tools* basic_tools, struct data_struct* data);
-void combinaciones(struct tools* basic_tools, struct data_struct* local_data);
+/**
+ * @brief Find and save all prime numbers from 0 to a number
+ *
+ * @param basic_tools Struct containing prime number array
+ * @param struct_number Struct containing number
+ */
+void numPrimos(struct tools *basic_tools, number_t *struct_number);
 
-uint64_t solve(struct global_data_struct* global_data){
+/**
+ * @brief Find goldbach sums and save in array sums
+ *
+ * @param basic_tools Struct containing prime number array
+ * @param struct_number Struct containing the base number and vector of sums
+ * @return An error code:
+ * 0 for succes
+ * =! 0 error by function resize_sums
+ */
+uint64_t combinations(struct tools *basic_tools, number_t *struct_number);
+
+//  function solve(my_goldbach_sums)
+uint64_t solve(goldbach_sums_t *my_goldbach_sums) {
   uint64_t error = EXIT_SUCCESS;
-	for (uint64_t i = 0; i < global_data->iterator && error == EXIT_SUCCESS; ++i) {
-		struct data_struct local_data = global_data->data_structure_array[i];
-		struct tools basic_tools;
-		basic_tools.iterator = 0;
-		basic_tools.size = local_data.number/2;
-		basic_tools.array_prime_number = (uint64_t*)calloc(basic_tools.size, sizeof(uint64_t));
-		if (basic_tools.array_prime_number) {
-			numPrimos(&basic_tools, &local_data);
-      combinaciones(&basic_tools, &local_data);
-			free(basic_tools.array_prime_number);
-		}else{
-			fprintf(stderr, "Error: No work space\n");
+  struct tools basic_tools;
+  //  for (i = 0 to my_goldbach_sums->count)
+  for (uint64_t i = 0; i < my_goldbach_sums->count; ++i) {
+    //  number_t my_number_t = my_goldbach_sums->numbers[i]
+    number_t *struct_number = &my_goldbach_sums->numbers[i];
+    basic_tools.count = 0;
+    uint64_t number = struct_number->number < 0 ?
+      struct_number->number * -1 : struct_number->number;
+    basic_tools.capacity = number / (10 / 4) + 1;
+    basic_tools.array_prime_number = (uint64_t *)
+        malloc(basic_tools.capacity * sizeof(uint64_t));
+    if (basic_tools.array_prime_number != NULL) {
+      //  array_prime_number = get prime numbers form my_number_t->number
+      numPrimos(&basic_tools, struct_number);
+      //  combinaciones(my_number_t)
+      error = combinations(&basic_tools, struct_number);
+      free(basic_tools.array_prime_number);
+    } else {
+      fprintf(stderr, "Error: No work space\n");
       error = 31;
-		}
-	}
+      break;
+    }
+  }
   return error;
 }
 
-void numPrimos(struct tools* basic_tools, struct data_struct* local_data){
-	bool is_prime = true;
-	for (uint64_t prime_number = 0; prime_number < local_data->number; ++prime_number) {
-		for (uint64_t i = 0; i < pow(prime_number, 1/2) + 1 && is_prime; ++i) {
-			if (local_data->number - ((uint64_t)(local_data->number / 2)) * 2 == 0) {
-				is_prime = false;
-			}
-		}
-		if (is_prime) {
-			basic_tools->array_prime_number[basic_tools->iterator++] = prime_number;
-		}
-	}
+void numPrimos(struct tools *basic_tools, number_t *struct_number) {
+  bool is_prime = true;
+  uint64_t number = struct_number->number < 0 ?
+    struct_number->number * -1 : struct_number->number;
+    //  Check if prime number contains a multiple
+  for (uint64_t prime_number = 2; prime_number < number; ++prime_number) {
+    is_prime = true;
+    for (uint64_t i = 2; i < prime_number / 2 + 1 && is_prime; ++i) {
+      if (prime_number % i == 0) {
+        is_prime = false;
+      }
+    }
+    if (is_prime) {
+      basic_tools->array_prime_number[basic_tools->count++] = prime_number;
+    }
+  }
 }
 
-void combinaciones(struct tools* basic_tools, struct data_struct* local_data){
-	if (local_data->number - ((uint64_t)(local_data->number / 2)) * 2 == 0) {
-		for (uint64_t i = 0; i < basic_tools->iterator; ++i) {
-			// for(j = i to tools->iterator)
-			for (uint64_t j = i; j < basic_tools->iterator; ++j) {
-				if (local_data->number == basic_tools->array_prime_number[i] + basic_tools->array_prime_number[j]) {
-					++local_data->result[0];
-					local_data->result[local_data->iterator_of_result++] = basic_tools->array_prime_number[i];
-					local_data->result[local_data->iterator_of_result++] = basic_tools->array_prime_number[j];
-				}
-			}
-		}
-	} else {
-		for (uint64_t i = 0; i < basic_tools->iterator; ++i) {
-			for (uint64_t j = i; j < basic_tools->iterator; ++j) {
-				for (uint64_t h = j; h < basic_tools->iterator; ++h) {
-					if (local_data->number == basic_tools->array_prime_number[i]
-						+ basic_tools->array_prime_number[j] + basic_tools->array_prime_number[h]) {
-					++local_data->result[0];
-					local_data->result[local_data->iterator_of_result++] = basic_tools->array_prime_number[i];
-					local_data->result[local_data->iterator_of_result++] = basic_tools->array_prime_number[j];
-					local_data->result[local_data->iterator_of_result++] = basic_tools->array_prime_number[h];
-					}
-				}
-			}
-		}
-	}
+//  function combinaciones(my_number_t)
+uint64_t combinations(struct tools *basic_tools, number_t *struct_number) {
+  uint64_t error = EXIT_SUCCESS;
+  uint64_t number = struct_number->number < 0 ?
+    struct_number->number * -1 : struct_number->number;
+  //    if (my_number_t->number is even)
+  if (number % 2 == 0) {
+    //  for(i = 0 to tools->count)
+    for (uint64_t i = 0; i < basic_tools->count && error == EXIT_SUCCESS; ++i) {
+      //  for(j = i to tools->count)
+      for (uint64_t j = i; j < basic_tools->count
+        && error == EXIT_SUCCESS; ++j) {
+        //  if my_number_t->number = tools->array_prime_number[i]
+        //  + tools->array_prime_number[j] save sums numbers
+        if (number == basic_tools->array_prime_number[i]
+          + basic_tools->array_prime_number[j]) {
+          //  if my_number_t->number is negative_t save sums
+          if (struct_number->number > 3 && struct_number->number != 5) {
+            ++struct_number->sums[0];
+          } else {
+            if (struct_number->sum_count >= struct_number->capacity - 3) {
+              error = resize_sums(struct_number);
+            }
+            if (error == EXIT_SUCCESS) {
+              struct_number->sums[struct_number->sum_count++]
+              = basic_tools->array_prime_number[i];
+              struct_number->sums[struct_number->sum_count++]
+              = basic_tools->array_prime_number[j];
+            }
+          }
+        }
+      }
+    }
+  } else {
+    //  for(i = 0 to tools->count)
+    for (uint64_t i = 0; i < basic_tools->count
+    && error == EXIT_SUCCESS; ++i) {
+      //  for(j = i to tools->count)
+      for (uint64_t j = i; j < basic_tools->count
+        && error == EXIT_SUCCESS; ++j) {
+        //  for(h = j to tools->count)
+        for (uint64_t h = j; h < basic_tools->count
+        && error == EXIT_SUCCESS; ++h) {
+          //  if my_number_t->number = tools->array_prime_number[i]
+          //  + tools->array_prime_number[j] save sums numbers
+          if (number == (basic_tools->array_prime_number[i]
+            + basic_tools->array_prime_number[j]
+              + basic_tools->array_prime_number[h])) {
+            //  if my_number_t->number is negative_t save sums
+            if (struct_number->number >= 0) {
+              ++struct_number->sums[0];
+            } else {
+              if (struct_number->sum_count >= struct_number->capacity - 4) {
+                error = resize_sums(struct_number);
+              }
+              if (error == EXIT_SUCCESS) {
+                struct_number->sums[struct_number->sum_count++]
+                  = basic_tools->array_prime_number[i];
+                struct_number->sums[struct_number->sum_count++]
+                  = basic_tools->array_prime_number[j];
+                struct_number->sums[struct_number->sum_count++]
+                  = basic_tools->array_prime_number[h];
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  return error;
 }

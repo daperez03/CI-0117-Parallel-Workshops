@@ -49,13 +49,13 @@ para ello se debe crear un archivo de texto con un número deseado por línea, p
 escribir el comando 'bin/goldbach_serial < **txt**' donde **txt** es la dirección de su archivo con 
 los números
 
-3. Redireccionamiento de salida standar: Para redireccionar la salida estándar debemos seguir con la
+3. Redireccionamiento de salida estándar: Para redireccionar la salida estándar debemos seguir con la
 misma lógica que la de la entrada estándar, nada más debemos colocar 'bin/goldbach_serial > **txt**'
 donde **txt** es el nombre del archivo donde queremos que vayan los resultados digitados, los
 números se deben ingresar desde la termina con un cambio de línea entre cada uno y una vez todos hayan
 sido ingresados se debe presionar 'ctrl d'
 
-4. Redireccionamiento de entrada y salida standar: Para este cuarto y último punto debemos tener en
+4. Redireccionamiento de entrada y salida estándar: Para este cuarto y último punto debemos tener en
 cuenta que el programa trabaja mediante archivos de texto, leyendo e imprimiendo así los archivos
 indicados, para esto se debe ejecutar el comando 'bin/goldbach_serial < **input** > **output**',
 dónde input sera la direccion del archivo de texto que desea ingresar y output el nombre de cómo

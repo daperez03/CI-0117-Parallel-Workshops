@@ -111,6 +111,7 @@ int create_threads(shared_data_t* share_data) {
   malloc(share_data->thread_count * sizeof(pthread_t));
   private_data_t* private_data = (private_data_t*)
     calloc(share_data->thread_count, sizeof(private_data_t));
+  printf("Hello from main thread\n");
   if (threads && private_data) {
     for (uint64_t thread_number = 0; thread_number < share_data->thread_count
       ; ++thread_number) {
@@ -134,7 +135,6 @@ int create_threads(shared_data_t* share_data) {
       }
     }
 
-    printf("Hello from main thread\n");
     for (uint64_t thread_number = 0; thread_number
       < share_data->thread_count; ++thread_number) {
       if (error == (int)EXIT_SUCCESS) {
@@ -158,7 +158,6 @@ void* greet(void* data) {
   private_data_t* private_data = (private_data_t*)data;
   shared_data_t* shared_data = private_data->shared_data;
   //  wait(can_greet[thread_number])
-  printf("%" SCNu64 "\n", private_data->thread_number);
   int error = sem_wait(shared_data->can_greet[private_data->thread_number]);
   if (error) {
     fprintf(stderr, "error: could not wait for semaphore %d\n", errno);

@@ -6,4 +6,4 @@ Modifique su solución para usar semáforos nombrados que tienen la ventaja de s
 
 ¿Puede su programa con semáforos nombrados crear más hilos que con semáforos de memoria?
 
-No, solo me permite crear un hilo
+Si, es una diferencia un poco grande

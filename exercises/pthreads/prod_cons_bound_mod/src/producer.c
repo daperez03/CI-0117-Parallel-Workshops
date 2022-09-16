@@ -1,3 +1,8 @@
+/*
+*Copyright 2022 Daniel Perez Morera <daniel.perezmorera@ucr.ac.cr> CC-BY 4.0
+*Imprime un hello
+*/
+
 #include "producer.h"
 void* produce(void* data) {
   // const private_data_t* private_data = (private_data_t*)data;

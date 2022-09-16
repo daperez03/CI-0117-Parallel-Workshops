@@ -1,3 +1,8 @@
+/*
+*Copyright 2022 Daniel Perez Morera <daniel.perezmorera@ucr.ac.cr> CC-BY 4.0
+*Imprime un hello
+*/
+
 #include "simulation.h"
 
 int analyze_arguments(int argc, char* argv[], shared_data_t* shared_data) {

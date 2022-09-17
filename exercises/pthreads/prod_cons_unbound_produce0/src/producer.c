@@ -5,7 +5,8 @@
 #include "common.h"
 #include "producer.h"
 
-void is_there_pending_work(simulation_t* simulation, size_t* ptr_my_unit, bool* ptr_is_there_pending_work);
+void is_there_pending_work(simulation_t* simulation
+  , size_t* ptr_my_unit, bool* ptr_is_there_pending_work);
 
 void* produce(void* data) {
   // const private_data_t* private_data = (private_data_t*)data;
@@ -29,7 +30,8 @@ void* produce(void* data) {
 }
 
   // procedure is_there_pending_work(ptr_my_unit, ptr_is_there_pending_work){
-void is_there_pending_work(simulation_t* simulation, size_t* ptr_my_unit, bool* ptr_is_there_pending_work) {
+void is_there_pending_work(simulation_t* simulation
+  , size_t* ptr_my_unit, bool* ptr_is_there_pending_work) {
   //  lock(can_access_next_unit)
   pthread_mutex_lock(&simulation->can_access_next_unit);
     //  ptr_is_there_pending_work := next_unit < unit_count

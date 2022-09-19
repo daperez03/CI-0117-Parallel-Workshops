@@ -4,23 +4,30 @@ privated struct tools{
 }
 
 function solve(my_goldbach_sums) {
-  count := 0
-  for (i = 0 to my_goldbach_sums->count) {
-    number_t my_number_t = my_goldbach_sums->numbers[i]
-    array_prime_number = get prime numbers form my_number_t->number
-    combinaciones(my_number_t)
+  while (true) {
+    tools->count := 0
+    lock(my_goldbach_sums->can_access_solution_count)
+      if(my_goldbach_sums->solution_count < my_goldbach_sums->count){
+        define my_solution := my_goldbach_sums->solution_count
+        my_goldbach_sums->solution_count := my_goldbach_sums->solution_count + 1
+      }else{
+        unlock(my_goldbach_sums->can_access_solution_count)
+        break while
+      }
+    unlock(my_goldbach_sums->can_access_solution_count)
+    number_t := my_goldbach_sums->numbers[my_solution]
+    tools->array_prime_number := get prime numbers form number_t->number
+    combinations(number_t)
   }
 
 }
 
-function combinaciones(my_number_t) {
-  total_combinations := 0
-  if (my_number_t->number is even) {
-
+function combinations(number_t) {
+  if (number_t->number is even) {
     for(i = 0 to tools->count){
       for(j = i to tools->count){
-        if my_number_t->number = tools->array_prime_number[i] + tools->array_prime_number[j] save sums numbers
-          if my_number_t->number is negative_t save sums
+        if number_t->number = tools->array_prime_number[i] + tools->array_prime_number[j] save sums numbers
+          if number_t->number is negative_t save sums
       }
     }
 
@@ -29,8 +36,8 @@ function combinaciones(my_number_t) {
     for(i = 0 to tools->count){
       for(j = i to tools->count){
         for(h = j to tools->count){
-          if my_number_t->number = tools->array_prime_number[i] + tools->array_prime_number[j] save sums numbers
-          if my_number_t->number is negative_t save sums
+          if number_t->number = tools->array_prime_number[i] + tools->array_prime_number[j] save sums numbers
+          if number_t->number is negative_t save sums
         }
       }
     }

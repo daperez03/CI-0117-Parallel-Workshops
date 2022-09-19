@@ -33,6 +33,32 @@ void numPrimos(struct tools *basic_tools, number_t *struct_number);
  */
 uint64_t combinations(struct tools *basic_tools, number_t *struct_number);
 
+/**
+ * @brief Secundary function for storing combinations for even numbers
+ * 
+ * @param basic_tools Struct containing prime number array
+ * @param struct_number Struct containing the base number and vector of sums
+ * @param number number to be reviewed
+ * @return uint64_t An error code:
+ * 0 for succes
+ * =! 0 error by function resize_sums
+ */
+uint64_t combination_of_even_numbers
+  (struct tools* basic_tools, number_t* struct_number, uint64_t number);
+
+/**
+ * @brief Secundary function for storing combinations for odd numbers
+ * 
+ * @param basic_tools Struct containing prime number array
+ * @param struct_number Struct containing the base number and vector of sums
+ * @param number number to be reviewed
+ * @return uint64_t An error code:
+ * 0 for succes
+ * =! 0 error by function resize_sums
+ */
+uint64_t combination_of_odd_numbers
+  (struct tools* basic_tools, number_t* struct_number, uint64_t number);
+
 //  function solve(my_goldbach_sums)
 uint64_t solve(goldbach_sums_t *my_goldbach_sums) {
   uint64_t error = EXIT_SUCCESS;
@@ -87,62 +113,76 @@ uint64_t combinations(struct tools *basic_tools, number_t *struct_number) {
     struct_number->number * -1 : struct_number->number;
   //    if (my_number_t->number is even)
   if (number % 2 == 0) {
-    //  for(i = 0 to tools->count)
-    for (uint64_t i = 0; i < basic_tools->count && error == EXIT_SUCCESS; ++i) {
-      //  for(j = i to tools->count)
-      for (uint64_t j = i; j < basic_tools->count
-        && error == EXIT_SUCCESS; ++j) {
-        //  if my_number_t->number = tools->array_prime_number[i]
-        //  + tools->array_prime_number[j] save sums numbers
-        if (number == basic_tools->array_prime_number[i]
-          + basic_tools->array_prime_number[j]) {
-          //  if my_number_t->number is negative_t save sums
-          if (struct_number->number > 3 && struct_number->number != 5) {
-            ++struct_number->sums[0];
-          } else {
-            if (struct_number->sum_count >= struct_number->capacity - 3) {
-              error = resize_sums(struct_number);
-            }
-            if (error == EXIT_SUCCESS) {
-              struct_number->sums[struct_number->sum_count++]
-              = basic_tools->array_prime_number[i];
-              struct_number->sums[struct_number->sum_count++]
-              = basic_tools->array_prime_number[j];
-            }
+    error = combination_of_even_numbers(basic_tools, struct_number, number);
+  } else {
+    error = combination_of_odd_numbers(basic_tools, struct_number, number);
+  }
+  return error;
+}
+
+uint64_t combination_of_even_numbers
+  (struct tools* basic_tools, number_t* struct_number, uint64_t number) {
+  uint64_t error = EXIT_SUCCESS;
+  //  for(i = 0 to tools->count)
+  for (uint64_t i = 0; i < basic_tools->count && error == EXIT_SUCCESS; ++i) {
+    //  for(j = i to tools->count)
+    for (uint64_t j = i; j < basic_tools->count
+      && error == EXIT_SUCCESS; ++j) {
+      //  if my_number_t->number = tools->array_prime_number[i]
+      //  + tools->array_prime_number[j] save sums numbers
+      if (number == basic_tools->array_prime_number[i]
+        + basic_tools->array_prime_number[j]) {
+        //  if my_number_t->number is negative_t save sums
+        if (struct_number->number > 3 && struct_number->number != 5) {
+          ++struct_number->sums[0];
+        } else {
+          if (struct_number->sum_count >= struct_number->capacity - 3) {
+            error = resize_sums(struct_number);
+          }
+          if (error == EXIT_SUCCESS) {
+            struct_number->sums[struct_number->sum_count++]
+            = basic_tools->array_prime_number[i];
+            struct_number->sums[struct_number->sum_count++]
+            = basic_tools->array_prime_number[j];
           }
         }
       }
     }
-  } else {
-    //  for(i = 0 to tools->count)
-    for (uint64_t i = 0; i < basic_tools->count
-    && error == EXIT_SUCCESS; ++i) {
-      //  for(j = i to tools->count)
-      for (uint64_t j = i; j < basic_tools->count
-        && error == EXIT_SUCCESS; ++j) {
-        //  for(h = j to tools->count)
-        for (uint64_t h = j; h < basic_tools->count
-        && error == EXIT_SUCCESS; ++h) {
-          //  if my_number_t->number = tools->array_prime_number[i]
-          //  + tools->array_prime_number[j] save sums numbers
-          if (number == (basic_tools->array_prime_number[i]
-            + basic_tools->array_prime_number[j]
-              + basic_tools->array_prime_number[h])) {
-            //  if my_number_t->number is negative_t save sums
-            if (struct_number->number >= 0) {
-              ++struct_number->sums[0];
-            } else {
-              if (struct_number->sum_count >= struct_number->capacity - 4) {
-                error = resize_sums(struct_number);
-              }
-              if (error == EXIT_SUCCESS) {
-                struct_number->sums[struct_number->sum_count++]
-                  = basic_tools->array_prime_number[i];
-                struct_number->sums[struct_number->sum_count++]
-                  = basic_tools->array_prime_number[j];
-                struct_number->sums[struct_number->sum_count++]
-                  = basic_tools->array_prime_number[h];
-              }
+  }
+  return error;
+}
+
+uint64_t combination_of_odd_numbers
+  (struct tools* basic_tools, number_t* struct_number, uint64_t number) {
+  uint64_t error = EXIT_SUCCESS;
+  //  for(i = 0 to tools->count)
+  for (uint64_t i = 0; i < basic_tools->count
+  && error == EXIT_SUCCESS; ++i) {
+    //  for(j = i to tools->count)
+    for (uint64_t j = i; j < basic_tools->count
+      && error == EXIT_SUCCESS; ++j) {
+      //  for(h = j to tools->count)
+      for (uint64_t h = j; h < basic_tools->count
+      && error == EXIT_SUCCESS; ++h) {
+        //  if my_number_t->number = tools->array_prime_number[i]
+        //  + tools->array_prime_number[j] save sums numbers
+        if (number == (basic_tools->array_prime_number[i]
+          + basic_tools->array_prime_number[j]
+            + basic_tools->array_prime_number[h])) {
+          //  if my_number_t->number is negative_t save sums
+          if (struct_number->number >= 0) {
+            ++struct_number->sums[0];
+          } else {
+            if (struct_number->sum_count >= struct_number->capacity - 4) {
+              error = resize_sums(struct_number);
+            }
+            if (error == EXIT_SUCCESS) {
+              struct_number->sums[struct_number->sum_count++]
+                = basic_tools->array_prime_number[i];
+              struct_number->sums[struct_number->sum_count++]
+                = basic_tools->array_prime_number[j];
+              struct_number->sums[struct_number->sum_count++]
+                = basic_tools->array_prime_number[h];
             }
           }
         }

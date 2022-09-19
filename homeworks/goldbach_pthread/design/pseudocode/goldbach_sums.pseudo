@@ -1,0 +1,22 @@
+shared struct goldbach_sums_t{
+  capacity
+  count
+  numbers[]
+}
+
+shared struct number_t {
+  number
+  capacity
+  sum_count
+  sums[]
+}
+
+function result() {
+  for (i := 0 to count) {
+    print numbers[i]": " numbers[i].sums
+  }
+}
+
+function destroy() {
+  delete everything stored
+}

@@ -17,18 +17,17 @@
  */
 uint64_t save_data(number_t* struct_number,
   int64_t number_read, uint64_t capacity);
-
   //  function readData(my_goldbach_sums)
 uint64_t readData(goldbach_sums_t* my_goldbach_sums) {
   uint64_t error = EXIT_SUCCESS;
   int64_t number_read = 0;
   int64_t scanner_status = 1;
   errno = 0;
-    //  while not end document
+    //  while not end stdin
   while (scanner_status != EOF) {
-      //  my_goldbach_sums->numbers[my_goldbach_sums->count]
-      //  ->number := read(stdin)
-      //  doc->nextLine
+      //  my_goldbach_sums->numbers[my_goldbach_sums->count]->number
+      //  := read(stdin)
+      //  stdin>nextLine
     scanner_status = scanf("%" SCNd64, &number_read);
     if (!errno && scanner_status == 1) {
       if (my_goldbach_sums->count == my_goldbach_sums->capacity - 1) {

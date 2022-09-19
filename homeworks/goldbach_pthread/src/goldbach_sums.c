@@ -24,6 +24,12 @@ uint64_t init(goldbach_sums_t* my_goldbach_sums) {
     fprintf(stderr, "Error: not create numbers vector\n");
     error = 11;
   }
+  if (pthread_mutex_init(&my_goldbach_sums->can_access_solution_count
+    , NULL) != EXIT_SUCCESS) {
+    fprintf(stderr, "Error: not init mutex \n");
+    error = 12;
+  }
+  my_goldbach_sums->solution_count = 0;
   return error;
 }
 
@@ -69,7 +75,7 @@ uint64_t resize_sums(number_t* number) {
   return error;
 }
 
-  //  function result()
+  //  function result(my_goldbach_sums)
 void result(goldbach_sums_t* my_goldbach_sums) {
   uint64_t sums = 0;
   number_t* struct_number = NULL;
@@ -87,17 +93,22 @@ void result(goldbach_sums_t* my_goldbach_sums) {
   }
   printf("Total %" SCNu64 " numbers %" SCNu64 " sums\n\n"
     , my_goldbach_sums->count, sums);
-    //  for (i := 0 to count)
+    //  for (i := 0 to my_goldbach_sums->count)
   for (uint64_t i = 0; i < my_goldbach_sums->count; ++i) {
     struct_number = &my_goldbach_sums->numbers[i];
-      //  print numbers[i]": " numbers[i].sums
     if (struct_number->number < -3 && struct_number->number != -5) {
       uint64_t repetitions = struct_number->number % 2 == 0? 2 : 3;
+        //  print my_goldbach_sums->numbers[i]->number, ": "
+        //  , my_goldbach_sums->numbers[i]->sums
       print(struct_number->number,
         struct_number->sum_count / repetitions, struct_number->sums, false);
     } else if (struct_number->number > 3 && struct_number->number != 5) {
+        //  print my_goldbach_sums->numbers[i]->number, ": "
+        //  , my_goldbach_sums->numbers[i]->sums
       print(struct_number->number, struct_number->sums[0], NULL, false);
     } else {
+        //  print my_goldbach_sums->numbers[i]->number, ": "
+        //  , my_goldbach_sums->numbers[i]->sums
       print(struct_number->number, 0, NULL, true);
     }
   }
@@ -129,9 +140,9 @@ void print(int64_t number, uint64_t number_of_sums
   }
 }
 
-  //  function destroy()
+  //  function destroy(my_goldbach_sums)
 void destroy(goldbach_sums_t* my_goldbach_sums) {
-    //  delete everything stored
+    //  delete everything stored in my_goldbach_sums
   for (uint64_t i = 0; i < my_goldbach_sums->count; ++i) {
     if (my_goldbach_sums != NULL && my_goldbach_sums->numbers[i].sums != NULL) {
       free(my_goldbach_sums->numbers[i].sums);
@@ -139,5 +150,9 @@ void destroy(goldbach_sums_t* my_goldbach_sums) {
   }
   if (my_goldbach_sums != NULL && my_goldbach_sums->numbers != NULL) {
     free(my_goldbach_sums->numbers);
+  }
+  if (pthread_mutex_destroy
+    (&my_goldbach_sums->can_access_solution_count) != EXIT_SUCCESS) {
+    fprintf(stderr, "Error: not destroyed mutex \n");
   }
 }

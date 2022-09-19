@@ -27,7 +27,7 @@ struct tools;
  * 31 There is no space to store funtion tools
  * Errors of the functions resize_sums and resize_numbers
  */
-uint64_t solve(goldbach_sums_t* my_goldbach_sums);
+void* solve(void* data);
 
 
 #endif

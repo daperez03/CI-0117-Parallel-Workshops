@@ -60,23 +60,42 @@ uint64_t combination_of_odd_numbers
   (struct tools* basic_tools, number_t* struct_number, uint64_t number);
 
 //  function solve(my_goldbach_sums)
-uint64_t solve(goldbach_sums_t *my_goldbach_sums) {
+void* solve(void* data) {
+  goldbach_sums_t* my_goldbach_sums = (goldbach_sums_t*)data;
   uint64_t error = EXIT_SUCCESS;
+  uint64_t my_solution = 0;
   struct tools basic_tools;
-  //  for (i = 0 to my_goldbach_sums->count)
-  for (uint64_t i = 0; i < my_goldbach_sums->count; ++i) {
-    //  number_t my_number_t = my_goldbach_sums->numbers[i]
-    number_t *struct_number = &my_goldbach_sums->numbers[i];
+  //  while (true)
+  while (true) {
+      //  tools->count := 0
     basic_tools.count = 0;
+      //  lock(my_goldbach_sums->can_access_solution_count)
+    pthread_mutex_lock(&my_goldbach_sums->can_access_solution_count);
+        // if(my_goldbach_sums->solution_count < my_goldbach_sums->count)
+      if (my_goldbach_sums->solution_count < my_goldbach_sums->count) {
+          //  define my_solution := my_goldbach_sums->solution_count
+          //  my_goldbach_sums->solution_count :=
+          //  my_goldbach_sums->solution_count + 1
+          my_solution = my_goldbach_sums->solution_count++;
+      } else {
+          //  unlock(my_goldbach_sums->can_access_solution_count)
+        pthread_mutex_unlock(&my_goldbach_sums->can_access_solution_count);
+          //   break while
+        break;
+      }
+      //  unlock(my_goldbach_sums->can_access_solution_count)
+    pthread_mutex_unlock(&my_goldbach_sums->can_access_solution_count);
+      //  number_t := my_goldbach_sums->numbers[my_solution]
+    number_t *struct_number = &my_goldbach_sums->numbers[my_solution];
     uint64_t number = struct_number->number < 0 ?
       struct_number->number * -1 : struct_number->number;
     basic_tools.capacity = number / (10 / 4) + 1;
     basic_tools.array_prime_number = (uint64_t *)
         malloc(basic_tools.capacity * sizeof(uint64_t));
     if (basic_tools.array_prime_number != NULL) {
-      //  array_prime_number = get prime numbers form my_number_t->number
+      //  tools->array_prime_number := get prime numbers form number_t->number
       numPrimos(&basic_tools, struct_number);
-      //  combinaciones(my_number_t)
+      //  combinations(number_t)
       error = combinations(&basic_tools, struct_number);
       free(basic_tools.array_prime_number);
     } else {
@@ -85,7 +104,7 @@ uint64_t solve(goldbach_sums_t *my_goldbach_sums) {
       break;
     }
   }
-  return error;
+  return (void*)error;
 }
 
 void numPrimos(struct tools *basic_tools, number_t *struct_number) {
@@ -106,12 +125,12 @@ void numPrimos(struct tools *basic_tools, number_t *struct_number) {
   }
 }
 
-//  function combinaciones(my_number_t)
+//  function combinations(number_t)
 uint64_t combinations(struct tools *basic_tools, number_t *struct_number) {
   uint64_t error = EXIT_SUCCESS;
   uint64_t number = struct_number->number < 0 ?
     struct_number->number * -1 : struct_number->number;
-  //    if (my_number_t->number is even)
+  //  if (my_number_t->number is even)
   if (number % 2 == 0) {
     error = combination_of_even_numbers(basic_tools, struct_number, number);
   } else {

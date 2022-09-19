@@ -1,7 +1,7 @@
 function read_data(my_goldbach_sums) {
-  while not end document {
+  while not end stdin {
     my_goldbach_sums->numbers[my_goldbach_sums->count]->number := read(stdin)
-    doc->nextLine
+    stdin>nextLine
     my_goldbach_sums->count := my_goldbach_sums->count + 1
   }
 }

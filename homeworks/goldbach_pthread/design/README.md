@@ -39,7 +39,7 @@ Para el problema propuesto se implementó un diseño para la estructura de datos
 
 ![goldbach_serial](./pseudocode/goldbach_serial.pseudo)
 
-### Funciones encargada de implementa paralelismo
+### Funciones encargadas de implementar paralelismo
 
 ![parallelism](./pseudocode/parallelism.pseudo)
 

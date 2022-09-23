@@ -1,0 +1,10 @@
+function main(argv[]) {
+  create goldbach_sums_t my_goldbach_sums
+  define threads_number := argv[1]
+  buffer->read_data(my_goldbach_sums)
+  threads[] = parallelism->create_threads
+    (my_math->solve, threads_number, my_goldbach_sums)
+  join_threads(threads, threads_number)
+  goldbach_sums->result(my_goldbach_sums)
+  goldbach_sums->destroy(my_goldbach_sums)
+}

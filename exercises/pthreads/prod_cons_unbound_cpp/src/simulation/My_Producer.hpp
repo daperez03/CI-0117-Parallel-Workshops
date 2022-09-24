@@ -13,7 +13,7 @@ class My_Producer : public Producer {
   Common* shared_data;
  public:
   My_Producer(size_t thread_number, size_t count,  void* data);
-  int run();
+  int run() override;
   void produce() override;
 };
 #endif

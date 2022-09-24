@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <mutex>
+#include <string>
 #include <thread>
 #include "My_Producer.hpp"
 
@@ -38,7 +39,11 @@ void My_Producer::produce() {
       this->shared_data->producer_min_delay
         , this->shared_data->producer_max_delay));
     this->shared_data->queue_to_use.enqueue(my_unit);
-    std::cout << "Produced " << my_unit << "\n";
+    std::string consumer_message;
+    consumer_message += "Produced ";
+    consumer_message += my_unit + '0';
+    consumer_message += '\n';
+    std::cout << consumer_message;
     // signal(can_consume)
     // sem_post(&this->shared_data->can_consume);
   }

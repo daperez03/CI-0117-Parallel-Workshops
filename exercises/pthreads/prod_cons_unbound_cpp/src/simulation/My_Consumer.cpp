@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <mutex>
+#include <string>
 #include <thread>
 #include "My_Consumer.hpp"
 
@@ -34,7 +35,10 @@ void My_Consumer::consume() {
     //  wait(can_consume)
     //  sem_wait(&this->shared_data->can_consume);
     size_t value = this->shared_data->queue_to_use.dequeue();
-    std::cout << "\tConsuming " << value << std::endl;
+    std::string consumer_message = "\tConsuming ";
+    consumer_message += value + '0';
+    consumer_message += "\n";
+    std::cout << consumer_message;
     usleep(1000 * this->shared_data->random_between(
       shared_data->consumer_min_delay, shared_data->consumer_max_delay));
   }

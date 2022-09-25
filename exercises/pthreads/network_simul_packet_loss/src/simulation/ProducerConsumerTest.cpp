@@ -26,7 +26,7 @@ const char* const usage =
 ProducerConsumerTest::~ProducerConsumerTest() {
   delete this->producer;
   delete this->dispatcher;
-  for ( ConsumerTest* consumer : this->consumers )
+  for ( Consumer<NetworkMessage>* consumer : this->consumers )
     delete consumer;
 }
 

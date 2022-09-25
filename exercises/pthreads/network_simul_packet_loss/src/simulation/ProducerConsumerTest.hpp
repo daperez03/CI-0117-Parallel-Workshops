@@ -9,6 +9,8 @@
 #include <vector>
 
 #include "common.hpp"
+#include "./prodcons/Consumer.hpp"
+#include "NetworkMessage.hpp"
 
 // Forward declarations
 class ConsumerTest;
@@ -42,7 +44,7 @@ class ProducerConsumerTest {
   /// A dispatcher of the of the simulated network messages
   DispatcherTest* dispatcher = nullptr;
   /// Consumers of the simulated network messages
-  std::vector<ConsumerTest*> consumers;
+  std::vector<Consumer<NetworkMessage>*> consumers;
 
  public:
   /// Constructor

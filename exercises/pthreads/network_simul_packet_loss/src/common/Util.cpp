@@ -12,9 +12,12 @@ static std::random_device::result_type seed = std::random_device()();
 static std::mt19937 randomEngine(seed);
 
 int Util::random(int min, int max) {
+  static std::mutex canAccessRandom;
+  canAccessRandom.lock();
   // Produce random values with uniform discrete distribution
   std::uniform_int_distribution<int> randomDistribution(min, max - 1);
   // Generate and return a random number using the uniform distribution
+  canAccessRandom.unlock();
   return randomDistribution(randomEngine);
 }
 

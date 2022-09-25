@@ -4,6 +4,7 @@
 #define UTIL_HPP
 
 #include <string>
+#include <mutex>
 #include <vector>
 
 #include "common.hpp"
@@ -22,7 +23,6 @@ class Util {
  public:
   /// Generates a pseudo-random integer number in range [min, max[
   static int random(int min, int max);
-
   /// Utility method to simulate workload using sleep
   /// This method is for illustrative goals.
   /// Sleeps must be NEVER used for real projects.

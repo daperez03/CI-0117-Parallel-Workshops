@@ -17,8 +17,9 @@ int Util::random(int min, int max) {
   // Produce random values with uniform discrete distribution
   std::uniform_int_distribution<int> randomDistribution(min, max - 1);
   // Generate and return a random number using the uniform distribution
+  int random_number = randomDistribution(randomEngine);
   canAccessRandom.unlock();
-  return randomDistribution(randomEngine);
+  return random_number;
 }
 
 void Util::sleepFor(int milliseconds) {

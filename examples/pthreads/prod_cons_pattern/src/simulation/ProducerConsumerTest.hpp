@@ -6,6 +6,7 @@
 #define PRODUCERCONSUMERTEST_HPP
 
 #include <vector>
+#include <cstddef>
 
 #include "common.hpp"
 

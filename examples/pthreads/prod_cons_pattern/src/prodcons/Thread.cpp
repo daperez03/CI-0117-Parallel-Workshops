@@ -3,7 +3,7 @@
 /// @author Jeisson Hidalgo-Céspedes <jeisson.hidalgo@ucr.ac.cr>
 
 #include <cassert>
-
+#include <cstdlib>
 #include "Thread.hpp"
 
 Thread::Thread() {

@@ -3,7 +3,7 @@
 # Compiler and tool flags
 CC=cc
 XC=g++
-DEFS=-DWEBSERVER  # -DSIMULATION
+DEFS=-DSIMULATION	#-DWEBSERVER
 FLAGS=$(strip -Wall -Wextra -pthread $(DEFS))
 FLAGC=$(FLAGS) -std=gnu11
 FLAGX=$(FLAGS) -std=gnu++11

@@ -1,6 +1,7 @@
 // Copyright 2021 Jeisson Hidalgo-Cespedes. Universidad de Costa Rica. CC BY 4.0
 
 #include <chrono>
+#include <mutex>
 #include <random>
 #include <thread>
 
@@ -12,10 +13,14 @@ static std::random_device::result_type seed = std::random_device()();
 static std::mt19937 randomEngine(seed);
 
 int Util::random(int min, int max) {
+  static std::mutex canAccessRandom;
+  canAccessRandom.lock();
   // Produce random values with uniform discrete distribution
   std::uniform_int_distribution<int> randomDistribution(min, max - 1);
   // Generate and return a random number using the uniform distribution
-  return randomDistribution(randomEngine);
+  int random_number = randomDistribution(randomEngine);
+  canAccessRandom.unlock();
+  return random_number;
 }
 
 void Util::sleepFor(int milliseconds) {

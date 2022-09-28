@@ -7,6 +7,7 @@
 
 #include <exception>
 #include <map>
+#include <vector>
 
 #include "Consumer.hpp"
 
@@ -22,7 +23,6 @@ class Dispatcher : public Consumer<DataType> {
 
  protected:
   /// Alias to the inherited queue for a more meaninguful identifier
-  std::map<KeyType, Queue<DataType>*> toQueues;
   Queue<DataType>*& fromQueue = Consumer<DataType>::consumingQueue;
 
   /// This thread will distribute elements to the following queues

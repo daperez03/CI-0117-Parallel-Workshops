@@ -5,6 +5,8 @@
 #include "DispatcherTest.hpp"
 #include "Util.hpp"
 
+#include <iostream>
+
 DispatcherTest::DispatcherTest(int dispatcherDelay)
   : dispatcherDelay(dispatcherDelay) {
 }
@@ -22,6 +24,34 @@ int DispatcherTest::run() {
   return EXIT_SUCCESS;
 }
 
+void DispatcherTest::consumeForever() {
+  while (true) {
+  for(uint64_t index = 0; index < this->consumingQueues.size(); ++index){
+      // Get the next data to consume, or block while queue is empty
+      std::cout<<"Here"<<this->consumingQueues.size() <<std::endl;
+      const NetworkMessage& data = this->consumingQueues[index]->pop();
+      // If data is the stop condition, stop the loop
+      if ( data == this->stopCondition ) {
+        break;
+        break;
+      }
+      // Process this data
+      this->consume(data);
+    }
+  }
+}
+
+void DispatcherTest::createOwnQueues(uint64_t capacity) {
+  consumingQueues.resize(capacity);
+  for(uint64_t index = 0; index < capacity; ++index){
+    this->consumingQueues.push_back(new Queue<NetworkMessage>());
+  }
+}
+
+Queue<NetworkMessage>* DispatcherTest::getConsumingQueue(int index) {
+  return this->consumingQueues[index];
+}
+
 int DispatcherTest::extractKey(const NetworkMessage& data) const {
   // Propagate a message requires time, simulate it
   // IMPORTANT: This simulation uses sleep() to mimic the process of propagating
@@ -32,3 +62,4 @@ int DispatcherTest::extractKey(const NetworkMessage& data) const {
   // as the key to find the queue
   return data.target;
 }
+

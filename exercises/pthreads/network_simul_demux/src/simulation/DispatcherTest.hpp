@@ -5,6 +5,8 @@
 #ifndef DISPATCHERTEST_HPP
 #define DISPATCHERTEST_HPP
 
+#include <vector>
+
 #include "Dispatcher.hpp"
 #include "NetworkMessage.hpp"
 
@@ -17,14 +19,17 @@ class DispatcherTest : public Dispatcher<int, NetworkMessage> {
  protected:
   /// Delay of dispatcher to dispatch a package, negative for max random
   int dispatcherDelay = 0;
-
+  std::vector<Queue<NetworkMessage>*> consumingQueues;
  public:
   /// Constructor
   explicit DispatcherTest(int dispatcherDelay);
   /// Start redirecting network messages
   int run() override;
+  void consumeForever();
   /// This method extracts the key from a data stored in the fromQueue
   int extractKey(const NetworkMessage& data) const override;
+  void createOwnQueues(size_t capacity);
+  Queue<NetworkMessage>* getConsumingQueue(int index);
 };
 
 #endif  // DISPATCHERTEST_HPP

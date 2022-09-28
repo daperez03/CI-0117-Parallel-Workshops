@@ -5,8 +5,8 @@
 #ifndef PRODUCERCONSUMERTEST_HPP
 #define PRODUCERCONSUMERTEST_HPP
 
-#include <cstddef>
 #include <vector>
+#include <cstddef>
 
 #include "common.hpp"
 
@@ -37,7 +37,7 @@ class ProducerConsumerTest {
   int consumerDelay = 0;
 
  private:
-  /// Producers of the simulated network messages
+  /// Producer of the simulated network messages
   std::vector<ProducerTest*> producers;
   /// A dispatcher of the of the simulated network messages
   DispatcherTest* dispatcher = nullptr;

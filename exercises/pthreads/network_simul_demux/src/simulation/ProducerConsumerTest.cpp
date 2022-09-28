@@ -4,7 +4,6 @@
 
 #include <cstdlib>
 #include <iostream>
-#include <mutex>
 
 #include "ProducerConsumerTest.hpp"
 #include "ConsumerTest.hpp"
@@ -15,8 +14,8 @@ const char* const usage =
   "Usage: prodcons packages consumers prod_delay disp_delay cons_delay\n"
   "\n"
   "  packages    number of packages to be produced\n"
-  "  producers   number of producers threads\n"
-  "  consumers   number of consumer threads\n"
+  "  producers   number of producer threads\n"
+  //  "  consumers   number of consumer threads\n"
   "  prod_delay  delay of producer to create a package\n"
   "  disp_delay  delay of dispatcher to dispatch a package\n"
   "  cons_delay  delay of consumer to consume a package\n"
@@ -36,22 +35,19 @@ int ProducerConsumerTest::start(int argc, char* argv[]) {
   if ( int error = this->analyzeArguments(argc, argv) ) {
     return error;
   }
-
-  // Create objects for the simulation
   this->dispatcher = new DispatcherTest(this->dispatcherDelay);
-  this->dispatcher->createOwnQueue();
-  this->producers.resize(this->producerCount);
-  size_t productionCount = 0;
-  std::mutex mutex;
+  this->dispatcher->createOwnQueues(producerCount);
+  // Create objects for the simulation
+  this->producers.resize(producerCount);
   for ( size_t index = 0; index < this->producerCount; ++index ) {
-    this->producers[index] = new ProducerTest(this->packageCount, this->productorDelay
-    , this->consumerCount, &productionCount, &mutex);
+    this->producers[index] = new ProducerTest(this->packageCount
+    , this->productorDelay, this->consumerCount);
     assert(this->producers[index]);
     this->producers[index]->setProducingQueue
-      (this->dispatcher->getConsumingQueue());
+      (this->dispatcher->getConsumingQueue(index));
   }
   // Create each producer
-  this->consumers.resize(this->consumerCount);
+  this->consumers.resize(++consumerCount);
   for ( size_t index = 0; index < this->consumerCount; ++index ) {
     this->consumers[index] = new ConsumerTest(this->consumerDelay);
     assert(this->consumers[index]);
@@ -60,14 +56,13 @@ int ProducerConsumerTest::start(int argc, char* argv[]) {
 
   // Communicate simulation objects
   // Producer push network messages to the dispatcher queue
+
   // Dispatcher delivers to each consumer, and they should be registered
   for ( size_t index = 0; index < this->consumerCount; ++index ) {
     this->dispatcher->registerRedirect(index + 1
       , this->consumers[index]->getConsumingQueue());
   }
-
   // Start the simulation
-  
   for ( size_t index = 0; index < this->producerCount; ++index ) {
     this->producers[index]->startThread();
   }
@@ -91,7 +86,7 @@ int ProducerConsumerTest::start(int argc, char* argv[]) {
 
 int ProducerConsumerTest::analyzeArguments(int argc, char* argv[]) {
   // 5 + 1 arguments are mandatory
-  if ( argc != 7 ) {
+  if ( argc != 6 ) {
     std::cout << usage;
     return EXIT_FAILURE;
   }
@@ -99,7 +94,7 @@ int ProducerConsumerTest::analyzeArguments(int argc, char* argv[]) {
   int index = 1;
   this->packageCount = std::strtoull(argv[index++], nullptr, 10);
   this->producerCount = std::strtoull(argv[index++], nullptr, 10);
-  this->consumerCount = std::strtoull(argv[index++], nullptr, 10);
+  //  this->consumerCount = std::strtoull(argv[index++], nullptr, 10);
   this->productorDelay = std::atoi(argv[index++]);
   this->dispatcherDelay = std::atoi(argv[index++]);
   this->consumerDelay = std::atoi(argv[index++]);

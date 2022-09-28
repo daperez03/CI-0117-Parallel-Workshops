@@ -21,6 +21,7 @@ struct NetworkMessage {
 
  public:
   /// Convenience constructor
+  //NetworkMessage();
   NetworkMessage(uint16_t target = 0, uint16_t source = 0
       , uint64_t messageNumber = 0)
     : target(target)

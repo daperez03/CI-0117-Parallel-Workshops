@@ -7,33 +7,23 @@
 #include "Util.hpp"
 
 ProducerTest::ProducerTest(size_t packageCount, int productorDelay
-  , size_t consumerCount, size_t* productionCount
-    , std::mutex* canAccessProduction)
+  , size_t consumerCount)
   : packageCount(packageCount)
   , productorDelay(productorDelay)
-  , consumerCount(consumerCount)
-  , productionCount(productionCount)
-  ,canAccessProduction(canAccessProduction){
+  , consumerCount(consumerCount) {
 }
 
 int ProducerTest::run() {
   // Produce each asked message
-  while (true) {
-    this->canAccessProduction->lock();
-    if(*this->productionCount >= this->packageCount) {
-      this->canAccessProduction->unlock();
-      break;
-    }
-    ++(*this->productionCount);
-    this->canAccessProduction->unlock();
-    this->produce(this->createMessage(this->myPackageCount));
-    ++this->myPackageCount;
+  for ( size_t index = 0; index < this->packageCount; ++index ) {
+    this->produce(this->createMessage(index));
   }
+
   // Produce an empty message to communicate we finished
   this->produce(NetworkMessage());
 
   // Report production is done
-  Log::append(Log::INFO, "Producer", std::to_string(this->myPackageCount)
+  Log::append(Log::INFO, "Producer", std::to_string(this->packageCount)
     + " menssages sent");
   return EXIT_SUCCESS;
 }

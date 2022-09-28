@@ -5,7 +5,6 @@
 #include <random>
 #include <thread>
 
-
 #include "Util.hpp"
 
 // Try to get a seed from hardware, if available

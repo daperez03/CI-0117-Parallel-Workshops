@@ -16,7 +16,7 @@ Para el problema propuesto se implementó un diseño para la estructura de datos
 
 #### number_t
 
-* number: uint64_t
+* number: int64_t
 * capacity: uint64_t
 * sum_count: uint64_t
 * sums: uint64_t*

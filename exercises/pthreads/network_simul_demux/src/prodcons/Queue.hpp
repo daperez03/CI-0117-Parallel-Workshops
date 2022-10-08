@@ -25,7 +25,7 @@ class Queue {
   /// All read or write operations are mutually exclusive
   std::mutex mutex;
   /// Indicates if there are consumable elements in the queue
-  Semaphore* canConsume;
+  Semaphore canConsume;
   /// Contains the actual data shared between producer and consumer
   std::queue<DataType> queue;
 
@@ -45,24 +45,20 @@ class Queue {
     return empty;
   }
 
-  void setCanConsume(Semaphore* canConsume) {
-    this->canConsume = canConsume;
-  }
-
   /// Produces an element that is pushed in the queue
   /// The semaphore is increased to wait potential consumers
   void push(const DataType& data) {
     this->mutex.lock();
     this->queue.push(data);
     this->mutex.unlock();
-    this->canConsume->signal();
+    this->canConsume.signal();
   }
 
   /// Consumes the next available element. If the queue is empty, blocks the
   /// calling thread until an element is produced and enqueue
   /// @return A copy of the element that was removed from the queue
   DataType pop() {
-    this->canConsume->wait();
+    this->canConsume.wait();
     this->mutex.lock();
     DataType result = this->queue.front();
     this->queue.pop();

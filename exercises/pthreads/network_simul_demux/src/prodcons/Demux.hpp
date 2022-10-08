@@ -27,7 +27,7 @@ class Demux : public Consumer<DataType> {
   std::vector<Queue<DataType>*> fromQueues;
 
   /// This thread will distribute elements to the following queues
-  std::map<KeyType, Queue<DataType>*> toQueues;
+  Queue<DataType>* toQueue;
 
   Semaphore canConsume;
 
@@ -52,14 +52,13 @@ class Demux : public Consumer<DataType> {
 
   /// Register a map. When the data to be consumed has this key, it will be
   /// redirected to the the given queue
-  inline void registerRedirect(const KeyType& key,  Queue<DataType>* toQueue) {
-    this->toQueues[key] = toQueue;
+  inline void setToQueue(Queue<DataType>* toQueue) {
+    this->toQueue = toQueue;
   }
 
   void createOwnQueues() {
     for (int64_t i = 0; i < this->producerCount; i++) {
       this->fromQueues.push_back(new Queue<DataType>());
-      fromQueues[i]->setCanConsume(&this->canConsume);
     }
     this->ownsQueues = true;
   }
@@ -68,19 +67,19 @@ class Demux : public Consumer<DataType> {
     return this->fromQueues[i];
   }
 
-  /// Override this method to process any data extracted from the queue
-  void consume(DataType data) override {
-    const KeyType& key = this->extractKey(data);
-    const auto& itr = this->toQueues.find(key);
-    if ( itr == this->toQueues.end() ) {
-      throw std::runtime_error("demux: queue's key not found");
-    }
-    itr->second->push(data);
+  inline Semaphore* getCanConsume() {
+    return &this->canConsume;
   }
 
-  virtual void consumeForever() {
+  /// Override this method to process any data extracted from the queue
+  void consume(DataType data) override {
+    toQueue->push(data);
+  }
+
+  void consumeForever() override {
     DataType caseDefault;
     while (true) {
+      // std::cout << "here" << std::endl;
       DataType& data = caseDefault;
       this->canConsume.wait();
       // Get the next data to consume, or block while queue is empty
@@ -100,9 +99,6 @@ class Demux : public Consumer<DataType> {
     }
   }
 
-  Semaphore* getCanConsume() {
-    return &canConsume;
-  }
 
   /// Override this method to extract the key from a data stored in fromQueue
   virtual KeyType extractKey(const DataType& data) const = 0;

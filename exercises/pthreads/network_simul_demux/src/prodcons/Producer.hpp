@@ -23,6 +23,7 @@ class Producer : public virtual Thread {
  protected:
   /// This thread will produce for this queue
   Queue<DataType>* producingQueue;
+  Semaphore* canConsume;
 
  public:
   /// Constructor
@@ -48,6 +49,11 @@ class Producer : public virtual Thread {
   virtual void produce(const DataType& data) {
     assert(this->producingQueue);
     this->producingQueue->push(data);
+    this->canConsume->signal();
+  }
+
+  virtual void setCanConsume(Semaphore* canConsume){
+    this->canConsume = canConsume;
   }
 };
 

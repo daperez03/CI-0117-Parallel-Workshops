@@ -16,9 +16,7 @@ int DemuxTest::run() {
 
   // If we exited from the forever loop, the finish message was received
   // For this simulation is OK to propagate it to all the queues
-  for ( const auto& pair : this->toQueues ) {
-    pair.second->push(NetworkMessage());
-  }
+  this->toQueue->push(NetworkMessage());
 
   return EXIT_SUCCESS;
 }

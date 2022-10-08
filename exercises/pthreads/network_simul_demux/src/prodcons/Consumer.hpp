@@ -29,7 +29,6 @@ class Consumer : public virtual Thread {
   /// consumption, and finish its work. It is used for cleaning purposes.
   const DataType stopCondition;
   /// True if this consumer owns the queue and it must be deleted in destructor
-  Semaphore canConsume;
   bool ownsQueue;
 
  public:
@@ -69,7 +68,6 @@ class Consumer : public virtual Thread {
   void createOwnQueue() {
     assert(this->consumingQueue == nullptr);
     this->consumingQueue = new Queue<DataType>();
-    this->consumingQueue->setCanConsume(&canConsume);
     this->ownsQueue = true;
   }
 

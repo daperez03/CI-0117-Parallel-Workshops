@@ -26,8 +26,7 @@ ProducerConsumerTest::~ProducerConsumerTest() {
   for ( ProducerTest* producer : this->producers )
     delete producer;
   delete this->demux;
-  for ( ConsumerTest* consumer : this->consumers )
-    delete consumer;
+  delete consumer;
 }
 
 int ProducerConsumerTest::start(int argc, char* argv[]) {
@@ -35,7 +34,6 @@ int ProducerConsumerTest::start(int argc, char* argv[]) {
   if ( int error = this->analyzeArguments(argc, argv) ) {
     return error;
   }
-  this->consumerCount = 1;
   // Create objects for the simulation
   this->demux = new DemuxTest
     (this->dispatcherDelay, this->producerCount);
@@ -46,43 +44,34 @@ int ProducerConsumerTest::start(int argc, char* argv[]) {
   for ( size_t index = 0; index < this->producerCount; ++index ) {
     this->producers[index] = new ProducerTest
       (this->packageCount, this->productorDelay,
-        this->consumerCount, &productionCount, &mutex);
+        1, &productionCount, &mutex);
     assert(this->producers[index]);
     this->producers[index]->setProducingQueue
       (this->demux->getConsumingQueues(index));
+    this->producers[index]->setCanConsume(this->demux->getCanConsume());
   }
   // Create each producer
-  this->consumers.resize(this->consumerCount);
-  for ( size_t index = 0; index < this->consumerCount; ++index ) {
-    this->consumers[index] = new ConsumerTest(this->consumerDelay);
-    assert(this->consumers[index]);
-    this->consumers[index]->createOwnQueue();
-  }
+  this->consumer = new ConsumerTest(this->consumerDelay);
+  assert(this->consumer);
+  this->consumer->createOwnQueue();
   // Communicate simulation objects
   // Producer push network messages to the demux queue
   // Dispatcher delivers to each consumer, and they should be registered
-  for ( size_t index = 0; index < this->consumerCount; ++index ) {
-    this->demux->registerRedirect(index + 1
-      , this->consumers[index]->getConsumingQueue());
-  }
+    this->demux->setToQueue(this->consumer->getConsumingQueue());
 
   // Start the simulation
   for ( size_t index = 0; index < this->producerCount; ++index ) {
     this->producers[index]->startThread();
   }
   this->demux->startThread();
-  for ( size_t index = 0; index < this->consumerCount; ++index ) {
-    this->consumers[index]->startThread();
-  }
+  this->consumer->startThread();
 
   // Wait for objets to finish the simulation
   for ( size_t index = 0; index < this->producerCount; ++index ) {
     this->producers[index]->waitToFinish();
   }
   this->demux->waitToFinish();
-  for ( size_t index = 0; index < this->consumerCount; ++index ) {
-    this->consumers[index]->waitToFinish();
-  }
+  this->consumer->waitToFinish();
 
   // Simulation finished
   return EXIT_SUCCESS;

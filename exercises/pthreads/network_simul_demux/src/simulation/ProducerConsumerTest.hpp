@@ -28,7 +28,6 @@ class ProducerConsumerTest {
   /// Number of producer threads
   size_t producerCount = 0;
   /// Number of consumer threads
-  size_t consumerCount = 0;
   /// Delay of producer to create a package, negative for max random
   int productorDelay = 0;
   /// Delay of demux to dispatch a package, negative for max random
@@ -42,7 +41,7 @@ class ProducerConsumerTest {
   /// A demux of the of the simulated network messages
   DemuxTest* demux = nullptr;
   /// Consumers of the simulated network messages
-  std::vector<ConsumerTest*> consumers;
+  ConsumerTest* consumer;
 
  public:
   /// Constructor

@@ -21,7 +21,7 @@ struct tools;
 /**
  * @brief Calculate and save the goldbach sums
  * 
- * @param my_goldbach_sums Structure that contains the goldbach sums
+ * @param data Structure that contains the goldbach sums
  * @return An error code:
  * 0 for success
  * 31 There is no space to store funtion tools

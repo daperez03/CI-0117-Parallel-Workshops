@@ -22,6 +22,7 @@ pthread_t* create_threads(void*(*subroutine)(void*)
  * @brief Wait for execution threads
  * 
  * @param threads Structure containing threads
+ * @param threads_number number of threads
  * @return uint64_t An error code:
  * 0 for success
  * != 0 thread join error

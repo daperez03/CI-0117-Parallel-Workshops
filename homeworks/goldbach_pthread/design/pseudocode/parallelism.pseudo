@@ -1,5 +1,5 @@
 procedure create_threads
-    (my_math->solve, threads_number, data) {
+    (subroutine, threads_number, data) {
     for (define threads_count := 0 to threads_number) {
         defien threads[] =: create_thread(subroutine, data)
     }

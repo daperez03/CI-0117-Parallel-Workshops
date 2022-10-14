@@ -1,0 +1,45 @@
+privated struct tools{
+  array_prime_number[]
+  count
+}
+
+function solve(my_goldbach_sums) {
+  while (true) {
+    tools->count := 0
+    lock(my_goldbach_sums->can_access_solution_count)
+      if(my_goldbach_sums->solution_count < my_goldbach_sums->count){
+        define my_solution := my_goldbach_sums->solution_count
+        my_goldbach_sums->solution_count := my_goldbach_sums->solution_count + 1
+      }else{
+        unlock(my_goldbach_sums->can_access_solution_count)
+        break while
+      }
+    unlock(my_goldbach_sums->can_access_solution_count)
+    number_t := my_goldbach_sums->numbers[my_solution]
+    tools->array_prime_number := get prime numbers form number_t->number
+    combinations(number_t)
+  }
+
+}
+
+function combinations(number_t) {
+  if (number_t->number is even) {
+    for(i = 0 to tools->count){
+      for(j = i to tools->count){
+        if number_t->number = tools->array_prime_number[i] + tools->array_prime_number[j] save sums numbers
+          if number_t->number is negative_t save sums
+      }
+    }
+
+  }else{
+
+    for(i = 0 to tools->count){
+      for(j = i to tools->count){
+        for(h = j to tools->count){
+          if number_t->number = tools->array_prime_number[i] + tools->array_prime_number[j] save sums numbers
+          if number_t->number is negative_t save sums
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+procedure create_threads
+    (subroutine, threads_number, data) {
+    for (define threads_count := 0 to threads_number) {
+        defien threads[] =: create_thread(subroutine, data)
+    }
+    return threads
+}
+
+procedure join_threads(threads, threads_number) {
+    for (define threads_count = 0 to threads_number) {
+        join_thread(threads[threads_count])
+    }
+}

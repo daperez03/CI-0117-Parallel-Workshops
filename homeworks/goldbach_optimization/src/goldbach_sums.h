@@ -11,7 +11,7 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
-
+#include "bits_array.h"
 /**
  * @brief Data structure of a number
  * @details Save a number with a array with
@@ -20,8 +20,8 @@
  */
 typedef struct number {
   int64_t number;
-  uint64_t capacity;
-  uint64_t sum_count;
+  size_t capacity;
+  size_t sum_count;
   uint64_t *sums;
 } number_t;
 
@@ -31,11 +31,12 @@ typedef struct number {
  * vector writing position
  */
 typedef struct goldbach_sums {
-  uint64_t capacity;
-  uint64_t count;
+  size_t capacity;
+  size_t count;
   number_t *numbers;
   pthread_mutex_t can_access_solution_count;
-  uint64_t solution_count;
+  size_t solution_count;
+  bits_array_t* prime_numbers;
 } goldbach_sums_t;
 
 /**

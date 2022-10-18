@@ -12,7 +12,7 @@ pthread_t* create_threads(void*(*subroutine)(void*)
     calloc(threads_number, sizeof(pthread_t));
   if (threads) {
       //  for (define threads_count := 0 to threads_number)
-    for (uint64_t index = 0; index < threads_number; ++index) {
+    for (size_t index = 0; index < threads_number; ++index) {
         //  defien threads[] =: create_thread(subroutine, data)
       if (pthread_create(&threads[index]
         , /*attr*/ NULL, subroutine, (void*)data)
@@ -33,7 +33,7 @@ uint64_t join_threads(pthread_t* threads, uint64_t threads_number) {
   uint64_t error = EXIT_SUCCESS;
   uint64_t error_thread = EXIT_SUCCESS;
     //  for (define threads_count = 0 to threads_number)
-  for (uint64_t index = 0; index < threads_number; ++index) {
+  for (size_t index = 0; index < threads_number; ++index) {
     void* data = (void*)error;
       //  join_thread(threads[threads_count])
     error_thread += pthread_join(threads[index], &data);

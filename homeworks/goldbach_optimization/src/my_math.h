@@ -15,6 +15,7 @@
 
   //  other header
 #include "goldbach_sums.h"
+#include "bits_array.h"
 
 struct tools;
 
@@ -29,5 +30,6 @@ struct tools;
  */
 void* solve(void* data);
 
+void set_prime_numbers(bits_array_t* prime_numbers);
 
 #endif

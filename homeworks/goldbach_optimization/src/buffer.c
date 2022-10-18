@@ -18,7 +18,7 @@
 uint64_t save_data(number_t* struct_number,
   int64_t number_read, uint64_t capacity);
   //  function readData(my_goldbach_sums)
-uint64_t readData(goldbach_sums_t* my_goldbach_sums) {
+uint64_t read_data(goldbach_sums_t* my_goldbach_sums, size_t* max) {
   uint64_t error = EXIT_SUCCESS;
   int64_t number_read = 0;
   int64_t scanner_status = 1;
@@ -41,11 +41,14 @@ uint64_t readData(goldbach_sums_t* my_goldbach_sums) {
         } else if (number_read < -3) {
             //  my_goldbach_sums->count := my_goldbach_sums->count + 1
           error = save_data(&my_goldbach_sums->numbers
-            [my_goldbach_sums->count++], number_read, 30);
+            [my_goldbach_sums->count++], number_read, (number_read*-1)/2);
         } else {
             //  my_goldbach_sums->count := my_goldbach_sums->count + 1
           error = save_data(&my_goldbach_sums->numbers
             [my_goldbach_sums->count++], number_read, 0);
+        }
+        if(((number_read >= 0)? (number_read) : (number_read*-1)) > (int64_t)*max){
+          *max = (size_t)(number_read > 0? (number_read) : (number_read*-1));
         }
       }
     } else if (scanner_status == 0 || errno) {
@@ -69,6 +72,8 @@ uint64_t save_data(number_t* struct_number,
       fprintf(stderr, "Error: invalid create array\n");
       error = 22;
     }
+  } else {
+    struct_number->sums = NULL;
   }
   return error;
 }

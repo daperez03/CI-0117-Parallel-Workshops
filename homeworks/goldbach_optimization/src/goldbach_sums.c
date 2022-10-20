@@ -148,7 +148,7 @@ void destroy(goldbach_sums_t* my_goldbach_sums) {
   //  delete everything stored in my_goldbach_sums
   if (my_goldbach_sums->numbers != NULL) {
     for (size_t i = 0; i < my_goldbach_sums->count; ++i) {
-      if(my_goldbach_sums->numbers[i].sums !=  NULL)
+      if (my_goldbach_sums->numbers[i].sums !=  NULL)
         free(my_goldbach_sums->numbers[i].sums);
     }
     free(my_goldbach_sums->numbers);
@@ -157,7 +157,7 @@ void destroy(goldbach_sums_t* my_goldbach_sums) {
     (&my_goldbach_sums->can_access_solution_count) != EXIT_SUCCESS) {
     fprintf(stderr, "Error: not destroyed mutex \n");
   }
-  if (my_goldbach_sums->prime_numbers != NULL){
+  if (my_goldbach_sums->prime_numbers != NULL) {
     if (my_goldbach_sums->prime_numbers->array != NULL)
       free(my_goldbach_sums->prime_numbers->array);
     free(my_goldbach_sums->prime_numbers);

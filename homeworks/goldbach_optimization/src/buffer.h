@@ -23,7 +23,7 @@
  * 
  * @param my_goldbach_sums Structure in charge of saving the
  * number entered and their goldbach sums 
- * 
+ * @param max Find max number introduced by the user
  * @return An error code:
  * 0 for success.
  * 21 invalid input

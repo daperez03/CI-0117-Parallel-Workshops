@@ -47,7 +47,8 @@ uint64_t read_data(goldbach_sums_t* my_goldbach_sums, size_t* max) {
           error = save_data(&my_goldbach_sums->numbers
             [my_goldbach_sums->count++], number_read, 0);
         }
-        if(((number_read >= 0)? (number_read) : (number_read*-1)) > (int64_t)*max){
+        if ( ((number_read >= 0) ? (number_read)
+          : (number_read*-1)) > (int64_t) * max ) {
           *max = (size_t)(number_read > 0? (number_read) : (number_read*-1));
         }
       }

@@ -1,1 +1,2 @@
 @INCLUDE = ../../common/Doxyfile
+PROJECT_NAME = "Goldbach Optimization"

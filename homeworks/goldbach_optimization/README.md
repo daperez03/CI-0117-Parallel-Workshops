@@ -17,7 +17,7 @@ Este apartado contiene información breve para una adecuada manipulación y ejec
 1. Tener el compilador GCC adecuado para C y preferiblemente un documento Makefile
 configurado para la ejecución.
 2. Abrir la terminal respectiva de su dispositivo(`Ctrl+alt+t`).
-3. Desplazarse por los archivos hasta llegar a la carpeta nombrada goldbach_pthread(`cd _____`).
+3. Desplazarse por los archivos hasta llegar a la carpeta nombrada goldbach_optimization(`cd _____`).
 4. Una vez ubicado en la carpeta se debe compilar y correr el programa.
 
 ### Compilación
@@ -29,13 +29,14 @@ Compilador normal: debe ingresar los comandos:
 
 ```
 mkdir -p build/
+gcc -c -Wall -Wextra -pthread -O3 -DNDEBUG -std=gnu11 -Isrc -MMD src/bits_array.c -o build/bits_array.o
 gcc -c -Wall -Wextra -pthread -O3 -DNDEBUG -std=gnu11 -Isrc -MMD src/buffer.c -o build/buffer.o
-gcc -c -Wall -Wextra -pthread -O3 -DNDEBUG -std=gnu11 -Isrc -MMD src/goldbach_pthread.c -o build/goldbach_pthread.o
+gcc -c -Wall -Wextra -pthread -O3 -DNDEBUG -std=gnu11 -Isrc -MMD src/goldbach_optimization.c -o build/goldbach_optimization.o
 gcc -c -Wall -Wextra -pthread -O3 -DNDEBUG -std=gnu11 -Isrc -MMD src/goldbach_sums.c -o build/goldbach_sums.o
 gcc -c -Wall -Wextra -pthread -O3 -DNDEBUG -std=gnu11 -Isrc -MMD src/my_math.c -o build/my_math.o
 gcc -c -Wall -Wextra -pthread -O3 -DNDEBUG -std=gnu11 -Isrc -MMD src/parallelism.c -o build/parallelism.o
 mkdir -p bin/
-gcc -Wall -Wextra -pthread -O3 -DNDEBUG -Isrc build/buffer.o build/goldbach_pthread.o build/goldbach_sums.o build/my_math.o build/parallelism.o -o bin/goldbach_pthread
+gcc -Wall -Wextra -pthread -O3 -DNDEBUG -Isrc build/bits_array.o build/buffer.o build/goldbach_optimization.o build/goldbach_sums.o build/my_math.o build/parallelism.o -o bin/goldbach_optimization
 ```
 
 ### Ejecución
@@ -43,23 +44,23 @@ gcc -Wall -Wextra -pthread -O3 -DNDEBUG -Isrc build/buffer.o build/goldbach_pthr
 Es importante recordar el pase de parámetros de número de hilos en la ejecución, este debe ser en el argumento número 1 de ejecución, en el espacio indicado como **número_de_hilos**.
 Para la ejecución se encuentra disponible cuatro formatos:
  
-1. Entrada estándar: El primer método consiste en simplemente utilizar ` make run ARGS=número_de_hilos` o
-`bin/goldbach_pthread número_de_hilos` e ingresar los números deseados en la terminal, una vez ya haya
+1. Entrada estándar: El primer método consiste en simplemente utilizar `make run ARGS=número_de_hilos` o
+`bin/goldbach_optimization número_de_hilos` e ingresar los números deseados en la terminal, una vez ya haya
 ingresado todos los números se debe presionar `ctrl d`.
 
 2. Redireccionamiento de entrada estándar: El segundo método debe redireccionar la entrada estándar,
 para ello se debe crear un archivo de texto con un número deseado por línea, para ejecutar debe
-escribir el comando `bin/goldbach_pthread número_de_hilos < txt` donde txt es la dirección de su archivo con los números.
+escribir el comando `bin/goldbach_optimization número_de_hilos < txt` donde txt es la dirección de su archivo con los números.
 
 3. Redireccionamiento de salida estándar: Para redireccionar la salida estándar debemos seguir con la
 misma lógica que la de la entrada estándar, nada más debemos colocar
-`bin/goldbach_pthread número_de_hilos > txt` donde txt es el nombre del archivo donde queremos que vayan
+`bin/goldbach_optimization número_de_hilos > txt` donde txt es el nombre del archivo donde queremos que vayan
 los resultados digitados, los números se deben ingresar desde la termina con un cambio de línea entre cada
 uno y una vez todos hayan sido ingresados se debe presionar `ctrl d`.
 
 4. Redireccionamiento de entrada y salida estándar: Para este cuarto y último punto debemos tener en
 cuenta que el programa trabaja mediante archivos de texto, leyendo e imprimiendo así los archivos
-indicados, para esto se debe ejecutar el comando `bin/goldbach_pthread número_de_hilos < input > output`,
+indicados, para esto se debe ejecutar el comando `bin/goldbach_optimization número_de_hilos < input > output`,
 dónde input sera la direccion del archivo de texto que desea ingresar y output el nombre de cómo
 desea que el archivo de salida sea llamado.
 
@@ -72,7 +73,7 @@ Además verificar que este error no se haya producido por un dígito válido o f
 ## Ejemplos de ejecución
 
 ```
-bin/goldbach_pthread
+bin/goldbach_optimization
 1
 6
 4
@@ -88,7 +89,7 @@ Total 5 numbers 6 sums
 ```
 
 ```
-bin/goldbach_pthread 8 < tests/input004.txt > output004.txt
+bin/goldbach_optimization 8 < tests/input004.txt > output004.txt
 ```
 
 ## Más información
@@ -99,7 +100,11 @@ bin/goldbach_pthread 8 < tests/input004.txt > output004.txt
 
 ### Referencias
 
-Jorge. (2022, May 3). Cómo verificar si un número es primo en python. cryptoshitcompra.com. Retrieved September 5, 2022, from https://cryptoshitcompra.com/como-verificar-si-un-numero-es-primo-en-python
+> C/C++ bit array or bit vector. (s/f-a). Stack Overflow. Recuperado el 20 de octubre de 2022, de https://stackoverflow.com/questions/4604130/
+
+> Jorge. (2022, May 3). Cómo verificar si un número es primo en python. cryptoshitcompra.com. Retrieved September 5, 2022, from https://cryptoshitcompra.com/como-verificar-si-un-numero-es-primo-en-python
+
+> Wikipedia contributors. (2022, octubre 12). Primality test. Wikipedia, The Free Encyclopedia. https://en.wikipedia.org/w/index.php?title=Primality_test&oldid=1115673561
 
 ### Autor
 

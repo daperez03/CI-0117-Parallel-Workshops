@@ -49,13 +49,17 @@ uint64_t combination_of_even_numbers
  */
 uint64_t combination_of_odd_numbers
   (number_t* struct_number, uint64_t number);
-
+/// todo(you) documentar
 uint64_t fast_combinations(number_t * struct_number, bits_array_t* primes_numbers);
+/// todo(you) documentar
 uint64_t fast_combination_of_even_numbers
   (number_t* struct_number, uint64_t number, bits_array_t* primes_numbers);
+/// todo(you) documentar
 uint64_t fast_combination_of_odd_numbers
   (number_t* struct_number, uint64_t number, bits_array_t* primes_numbers);
-
+/// todo(you) documentar
+uint64_t save_goldbach_sums (number_t* struct_number
+  , uint64_t number1, uint64_t number2, uint64_t number3);
 
 
 //  function solve(my_goldbach_sums)
@@ -97,13 +101,19 @@ void* solve(void* data) {
 void set_prime_numbers(bits_array_t* primes_numbers) {
   assert(primes_numbers);
   assert (primes_numbers->array);
-  for(size_t number = 2; number < primes_numbers->count; ++number){
+  set_bit(primes_numbers, 2);
+  set_bit(primes_numbers, 3);
+  set_bit(primes_numbers, 5);
+  set_bit(primes_numbers, 7);
+  for(size_t number = 11; number < primes_numbers->count;
+    number += (number % 10 == 3) ? 4 : 2){
     if (is_prime(number)) {
       set_bit(primes_numbers, number);
     }
   }
 }
 
+// extraido de wikipedia primality test
 bool is_prime(uint64_t number) {
   if (number == 2 || number == 3)
       return true;
@@ -149,22 +159,12 @@ uint64_t combination_of_even_numbers
   (number_t* struct_number, uint64_t number) {
   uint64_t error = EXIT_SUCCESS;
   //  for(i = 0 to tools->count)
-  for (size_t i = 2; i <= number/2; i+=(i<=10)?1:(i%10==3)?4:2) {
+  for (size_t i = 2; i <= number/2; i += (i <= 10) ? 1 : (i % 10 == 3) ? 4 : 2) {
     //  for(j = i to tools->count)
     uint64_t prime_number = number - i;
     if (is_prime(i) && is_prime(prime_number)) {
       //  if my_number_t->number is negative_t save sums
-      if (struct_number->number > 3 && struct_number->number != 5) {
-        ++struct_number->sums[0];
-      } else {
-        if (struct_number->sum_count >= struct_number->capacity - 3) {
-          error = resize_sums(struct_number);
-        }
-        if (error == EXIT_SUCCESS) {
-          struct_number->sums[struct_number->sum_count++] = i;
-          struct_number->sums[struct_number->sum_count++] = prime_number;
-        }
-      }
+      error = save_goldbach_sums(struct_number, i, prime_number, 0);
     }
   }
   return error;
@@ -183,18 +183,7 @@ uint64_t combination_of_odd_numbers
         if(is_prime(j) && is_prime(prime_number)
           && prime_number >= i && prime_number >= j){
             //  if my_number_t->number is negative_t save sums
-          if (struct_number->number >= 0) {
-            ++struct_number->sums[0];
-          } else {
-            if (struct_number->sum_count >= struct_number->capacity - 4) {
-              error = resize_sums(struct_number);
-            }
-            if (error == EXIT_SUCCESS) {
-              struct_number->sums[struct_number->sum_count++] = i;
-              struct_number->sums[struct_number->sum_count++] = j;
-              struct_number->sums[struct_number->sum_count++] = prime_number;
-            }
-          }
+          error = save_goldbach_sums(struct_number, i, j, prime_number);
         }
       }
     }
@@ -206,22 +195,13 @@ uint64_t fast_combination_of_even_numbers
   (number_t* struct_number, uint64_t number, bits_array_t* primes_numbers) {
   uint64_t error = EXIT_SUCCESS;
   //  for(i = 0 to tools->count)
-  for (size_t i = 2; i <= number/2; i+=(i<=10)?1:(i%10==3)?4:2) {
+  for (size_t i = 2; i <= number/2; i +=
+    (i <= 10) ? 1 : (i % 10 == 3) ? 4 : 2) {
     //  for(j = i to tools->count)
     uint64_t prime_number = number - i;
     if (test_bit(primes_numbers, i) && test_bit(primes_numbers, prime_number)) {
       //  if my_number_t->number is negative_t save sums
-      if (struct_number->number > 3 && struct_number->number != 5) {
-        ++struct_number->sums[0];
-      } else {
-        if (struct_number->sum_count >= struct_number->capacity - 3) {
-          error = resize_sums(struct_number);
-        }
-        if (error == EXIT_SUCCESS) {
-          struct_number->sums[struct_number->sum_count++] = i;
-          struct_number->sums[struct_number->sum_count++] = prime_number;
-        }
-      }
+      error = save_goldbach_sums(struct_number, i, prime_number, 0);
     }
   }
   return error;
@@ -239,22 +219,31 @@ uint64_t fast_combination_of_odd_numbers
         uint64_t prime_number = number - (i+j);
         if(test_bit(primes_numbers, j) && test_bit(primes_numbers, prime_number)
           && prime_number >= i && prime_number >= j){
-            //  if my_number_t->number is negative_t save sums
-          if (struct_number->number >= 0) {
-            ++struct_number->sums[0];
-          } else {
-            if (struct_number->sum_count >= struct_number->capacity - 4) {
-              error = resize_sums(struct_number);
-            }
-            if (error == EXIT_SUCCESS) {
-              struct_number->sums[struct_number->sum_count++] = i;
-              struct_number->sums[struct_number->sum_count++] = j;
-              struct_number->sums[struct_number->sum_count++] = prime_number;
-            }
-          }
+          error = save_goldbach_sums(struct_number, i, j, prime_number);
         }
       }
     }
   }
   return error;
 }
+
+uint64_t save_goldbach_sums (number_t* struct_number
+  , uint64_t number1, uint64_t number2, uint64_t number3) {
+    uint64_t error = EXIT_SUCCESS;
+//  if my_number_t->number is negative_t save sums
+  if (struct_number->number >= 0) {
+    ++struct_number->sums[0];
+  } else {
+    if (struct_number->sum_count >= struct_number->capacity - 4) {
+      error = resize_sums(struct_number);
+    }
+    if (error == EXIT_SUCCESS) {
+      struct_number->sums[struct_number->sum_count++] = number1;
+      struct_number->sums[struct_number->sum_count++] = number2;
+      if(number3 != 0)
+      struct_number->sums[struct_number->sum_count++] = number3;
+    }
+  }
+  return error;
+}
+

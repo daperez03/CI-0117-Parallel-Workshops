@@ -4,14 +4,12 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-#define ARRAY_SIZE(x) (x/8+(!!(x%8)))
-
 typedef struct bits_array {
   uint8_t* array;
   size_t count;
 } bits_array_t;
 
-
+// Todo(you) extraido de stack overflow y documentar
 void init_array(bits_array_t* bits_array, size_t capacity);
 
 void  set_bit(bits_array_t* bits_array,  uint64_t index);

@@ -4,6 +4,7 @@ shared struct goldbach_sums_t{
   numbers[]
   can_access_solution_count
   solution_count
+  prime_numbers[]
 }
 
 shared struct number_t {

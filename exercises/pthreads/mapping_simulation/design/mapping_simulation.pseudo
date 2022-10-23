@@ -1,0 +1,50 @@
+procedure main(argv[]){
+  shared can_access := mutex()
+  shared thread_count := argv[1]
+  declare data[]
+  while(input != Fin)
+    data.push_back(get(input))
+  end while
+  shared index := 0
+  declare serial := createThread(serial(data, data_count))
+  waitThread(serial)
+  declare blocks := createThreads(block(data, data_count), thread_count)
+  waitThreads(blocks)
+  index := 0
+  declare cyclicals := createThreads(cyclic(data, data_count), thread_count)
+  waitThreads(cyclicals)
+  index := 0
+  declare dynamics := createThreads(dynamic(data, data_count))
+  waitThreads(dynamics)
+  print(Statistics(blocks, cyclicals, dynamics))
+}
+
+procedure serial(data, data_count)
+  for ( index := 0; index < data_count; index := index + 1) {
+    process(data(index))
+  end for
+end procedure
+
+procedure block(data, data_count)
+  declare my_start := start(thread_number, data_count, thread_count)
+  declare my_finish
+  for(index := my_start; index < my_finish; index++)
+    process(data(index))
+  end for
+end procedure
+
+procedure cyclic(data, data_count)
+  for(index := thread_number; index < data_count; index += thread_count)
+    process(data(index))
+  end for
+end procedure
+
+procedure dynamic(data, data_count)
+  while(true)
+    lock(can_access)
+      process(data(index))
+      index := index + 1
+      if(index = data_count) break while
+    unlock(can_access)
+  end while
+end procedure

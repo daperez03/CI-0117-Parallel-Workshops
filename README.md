@@ -80,6 +80,9 @@ decremento o incremento al mismo
 
 ### Mapeo
 
+Forma en la cual se reparte trabajo entre trabajadores(hilos), hay tres tipos de mapeos: dinamicos,
+ciclicos y por bloque.
+
 ### Incremento de velocidad
 
 ### Comunicación punto a punto entre procesos

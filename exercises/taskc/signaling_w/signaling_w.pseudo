@@ -1,0 +1,11 @@
+procedure main:
+  declare thread_count := read_integer()
+  shared previous_ready[thread_count] := create_semaphores(0)
+  create_threads(thread_count, secondary)
+end procedure
+
+procedure secondary:
+  wait(previous_ready[thread_number - 1])
+  statement secondary
+  signal(previous_ready[thread_number])
+end procedure

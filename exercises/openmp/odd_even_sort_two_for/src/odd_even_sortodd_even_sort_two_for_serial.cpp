@@ -7,12 +7,12 @@ void swap(double& number1, double& number2);
 
 int main(int argc, char* argv[]) {
   size_t n = 0;
-  if (argc <= 2) {
+  if (argc >= 2) {
     n = atoi(argv[1]);
   }
   size_t thread_count = omp_get_max_threads();
-  if (argc <= 3) {
-    thread_count = atoi(argv[1]);
+  if (argc >= 3) {
+    thread_count = atoi(argv[2]);
   }
   double* arr = new double[n];
   for (size_t i = 0; i < n; i++)

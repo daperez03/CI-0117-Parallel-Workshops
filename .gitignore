@@ -4,3 +4,5 @@ build
 doc
 null.d
 callgrind.out.*
+*.log
+

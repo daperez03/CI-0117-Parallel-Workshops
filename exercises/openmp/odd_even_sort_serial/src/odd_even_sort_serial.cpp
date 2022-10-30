@@ -1,3 +1,4 @@
+// Copyright 2022 Daniel Perez-Morera <daniel.perezmorera@ucr.ac.cr> CC-BY-4
 #include <cstdlib>
 #include <iostream>
 
@@ -10,9 +11,11 @@ int main(int argc, char* argv[]) {
     n = atoi(argv[1]);
   }
   double* arr = new double[n];
-  for (size_t i = 0; i < n; i++)
-    arr[i] = (double)(rand() % 100000)
-      + ((double)(rand() % 100000)/1000000);
+  for (size_t i = 0; i < n; i++) {
+    unsigned int seedp = static_cast<unsigned int>(i);
+    arr[i] = static_cast<double>(rand_r(&seedp) % 100000)
+      + (static_cast<double>(rand_r(&seedp) % 100000)/1000000);
+  }
   concurrent_odd_even_sort(n, arr);
   for (size_t i = 0; i < n; i++) printf("%f - ", arr[i]);
   std::cout << std::endl;

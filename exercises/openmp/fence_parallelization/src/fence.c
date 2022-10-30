@@ -54,7 +54,8 @@ int main() {
     // Print maximum perimeter and its coordinates
     print_maximum_perimeter(fence_data);
   }
-
+  if (fence_data->terrain != NULL)
+    destroy_terrain(fence_data->terrain, fence_data->rows);
   free(fence_data);
   return 0;
 }

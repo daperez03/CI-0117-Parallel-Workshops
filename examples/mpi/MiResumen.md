@@ -38,11 +38,48 @@ Lo podemos ver con `ls -la /etc/skel`
 ### Normal
 
 ```
-mpiexec -np # bin/ejecutable param
+M_Pich
+
+mpiexec -np # -f doc bin/ejecutable param
+
+OpenMPI
+
+mpiexec --oversubscribe -np # --hostfile doc ejecutable param
+
 ```
 
 ### Sanitizer
 
 ```
 mpiexec -np # Sanitizer bin/ejecutable param
+```
+
+### Ejemplo mpich
+
+hosts-mpich
+
+```
+compute-0-0:1
+#compute-0-1:1
+compute-0-2:1
+compute-0-3:1
+```
+
+```
+mpiexec -np 5 -f hosts-mpich bin/hello
+```
+
+### Ejemplo OpenMPI
+
+hosts-openmpi
+
+```
+compute-0-0 slots=1
+#compute-0-1 slots=1
+compute-0-2 slots=1
+compute-0-3 slots=1
+```
+
+```
+mpiexec --oversubscribe -np 10 --hostfile hosts-openmpi bin/hello
 ```

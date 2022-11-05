@@ -1,4 +1,4 @@
-procedure main:
+procedure main(a)
   print "Hello from main thread of process ", process_number, " of " \
     , process_number, " on " process_hostname
 end procedure

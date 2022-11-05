@@ -1,21 +1,21 @@
 // Copyright 2022 Daniel Perez-Morera <daniel.perezmorera@ucr.ac.cr> CC-BY-4
+#ifndef MPI_HPP
+#define MPI_HPP
 #include <mpi.h>
 #include <cassert>
 #include <string>
-#include <system_error>
-#ifndef MPI_HPP
-#define MPI_HPP
+#include "MpiError.hpp"
 
 /// @brief Class error code
 #define MPI_FAILURE -1
 /// @brief Error message for the constructor
-const char* ERROR01 = "ERROR: The MPI ambiance cloud not be started\n";
+#define ERROR01 "The MPI ambiance cloud not be started"
 /// @brief Error message for the get process number
-const char* ERROR02 = "ERROR: Not possible to access process number\n";
+#define ERROR02 "Not possible to access process number"
 /// @brief Error message for the get process count
-const char* ERROR03 = "ERROR: Not possible to access process count\n";
+#define ERROR03 "Not possible to access process count"
 /// @brief Error message for the get hostname
-const char* ERROR04 = "ERROR: Not possible to access hostname\n";
+#define ERROR04 "Not possible to access hostname"
 
 class Mpi{
  public:
@@ -25,20 +25,20 @@ class Mpi{
   Mpi(int& argc, char**& argv) {
     assert(argv);
     if (MPI_Init(&argc, &argv) != MPI_SUCCESS) {
-      throw std::runtime_error(ERROR01);
+      throw MpiError(ERROR01);
     } else {
       if (MPI_Comm_rank(MPI_COMM_WORLD, &this->process_number) != MPI_SUCCESS) {
-        throw std::runtime_error(ERROR02);
+        throw MpiError(ERROR02);
       } else {
         if (MPI_Comm_size(MPI_COMM_WORLD, &this->process_count)
           != MPI_SUCCESS) {
-          throw std::runtime_error(ERROR03);
+          throw MpiError(ERROR03);
         } else {
           char process_hostname[MPI_MAX_PROCESSOR_NAME] = {0};
           int hostname_length = -1;
           if (MPI_Get_processor_name(process_hostname, &hostname_length)
             != MPI_SUCCESS) {
-            throw std::runtime_error(ERROR04);
+            throw MpiError(ERROR04);
           } else {
             this->process_hostname = std::string(process_hostname);
           }
@@ -54,19 +54,19 @@ class Mpi{
 
   /// @brief Get the number of the process in progress
   /// @return number of the process
-  int getProcessNumber() {
+  int getProcessNumber() const {
     return process_number;
   }
 
   /// @brief Get the count of the process in progress
   /// @return count of the process
-  int getProcessCount() {
+  int getProcessCount() const {
     return process_count;
   }
 
   /// @brief Get the current hostname
   /// @return current hostname
-  std::string getHostname() {
+  std::string getHostname() const {
     return process_hostname;
   }
 

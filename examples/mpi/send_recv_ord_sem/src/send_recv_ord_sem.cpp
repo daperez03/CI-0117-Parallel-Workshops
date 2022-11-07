@@ -58,5 +58,5 @@ void greet( int process_number, int process_count
   if (MPI_Send(&can_print, /*count*/ 1, MPI_C_BOOL, next_process, /*tag*/ 0
     , MPI_COMM_WORLD) != MPI_SUCCESS) {
       fail("could not send message");
-    };
+  }
 }

@@ -7,7 +7,7 @@
 #include "MpiError.hpp"
 
 class Mpi {
-protected:
+ protected:
   /// @brief process hostname
   std::string process_hostname;
   /// @brief process number
@@ -87,7 +87,6 @@ protected:
   /// @param tag Tag to receive
   template<typename DataType>
 
-  //TODO(ME) Preguntarle al profe sobre tag y el error que genera
   void receive(DataType data, int fromProcess, int tag = MPI_ANY_TAG) {
     if (MPI_Recv(&data, 1, map(data), fromProcess, tag
       , MPI_COMM_WORLD, MPI_STATUS_IGNORE) != MPI_SUCCESS) {
@@ -139,7 +138,8 @@ protected:
   /// @brief Identifier for unsigned long long type data
   /// @param  type data
   /// @return Identifier for unsigned long long
-  static inline MPI_Datatype map(unsigned long long) { return MPI_UNSIGNED_LONG_LONG; }
+  static inline MPI_Datatype map(unsigned long long)
+    { return MPI_UNSIGNED_LONG_LONG; }
   /// @brief Identifier for float type data
   /// @param  type data
   /// @return Identifier for float
@@ -152,6 +152,5 @@ protected:
   /// @param  type data
   /// @return Identifier for long double
   static inline MPI_Datatype map(long double) { return MPI_LONG_DOUBLE; }
-
 };
 #endif

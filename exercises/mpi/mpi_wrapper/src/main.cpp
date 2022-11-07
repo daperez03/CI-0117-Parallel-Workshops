@@ -1,4 +1,5 @@
 // Copyright 2022 Daniel Perez-Morera <daniel.perezmorera@ucr.ac.cr> CC-BY-4
+#if 0
 #include "iostream"
 #include "Mpi.hpp"
 int main(int argc, char* argv[]) {
@@ -11,3 +12,4 @@ int main(int argc, char* argv[]) {
     std::cerr << "error: " << error.what() << std::endl;
   }
 }
+#endif

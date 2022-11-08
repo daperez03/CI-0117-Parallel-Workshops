@@ -126,7 +126,7 @@ class Mpi {
   /// @param tag Tag to receive
   // template<typename Type>
   template<typename Type>
-  void receive(Type& value, int fromProcess, int tag = MPI_ANY_TAG) {
+  void receive(Type& value, int fromProcess = MPI_ANY_SOURCE, int tag = MPI_ANY_TAG) {
     if (MPI_Recv(&value, 1, this->map(Type()), fromProcess, tag
       , MPI_COMM_WORLD, MPI_STATUS_IGNORE) != MPI_SUCCESS) {
       throw MpiError(ERROR_06, (*this));
@@ -141,7 +141,7 @@ class Mpi {
   /// @param tag Tag to receive
   template<typename Type>
   void receive(Type* values, int capacity
-    , int fromProcess, int tag = MPI_ANY_TAG) {
+    , int fromProcess = MPI_ANY_SOURCE, int tag = MPI_ANY_TAG) {
     if (MPI_Recv(values, capacity, this->map(Type()), fromProcess, tag
       , MPI_COMM_WORLD, MPI_STATUS_IGNORE) != MPI_SUCCESS) {
       throw MpiError(ERROR_06, (*this));
@@ -156,7 +156,7 @@ class Mpi {
   /// @param tag Tag to receive
   template<typename Type>
   void receive(std::vector<Type>& values, int capacity
-    , int fromProcess, int tag = MPI_ANY_TAG) {
+    , int fromProcess = MPI_ANY_SOURCE, int tag = MPI_ANY_TAG) {
     if (MPI_Recv(&values[0], capacity, map(Type()), fromProcess, tag
       , MPI_COMM_WORLD, MPI_STATUS_IGNORE) != MPI_SUCCESS) {
       throw MpiError(ERROR_06, (*this));
@@ -169,7 +169,7 @@ class Mpi {
   /// @param fromProcess Process number to receive form
   /// @param tag Tag to receive
   void receive(std::string& text, int capacity
-    , int fromProcess, int tag = MPI_ANY_TAG) {
+    , int fromProcess = MPI_ANY_SOURCE, int tag = MPI_ANY_TAG) {
     std::vector<char> message(capacity);
     if (MPI_Recv(&message[0], capacity, map(char()), fromProcess, tag
       , MPI_COMM_WORLD, MPI_STATUS_IGNORE) != MPI_SUCCESS) {

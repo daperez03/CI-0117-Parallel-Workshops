@@ -1,0 +1,4 @@
+shared struct bits_array_t {
+    define array[]
+    define count
+}

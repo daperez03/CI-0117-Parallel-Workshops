@@ -1,0 +1,25 @@
+shared struct goldbach_sums_t{
+  capacity
+  count
+  numbers[]
+  can_access_solution_count
+  solution_count
+  prime_numbers[]
+}
+
+shared struct number_t {
+  number
+  capacity
+  sum_count
+  sums[]
+}
+
+function result(my_goldbach_sums) {
+  for (i := 0 to my_goldbach_sums->count) {
+    print my_goldbach_sums->numbers[i]->number, ": ", my_goldbach_sums->numbers[i]->sums
+  }
+}
+
+function destroy(my_goldbach_sums) {
+  delete everything stored in my_goldbach_sums
+}

@@ -1,4 +1,5 @@
 // Copyright 2022 Daniel Perez-Morera <daniel.perezmorera@ucr.ac.cr> CC-BY-4
+#if 0
 #include <cstdlib>
 #include <iostream>
 #include <sstream>
@@ -42,3 +43,4 @@ void greet(Mpi& mpi) {
     }
   }
 }
+#endif

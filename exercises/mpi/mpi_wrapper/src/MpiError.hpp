@@ -18,7 +18,10 @@
 #define ERROR_05 "could not send message"
 /// @brief Error could not receive message
 #define ERROR_06 "could not receive message"
+/// @brief Error could process number is out range
+#define ERROR_07 "could process number is out range"
 
+/// @brief Forward declaration of class Mpi
 class Mpi;
 /// @brief MPI error handling class
 class MpiError : public std::runtime_error {

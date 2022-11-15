@@ -39,6 +39,7 @@ typedef struct mpi_data {
 // } MPI_Status, *PMPI_Status;
 
 uint64_t init_mpi(mpi_data_t* mpi_data, int* argc, char*** argv);
+void uninit_mpi();
 uint64_t send_bool(const bool* value, int toProcess, int tag);
 uint64_t send_int32_t(const int32_t* values, int count, int toProcess, int tag);
 uint64_t send_int64_t(const int64_t* values, int count, int toProcess, int tag);

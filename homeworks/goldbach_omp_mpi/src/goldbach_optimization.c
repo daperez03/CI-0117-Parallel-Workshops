@@ -51,6 +51,7 @@ int main(int argc, char* argv[]) {  //  function main(argv[])
         calculator(&my_process_data);
       }
     }
+    uninit_mpi();
   }
   return error;
 }

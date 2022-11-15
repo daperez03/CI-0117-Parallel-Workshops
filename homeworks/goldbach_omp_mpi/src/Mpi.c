@@ -28,6 +28,10 @@ uint64_t init_mpi(mpi_data_t* mpi_data, int* argc, char*** argv) {
   return error;
 }
 
+void uninit_mpi() {
+  MPI_Finalize();
+}
+
 uint64_t send_bool(const bool* value, int toProcess, int tag) {
   assert(value);
   assert(toProcess >= 0);

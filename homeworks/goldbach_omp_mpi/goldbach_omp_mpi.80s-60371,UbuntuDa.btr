@@ -1,0 +1,12 @@
+
+goldbach_omp_mpi:60371 terminated with signal 11 at PC=7fcb8800bc86 SP=7ffe3533bfe0.  Backtrace:
+/lib/x86_64-linux-gnu/libmpich.so.12(+0x260c86)[0x7fcb8800bc86]
+/lib/x86_64-linux-gnu/libmpich.so.12(+0x20b5a89)[0x7fcb89e60a89]
+/lib/x86_64-linux-gnu/libmpich.so.12(+0x20b60f1)[0x7fcb89e610f1]
+/lib/x86_64-linux-gnu/libmpich.so.12(PMPI_Send+0x481)[0x7fcb87ec0041]
+./bin/goldbach_omp_mpi(+0x288a)[0x55ec69eac88a]
+./bin/goldbach_omp_mpi(+0x1b80)[0x55ec69eabb80]
+./bin/goldbach_omp_mpi(+0x16f5)[0x55ec69eab6f5]
+/lib/x86_64-linux-gnu/libc.so.6(+0x29d90)[0x7fcb87bacd90]
+/lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0x80)[0x7fcb87bace40]
+./bin/goldbach_omp_mpi(+0x12a5)[0x55ec69eab2a5]

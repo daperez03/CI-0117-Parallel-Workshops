@@ -15,7 +15,6 @@
 
   //  other header
 #include "goldbach_sums.h"
-#include "bits_array.h"
 
 struct tools;
 
@@ -28,8 +27,6 @@ struct tools;
  * 31 There is no space to store funtion tools
  * Errors of the functions resize_sums and resize_numbers
  */
-uint64_t solve(goldbach_sums_t* my_goldbach_sums);
-
-void set_prime_numbers(bits_array_t* prime_numbers);
+uint64_t solve(number_t* number);
 
 #endif

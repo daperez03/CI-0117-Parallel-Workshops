@@ -15,7 +15,7 @@
 void print(int64_t number, uint64_t number_of_sums
   , uint64_t* sums, bool is_NA);
 
-uint64_t init(goldbach_sums_t* my_goldbach_sums) {
+uint64_t init_goldbach_sums(goldbach_sums_t* my_goldbach_sums) {
   assert(my_goldbach_sums);
   uint64_t error = EXIT_SUCCESS;
   my_goldbach_sums->capacity = 120;
@@ -25,14 +25,16 @@ uint64_t init(goldbach_sums_t* my_goldbach_sums) {
     fprintf(stderr, "Error: not create numbers vector\n");
     error = 11;
   }
-  my_goldbach_sums->prime_numbers = (bits_array_t*)malloc(sizeof(bits_array_t));
-  if (pthread_mutex_init(&my_goldbach_sums->can_access_solution_count
-    , NULL) != EXIT_SUCCESS) {
-    fprintf(stderr, "Error: not init mutex \n");
-    error = 13;
-  }
   my_goldbach_sums->solution_count = 0;
   return error;
+}
+
+void init_number_t(number_t* number) {
+  number->capacity = 0;
+  number->number = 0;
+  number->sum_count = 0;
+  number->sums = (uint64_t*) malloc(10 * sizeof(uint64_t));
+  number->sums[0] = 0;
 }
 
 
@@ -79,6 +81,7 @@ uint64_t resize_sums(number_t* number) {
 
   //  function result(my_goldbach_sums)
 void result(goldbach_sums_t* my_goldbach_sums) {
+  printf("voy a imprimir\n");
   uint64_t sums = 0;
   number_t* struct_number = NULL;
   for (size_t i = 0; i < my_goldbach_sums->count; ++i) {
@@ -143,7 +146,7 @@ void print(int64_t number, uint64_t number_of_sums
 }
 
   //  function destroy(my_goldbach_sums)
-void destroy(goldbach_sums_t* my_goldbach_sums) {
+void destroy_goldbach_sums(goldbach_sums_t* my_goldbach_sums) {
   assert(my_goldbach_sums);
   //  delete everything stored in my_goldbach_sums
   if (my_goldbach_sums->numbers != NULL) {
@@ -153,13 +156,9 @@ void destroy(goldbach_sums_t* my_goldbach_sums) {
     }
     free(my_goldbach_sums->numbers);
   }
-  if (pthread_mutex_destroy
-    (&my_goldbach_sums->can_access_solution_count) != EXIT_SUCCESS) {
-    fprintf(stderr, "Error: not destroyed mutex \n");
-  }
-  if (my_goldbach_sums->prime_numbers != NULL) {
-    if (my_goldbach_sums->prime_numbers->array != NULL)
-      free(my_goldbach_sums->prime_numbers->array);
-    free(my_goldbach_sums->prime_numbers);
-  }
+}
+
+void destroy_numbert_t (number_t* number) {
+  assert(number->sums);
+  free(number->sums);
 }

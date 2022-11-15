@@ -28,6 +28,6 @@
  * 0 for success.
  * 21 invalid input
  */
-uint64_t read_data(goldbach_sums_t* my_goldbach_sums, uint64_t* max);
+uint64_t read_data(goldbach_sums_t* my_goldbach_sums);
 
 #endif

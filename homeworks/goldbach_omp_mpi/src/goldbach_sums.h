@@ -11,7 +11,6 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "bits_array.h"
 /**
  * @brief Data structure of a number
  * @details Save a number with a array with
@@ -34,9 +33,7 @@ typedef struct goldbach_sums {
   size_t capacity;
   size_t count;
   number_t *numbers;
-  pthread_mutex_t can_access_solution_count;
   size_t solution_count;
-  bits_array_t* prime_numbers;
 } goldbach_sums_t;
 
 /**
@@ -47,7 +44,9 @@ typedef struct goldbach_sums {
  * 0 for success
  * 11 for not creating numbers vector
  */
-uint64_t init(goldbach_sums_t *my_goldbach_sums);
+uint64_t init_goldbach_sums (goldbach_sums_t *my_goldbach_sums);
+
+void init_number_t(number_t* number);
 
 /**
  * @brief It modifies the capacity of the numbers vector
@@ -77,11 +76,13 @@ uint64_t resize_sums(number_t *number);
  */
 void result(goldbach_sums_t *my_goldbach_sums);
 
+void destroy_numbert_t (number_t* number);
+
 /**
  * @brief Destroy the data structure used to store the goldbach sums
  *
  * @see result
  */
-void destroy(goldbach_sums_t *my_goldbach_sums);
+void destroy_goldbach_sums(goldbach_sums_t *my_goldbach_sums);
 
 #endif

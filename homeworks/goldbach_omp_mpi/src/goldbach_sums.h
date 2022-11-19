@@ -18,6 +18,7 @@
  * by which the vector is found
  */
 typedef struct number {
+  uint64_t id_responsible_process;
   int64_t number;
   size_t capacity;
   size_t sum_count;
@@ -46,7 +47,9 @@ typedef struct goldbach_sums {
  */
 uint64_t init_goldbach_sums (goldbach_sums_t *my_goldbach_sums);
 
-void init_number_t(number_t* number);
+uint64_t init_number_t(number_t* number);
+
+void append_number_t(number_t* data, number_t* destiny);
 
 /**
  * @brief It modifies the capacity of the numbers vector

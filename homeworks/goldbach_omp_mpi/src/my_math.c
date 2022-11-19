@@ -62,6 +62,18 @@ uint64_t combination_of_odd_numbers
 uint64_t save_goldbach_sums(number_t* struct_number
   , uint64_t number1, uint64_t number2, uint64_t number3);
 
+uint64_t regular_solution(goldbach_sums_t* my_goldbach_sums) {
+  uint64_t error = EXIT_SUCCESS;
+  uint64_t my_solution = 0;
+  while (true) {
+    if (my_goldbach_sums->solution_count++ >= my_goldbach_sums->count) break;
+    number_t* struct_number = &my_goldbach_sums->numbers[my_solution++];
+    //int64_t number = struct_number->number;
+    init_number_t(struct_number);
+    solve(struct_number);
+  }
+  return error;
+}
 
 // Extracted from https://en.wikipedia.org/wiki/Primality_test
 bool is_prime(uint64_t number) {

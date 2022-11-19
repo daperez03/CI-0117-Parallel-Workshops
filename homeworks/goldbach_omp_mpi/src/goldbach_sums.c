@@ -18,6 +18,7 @@ void print(int64_t number, uint64_t number_of_sums
 uint64_t init_goldbach_sums(goldbach_sums_t* my_goldbach_sums) {
   assert(my_goldbach_sums);
   uint64_t error = EXIT_SUCCESS;
+  my_goldbach_sums->solution_count = 0;
   my_goldbach_sums->capacity = 120;
   my_goldbach_sums->count = 0;
   my_goldbach_sums->numbers = (number_t*)malloc(120 * sizeof(number_t));
@@ -29,14 +30,24 @@ uint64_t init_goldbach_sums(goldbach_sums_t* my_goldbach_sums) {
   return error;
 }
 
-void init_number_t(number_t* number) {
-  number->capacity = 0;
-  number->number = 0;
+uint64_t init_number_t(number_t* number) {
+  number->capacity = 100;
+  // number->number = 0;
+  number->id_responsible_process = 0;
   number->sum_count = 0;
-  number->sums = (uint64_t*) malloc(10 * sizeof(uint64_t));
+  number->sums = (uint64_t*) malloc(100 * sizeof(uint64_t));
   number->sums[0] = 0;
+  return number->sums == NULL? EXIT_FAILURE : EXIT_SUCCESS;
 }
 
+void append_number_t(number_t* data, number_t* destiny) {
+  for (size_t i = 0; i < data->sum_count; i++) {
+    if (!(destiny->sum_count < destiny->capacity))
+      resize_sums(destiny);
+    destiny->sums[i] = data->sums[i];
+    ++destiny->sum_count;
+  }
+}
 
 uint64_t resize_numbers(goldbach_sums_t* my_goldbach_sums) {
   uint64_t error = EXIT_SUCCESS;
@@ -81,7 +92,6 @@ uint64_t resize_sums(number_t* number) {
 
   //  function result(my_goldbach_sums)
 void result(goldbach_sums_t* my_goldbach_sums) {
-  printf("voy a imprimir\n");
   uint64_t sums = 0;
   number_t* struct_number = NULL;
   for (size_t i = 0; i < my_goldbach_sums->count; ++i) {

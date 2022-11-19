@@ -7,6 +7,8 @@
 #include <stdlib.h>
 #include <mpi.h>
 
+#define ERROR_SEND_MSG "Error: the data cloud not be sent\n"
+#define ERROR_RECEIVE_MSG "Error: the data cloud not be receive\n"
 #define ERROR_MPI_INIT 1
 #define ERROR_MPI_RANK 2
 #define ERROR_MPI_SIZE 3
@@ -18,7 +20,7 @@
 #define TAG_ID_PROCESS 2
 #define TAG_STOPPING_CONDITION 3
 
-enum DATA_REPORT{index_data, count_data, number_data = 1};
+enum DATA_REPORT{index_data, number_data, count_data};
 
 typedef struct mpi_data {
   /// @brief process hostname
@@ -48,7 +50,7 @@ uint64_t receive_bool(bool* value, int fromProcess, int tag);
 uint64_t receive_int32_t(int32_t* values, int capacity
   , int fromProcess, int tag);
 uint64_t receive_int64_t(int64_t* values, int capacity
-  , int fromProcess, int tag, MPI_Status* status);
+  , int fromProcess, int tag);
 uint64_t receive_uint64_t(uint64_t* values, int capacity
   , int fromProcess, int tag);
 

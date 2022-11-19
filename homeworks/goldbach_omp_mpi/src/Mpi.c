@@ -103,13 +103,13 @@ uint64_t receive_int32_t(int32_t* values, int capacity
 }
 
 uint64_t receive_int64_t(int64_t* values, int capacity
-  , int fromProcess, int tag, MPI_Status* status) {
+  , int fromProcess, int tag) {
   assert(values);
   assert(capacity >= 1);
   // assert(fromProcess >= 0);
   uint64_t error = EXIT_SUCCESS;
   if (MPI_Recv(values, capacity, MPI_INT64_T , fromProcess, tag
-    , MPI_COMM_WORLD, status) != MPI_SUCCESS) {
+    , MPI_COMM_WORLD, MPI_STATUS_IGNORE) != MPI_SUCCESS) {
     error = ERROR_RECEIVE;
   }
   return error;

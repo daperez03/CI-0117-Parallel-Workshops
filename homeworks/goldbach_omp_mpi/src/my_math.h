@@ -29,4 +29,6 @@ struct tools;
  */
 uint64_t solve(number_t* number);
 
+uint64_t regular_solution(goldbach_sums_t* my_goldbach_sums);
+
 #endif

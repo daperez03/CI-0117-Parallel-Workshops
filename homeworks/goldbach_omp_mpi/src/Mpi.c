@@ -1,3 +1,5 @@
+/// Copyright 2022 Daniel Perez Morera <daniel.perezmorera@ucr.ac.cr> CC-BY 4.0
+
 #include "Mpi.h"
 
 uint64_t init_mpi(mpi_data_t* mpi_data, int* argc, char*** argv) {
@@ -7,7 +9,8 @@ uint64_t init_mpi(mpi_data_t* mpi_data, int* argc, char*** argv) {
   if (MPI_Init(argc, argv) != MPI_SUCCESS) {
     error = ERROR_MPI_INIT;
   } else {
-    if (MPI_Comm_rank(MPI_COMM_WORLD, &mpi_data->process_number) != MPI_SUCCESS) {
+    if (MPI_Comm_rank(MPI_COMM_WORLD, &mpi_data->process_number)
+      != MPI_SUCCESS) {
       error = ERROR_MPI_RANK;
     } else {
       if (MPI_Comm_size(MPI_COMM_WORLD, &mpi_data->process_count)
@@ -43,7 +46,8 @@ uint64_t send_bool(const bool* value, int toProcess, int tag) {
   return error;
 }
 
-uint64_t send_int32_t(const int32_t* values, int count, int toProcess, int tag) {
+uint64_t send_int32_t(const int32_t* values, int count
+  , int toProcess, int tag) {
   assert(values);
   assert(toProcess >= 0);
   assert(count >= 1);
@@ -55,7 +59,8 @@ uint64_t send_int32_t(const int32_t* values, int count, int toProcess, int tag) 
   return error;
 }
 
-uint64_t send_int64_t(const int64_t* values, int count, int toProcess, int tag) {
+uint64_t send_int64_t(const int64_t* values, int count
+  , int toProcess, int tag) {
   assert(values);
   assert(toProcess >= 0);
   assert(count >= 1);
@@ -67,7 +72,8 @@ uint64_t send_int64_t(const int64_t* values, int count, int toProcess, int tag) 
   return error;
 }
 
-uint64_t send_uint64_t(const uint64_t* values, int count, int toProcess, int tag) {
+uint64_t send_uint64_t(const uint64_t* values, int count
+  , int toProcess, int tag) {
   assert(values);
   assert(toProcess >= 0);
   assert(count >= 1);

@@ -10,8 +10,16 @@
 
 #define is_error(x) x != EXIT_SUCCESS
 
+/// @brief Distributed numbers and response receiver
+/// @param process_count Number of process
+/// @return Error code
 uint64_t dispatcher(int process_count);
-uint64_t calculator(int process_number);
+
+/// @brief Goldbachs sums calculator
+/// @param process_number Number of process
+/// @param threads_number Number of threads
+/// @return Error code
+uint64_t calculator(int process_number, size_t threads_number);
 
 /**
  * @brief Main funtion
@@ -22,8 +30,7 @@ uint64_t calculator(int process_number);
 int main(int argc, char* argv[]) {  //  function main(argv[])
   uint64_t error = EXIT_SUCCESS;
   mpi_data_t my_process_data;
-  error = init_mpi(&my_process_data, &argc, &argv);
-  if (!is_error(error)) {
+  if (!is_error(init_mpi(&my_process_data, &argc, &argv))) {
     size_t threads_number = sysconf(_SC_NPROCESSORS_ONLN);
     if (argc == 2) {
       //  define threads_number := argv[1]
@@ -37,16 +44,20 @@ int main(int argc, char* argv[]) {  //  function main(argv[])
         if (my_process_data.process_number == 0) {
           dispatcher(my_process_data.process_count);
         } else {
-          calculator(my_process_data.process_number);
+          calculator(my_process_data.process_number, threads_number);
         }
         uninit_mpi();
       } else {
-        printf("Here");
         goldbach_sums_t my_goldbach_sums;
         error = init_goldbach_sums(&my_goldbach_sums);
-        error = read_data(&my_goldbach_sums);
-        error = regular_solution(&my_goldbach_sums);
-        result(&my_goldbach_sums);
+        if (!is_error(error)) {
+          error = read_data(&my_goldbach_sums);
+          if (!is_error(error)) {
+            error = regular_solution(&my_goldbach_sums, threads_number);
+            if (!is_error(error)) result(&my_goldbach_sums);
+          }
+          destroy_goldbach_sums(&my_goldbach_sums);
+        }
       }
     }
   } else {
@@ -59,21 +70,18 @@ uint64_t dispatcher(int process_count) {
   assert(process_count > 1);
   uint64_t error = EXIT_SUCCESS;
   goldbach_sums_t my_goldbach_sums;
-  error = init_goldbach_sums(&my_goldbach_sums);
-  if(!is_error(error)) {
+  if (!is_error(init_goldbach_sums(&my_goldbach_sums))) {
     error = read_data(&my_goldbach_sums);
-    if(!is_error(error)) {
+    if (!is_error(error)) {
       int32_t id_pending_process = 0;
       size_t pending_solution = 0;
       ssize_t pending_process = (ssize_t)process_count - 1;
 
       while (true) {
         error = receive_int32_t(&id_pending_process, 1, MPI_ANY_SOURCE, 0);
-        if(!is_error(error)) {
+        if (!is_error(error)) {
           pending_solution = my_goldbach_sums.solution_count++;
-
           if (!(pending_solution < my_goldbach_sums.count)) {
-
             int64_t data_report[2] = {false};
             error = send_int64_t(&data_report[0], 2, id_pending_process, 0);
             if (!is_error(error)) {
@@ -83,14 +91,12 @@ uint64_t dispatcher(int process_count) {
               fprintf(stderr , ERROR_SEND_MSG);
               return error;
             }
-
           } else {
-
-            number_t* pending_number = &my_goldbach_sums.numbers[pending_solution];
+            number_t* pending_number =
+              &my_goldbach_sums.numbers[pending_solution];
             pending_number->id_responsible_process = id_pending_process;
             int64_t data_report[2] = {true, pending_number->number};
             error = send_int64_t(data_report, 2, id_pending_process, 0);
-
           }
         } else {
           destroy_goldbach_sums(&my_goldbach_sums);
@@ -110,9 +116,17 @@ uint64_t dispatcher(int process_count) {
           if (!is_error(error)) {
             current_number->capacity = capacity;
             current_number->sum_count = capacity;
-            current_number->sums = (uint64_t*) malloc(capacity * sizeof(uint64_t));
+            current_number->sums = (uint64_t*)
+              malloc(capacity * sizeof(uint64_t));
+            if (current_number->sums == NULL) {
+              fprintf(stderr , "Error: cloud si not enough memory\n");
+               destroy_goldbach_sums(&my_goldbach_sums);
+               error = EXIT_FAILURE;
+               return error;
+            }
             // Se obtienen los datos
-            error = receive_uint64_t(current_number->sums, capacity, process, 0);
+            error = receive_uint64_t(current_number->sums
+              , capacity, process, 0);
             if (is_error(error)) {
               destroy_goldbach_sums(&my_goldbach_sums);
               fprintf(stderr , ERROR_RECEIVE_MSG);
@@ -146,7 +160,7 @@ uint64_t dispatcher(int process_count) {
   return error;
 }
 
-uint64_t calculator(int process_number) {
+uint64_t calculator(int process_number, size_t threads_number) {
   assert(process_number > 0);
   uint64_t error = EXIT_SUCCESS;
   goldbach_sums_t sums_container;
@@ -167,11 +181,12 @@ uint64_t calculator(int process_number) {
               error = resize_numbers(&sums_container);
             }
             if (!is_error(error)) {
-              number_t* my_number = &sums_container.numbers[sums_container.count++];
+              number_t* my_number =
+                &sums_container.numbers[sums_container.count++];
               error = init_number_t(my_number);
               if (!is_error(error)) {
                 my_number->number = data_report[1];
-                error = solve(my_number);
+                error = solve(my_number, threads_number);
               } else {
                 destroy_goldbach_sums(&sums_container);
                 fprintf(stderr , "Error: cloud not possible init number_t\n");

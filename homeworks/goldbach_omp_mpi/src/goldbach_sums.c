@@ -4,6 +4,8 @@
 #include <assert.h>
 #include "goldbach_sums.h"
 
+#define is_error(x) x != EXIT_SUCCESS
+
 /**
  * @brief Print the goldbach sums at the standard output
  * 
@@ -40,13 +42,18 @@ uint64_t init_number_t(number_t* number) {
   return number->sums == NULL? EXIT_FAILURE : EXIT_SUCCESS;
 }
 
-void append_number_t(number_t* data, number_t* destiny) {
-  for (size_t i = 0; i < data->sum_count; i++) {
+uint64_t append_number_t(number_t* data, number_t* destiny) {
+  uint64_t error = EXIT_SUCCESS;
+  for (size_t i = 0; i < data->sum_count && !is_error(error); i++) {
     if (!(destiny->sum_count < destiny->capacity))
-      resize_sums(destiny);
-    destiny->sums[i] = data->sums[i];
-    ++destiny->sum_count;
+      error = resize_sums(destiny);
+    if (!is_error(error)) {
+      destiny->sums[destiny->sum_count] = data->sums[i];
+      ++destiny->sum_count;
+    }
   }
+  if (data->number > 0) destiny->sums[0] += data->sums[0];
+  return error;
 }
 
 uint64_t resize_numbers(goldbach_sums_t* my_goldbach_sums) {
@@ -168,7 +175,7 @@ void destroy_goldbach_sums(goldbach_sums_t* my_goldbach_sums) {
   }
 }
 
-void destroy_numbert_t (number_t* number) {
+void destroy_numbert_t(number_t* number) {
   assert(number->sums);
   free(number->sums);
 }

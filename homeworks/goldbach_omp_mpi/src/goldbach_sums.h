@@ -1,6 +1,4 @@
-/*
- *Copyright 2022 Daniel Perez Morera <daniel.perezmorera@ucr.ac.cr> CC-BY 4.0
- */
+/// Copyright 2022 Daniel Perez Morera <daniel.perezmorera@ucr.ac.cr> CC-BY 4.0
 
 #ifndef GOLDBACH_SUMS_H
 #define GOLDBACH_SUMS_H
@@ -11,6 +9,7 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
+
 /**
  * @brief Data structure of a number
  * @details Save a number with a array with
@@ -45,11 +44,20 @@ typedef struct goldbach_sums {
  * 0 for success
  * 11 for not creating numbers vector
  */
-uint64_t init_goldbach_sums (goldbach_sums_t *my_goldbach_sums);
+uint64_t init_goldbach_sums(goldbach_sums_t *my_goldbach_sums);
 
+/// @brief Initialise the strcut @a number_t
+/// @param number Pointer to struct @a number_t
+/// @return An error code:
+/// 0 for succes
+/// 1 for not succes
 uint64_t init_number_t(number_t* number);
 
-void append_number_t(number_t* data, number_t* destiny);
+/// @brief Append the strcut @a number_t
+/// @param data Set to join
+/// @param destiny Destination of the append
+/// @return error code
+uint64_t append_number_t(number_t* data, number_t* destiny);
 
 /**
  * @brief It modifies the capacity of the numbers vector
@@ -79,7 +87,9 @@ uint64_t resize_sums(number_t *number);
  */
 void result(goldbach_sums_t *my_goldbach_sums);
 
-void destroy_numbert_t (number_t* number);
+/// @brief Destructor of @a number_t
+/// @param number Pointer to @a number_t
+void destroy_numbert_t(number_t* number);
 
 /**
  * @brief Destroy the data structure used to store the goldbach sums

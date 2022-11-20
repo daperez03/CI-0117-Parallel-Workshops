@@ -4,8 +4,8 @@ Se desarrolló un programa concurrente y distribuido, en el lenguaje de programa
 
 **Características e implicaciones:**
 
-1. El programa es concurrente y distribuido, por lo que el usuario es responsable de indicar con cuantos procesos 
-e hilos se ejecutara el progarama, de lo contrario trabaja con un solo proceso y la cantidad de hilos disponibles 
+1. El programa es concurrente y distribuido, por lo que el usuario es responsable de indicar con cuantos procesos
+e hilos se ejecutará el programa, de lo contrario trabaja con un solo proceso y la cantidad de hilos disponibles
 de la computadora ejecutante.
 2. Si se le ordena al programa las sumas de Goldbach, estas sumas deben estar ordenadas por sus valores, del menor a mayor.
 3. Si el número ingresado es negativo, se considerará como que el usuario quiere que el programa además liste todas las sumas del correspondiente número en positivo.
@@ -13,7 +13,7 @@ de la computadora ejecutante.
 5. El programa no puede recibir un texto distinto la representación de un número. De lo contrario el programa devolverá el error `invalid input` en el error estándar y finalizará su ejecución.
 
 ## Manual De Uso
-
+ 
 Este apartado contiene información breve para una adecuada manipulación y ejecución del programa respectivo. Para esto es necesario seguir una serie de pasos mostradas a continuación:
 
 1. Tener el compilador mpicc adecuado para C y preferiblemente un documento Makefile
@@ -37,22 +37,22 @@ mpicc -c -Wall -Wextra -fopenmp -O3 -DNDEBUG -std=gnu11 -Isrc -MMD src/goldbach_
 mpicc -c -Wall -Wextra -fopenmp -O3 -DNDEBUG -std=gnu11 -Isrc -MMD src/Mpi.c -o build/Mpi.o
 mpicc -c -Wall -Wextra -fopenmp -O3 -DNDEBUG -std=gnu11 -Isrc -MMD src/my_math.c -o build/my_math.o
 mkdir -p bin/
-mpicc -Wall -Wextra -fopenmp -O3 -DNDEBUG -Isrc build/buffer.o build/goldbach_openmp_mpi.o build/goldbach_sums.o build/Mpi.o build/my_math.o -o bin/goldbach_omp_mpi 
+mpicc -Wall -Wextra -fopenmp -O3 -DNDEBUG -Isrc build/buffer.o build/goldbach_openmp_mpi.o build/goldbach_sums.o build/Mpi.o build/my_math.o -o bin/goldbach_omp_mpi
 ```
 
 ### Ejecución
 
 Es importante recordar:
 
-1. Es necesario tener instalado MPICH o Open MPI, ademas, a la hora de la ejecucion se debe indicar
-el numero de proceso que se desean realizar en el apartado de `numero_de_Procesos` y los host del closter
+1. Es necesario tener instalado MPICH o Open MPI, además, a la hora de la ejecución se debe indicar
+el número de proceso que se desean realizar en el apartado de `numero_de_Procesos` y los host del cluster
 a utilizar, el cual es representado como `hosts_mpich`.
 
 2. El pase de parámetros de número de hilos en la ejecución, este debe ser en el argumento número 1 de ejecución, en el espacio indicado como `número_de_hilos`.
 
 Para la ejecución se encuentra disponible cuatro formatos:
 
-1. Entrada estándar: El primer método consiste en simplemente utilizar 
+1. Entrada estándar: El primer método consiste en simplemente utilizar
 `mpiexec -np numero_de_Procesos -f hosts_mpich bin/goldbach_optimization número_de_hilos`
 e ingresar los números deseados en la terminal, una vez ya haya ingresado todos los números se debe presionar
 `ctrl d`.
@@ -84,7 +84,7 @@ correspondiente a ```rm -rf bin build doc```, y volver a ejecutar los procesos a
 Además verificar que este error no se haya producido por un dígito válido o falta de memoria.
 
 ## Más información
-
+ 
 [Estructura De Datos Implementada](./design/README.md)
 
 ## Créditos
@@ -102,3 +102,4 @@ Daniel Pérez Morera
 ### Información de Contacto
 
 **Correo electrónico:** daniel.perezmorera@ucr.ac.cr
+

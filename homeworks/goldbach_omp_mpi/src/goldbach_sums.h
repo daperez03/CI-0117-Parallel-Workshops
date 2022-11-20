@@ -57,7 +57,7 @@ uint64_t init_number_t(number_t* number);
 /// @param data Set to join
 /// @param destiny Destination of the append
 /// @return error code
-uint64_t append_number_t(number_t* data, number_t* destiny);
+uint64_t append_number_t(number_t *data, number_t *destiny);
 
 /**
  * @brief It modifies the capacity of the numbers vector

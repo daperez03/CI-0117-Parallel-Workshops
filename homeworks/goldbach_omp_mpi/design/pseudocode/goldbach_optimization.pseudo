@@ -1,10 +1,37 @@
 function main(argv[]) {
-  create goldbach_sums_t my_goldbach_sums
   define threads_number := argv[1]
-  buffer->read_data(my_goldbach_sums)
-  threads[] = parallelism->create_threads
-    (my_math->solve, threads_number, my_goldbach_sums)
-  join_threads(threads, threads_number)
+  if process_number = 0 :
+    dispatcher()
+  else:
+    calculator()
+  end_if
   goldbach_sums->result(my_goldbach_sums)
   goldbach_sums->destroy(my_goldbach_sums)
+}
+
+function dispatcher() {
+  create goldbach_sums_t my_goldbach_sums
+  buffer->read_data(my_goldbach_sums)
+  declare pending_solution := 0
+  while (true):
+    receive(id_pending_process)
+    send(my_goldbach_sums.numbers[pending_solution++])
+    if (pending process = 0) break;
+  end while
+  for (declare index := 0 to my_goldbach_sums.count) {
+    receive(my_goldbach_sums.numbers[any solution])
+  }
+}
+
+function calculator() {
+  create goldbach_sums_t sums_container
+  declare count := 0
+  while (true):
+    receive(&my_goldbach_sums.numbers[count], 1, process 0)
+    solve(&my_goldbach_sums.numbers[count++])
+    if (my pending process = 0) break;
+  end while
+  for (declar index =: 0; index < count; ++index)
+  send_int64_t(&my_goldbach_sums.numbers[count], 1, process 0);
+  end for
 }

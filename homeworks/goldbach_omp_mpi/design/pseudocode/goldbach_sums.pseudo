@@ -2,12 +2,11 @@ shared struct goldbach_sums_t{
   capacity
   count
   numbers[]
-  can_access_solution_count
   solution_count
-  prime_numbers[]
 }
 
 shared struct number_t {
+  id_responsible_process
   number
   capacity
   sum_count

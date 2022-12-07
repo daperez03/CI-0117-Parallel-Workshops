@@ -1,0 +1,56 @@
+procedure main(argc, argv[]):
+  create_process(6)
+  if process_number != 0 then
+    philosopher()
+  else 
+    waiter()
+  end if
+end procedure
+
+procedure philosopher():
+  declare requestOfphilosopher
+  requestOfphilosopher.philosopherNumber := process_number
+  requestOfphilosopher.requestChopstick := true
+  while true do
+    think()
+    requestChopsticks(requestOfphilosopher)
+    eat()
+    returnChopsticks(requestOfphilosopher)
+  end while
+end procedure
+
+procedure requestChopsticks(requestOfphilosopher):
+  declare chopsticks
+  requestOfphilosopher.requestChopstick := true
+  send(requestOfphilosopher, 1, 0)
+  receve(chopsticks, 1, 0)
+end procedure
+
+procedure returnChopsticks(requestOfphilosopher):
+  requestOfphilosopher.requestChopstick := false
+  send(requestOfphilosopher, 1, 0)
+end procedure
+
+struct requestOfphilosopher
+  declare philosopherNumber
+  declare requestChopstick
+end struct
+
+procedure waiter():
+  declare chopsticks
+  declare chopstick := 5
+  declare queue
+  declare requestOfphilosopher
+  while true do
+    receve(&requestOfphilosopher, 1, any_process)
+    if requestOfphilosopher.requestChopstick then
+      push(queue, HungryPhilosopher)
+    else
+      chopstick += 2
+    end if
+    if chopstick >= 2 && !Empty(queue) then
+      chopstick -= 2
+      send(&chopsticks, 1, pop(queue))
+    end if
+  end while
+end procedure

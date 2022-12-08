@@ -21,9 +21,8 @@ int main() {
   array_t* array2 = array_create(MAX_CNT);
 
   srand((unsigned int)((unsigned long)time(NULL) + clock()));
-  // No Lint
   for ( size_t index = 0, count
-    = MIN_CNT + rand_r() % MAX_CNT; index < count; ++index ) {
+    = MIN_CNT + rand_r() % MAX_CNT; index < count; ++index ) {  // No Lint
     array_append( array1, (void*)(10 + (size_t)rand() % 90) );
     array_append( array2, (void*)(100 + (size_t)rand() % 900) );
   }

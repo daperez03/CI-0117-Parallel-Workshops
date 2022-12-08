@@ -45,7 +45,7 @@ int array_decrease_capacity(array_t* array) {
   if ( new_capacity < 10 )
     return 0;
 
-  void** new_elements = (void**)realloc( array, new_capacity * sizeof(void*) );
+  void** new_elements = (void**)realloc( array->elements, new_capacity * sizeof(void*) );
   if ( new_elements == NULL )
     return -1;
 

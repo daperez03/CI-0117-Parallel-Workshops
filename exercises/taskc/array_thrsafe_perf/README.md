@@ -20,7 +20,7 @@ En este análisis podemos observar como el control de concurrencia mediante un r
 de ejecución del programa aumentará considerablemente mucho, esto con respecto al control de concurrencia del
 mutex. Sin embargo es importante observar que conforme se incremente el nivel de concurrencia, el mutex
 incrementa de manera mínima, prácticamente pasa a ser constante y por el lado del rwlock, este comienza
-adecrecer, dando a entender que entre mayor el grado de concurrencia entonces mas eficiente y rapido sera
+a decrecer, dando a entender que entre mayor el grado de concurrencia entonces mas eficiente y rapido sera
 este control de concurrencia.
 
 Para poder obtener mejores resultados, será necesario la implementación de más casos grandes de prueba y de

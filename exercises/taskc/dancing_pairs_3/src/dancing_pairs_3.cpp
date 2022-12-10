@@ -61,7 +61,6 @@ int main() {
         peers.push_back(my_peer);
         pending_peer_Male.push(my_peer);
       } else {
-        std::cout << "Here" << std::endl;
         my_peer = pending_peer_Female.front();
         pending_peer_Female.pop();
       }

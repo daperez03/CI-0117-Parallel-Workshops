@@ -105,6 +105,7 @@ int main(int argc, char* argv[]) {
       sem_destroy(&peers[i]->wait_female);
       delete peers[i];
     }
+    sem_destroy(&ballrom);
   } else {
     std::cerr << "Invalid arguments" << std::endl;
   }

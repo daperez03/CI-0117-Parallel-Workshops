@@ -71,23 +71,44 @@ decremento o incremento al mismo
 
 ### Barrera
 
+Control de concurrencia, el cual asegura la instancia de todos los hilos sobre una parte del
+código.
 
 ### Variable de condición
 
+Mecanismo el cual permite detener los hilos, generando así concurrencia de tareas. Estos se pueden comunicar
+mediantes un signal(detiene a un solo hilo) o broadcast(detiene a todos los hilos).
+
 ### Candado de lectura y escritura
+
+Es análogo a un mutex, con la excepción que a los hilos de lectura pueden ingresar todos al mismo tiempo
+a la región crítica, siempre y cuando no haya ningún hilo de escritura en la región crítica.
 
 ### Descomposición
 
+Forma en la cual se puede repartir trabajo entre distintos trabajadores. Esto es útil para poder asignarle
+a los hilos y procesos, segmentos de trabajo.
+
 ### Mapeo
 
-Forma en la cual se reparte trabajo entre trabajadores(hilos), hay tres tipos de mapeos: dinamicos,
-ciclicos y por bloque.
+Forma en la cual se reparte trabajo entre trabajadores(hilos), alguno de estos son: dinámicos,
+cíclicos y por bloque.
 
 ### Incremento de velocidad
 
+Es el aumento de velocidad de un código respecto a otro.
+
 ### Comunicación punto a punto entre procesos
+
+Comunicación de un proceso a otro, usualmente usado para repartir trabajo
+o respectivamente su solución.
 
 ### Comunicación colectiva entre procesos
 
+Comunicación entre todos los procesos que pertenecen a un mundo en específico. Usualmente
+utilizado para datos comunes entre todos los procesos.
+
 ### Reducción
 
+Reduce algunas operaciones a nivel global de los procesos. Para esto utiliza un sistema de árbol
+para lograr un objetivo en común. Por ejemplo, el número mayor o menor de todos los procesos.

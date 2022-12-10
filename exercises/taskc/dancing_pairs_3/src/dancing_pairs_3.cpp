@@ -48,6 +48,7 @@ int main() {
   std::vector<peer*> peers;
   std::queue<peer*> pending_peer_Male;
   std::queue<peer*> pending_peer_Female;
+  std::cout << "Write M or W to create a dancer male or women" << std::endl;
   while (std::cin >> option) {
     // case read_char() of:
     if (option == 'M') {
